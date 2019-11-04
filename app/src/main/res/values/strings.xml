@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Movie fan</string>
+    <string name="most_popular_movies">Most Popular Movies</string>
+    <string name="today_at_the_cinema">Today At The Cinema</string>
+    <string name="see_all">See all</string>
 
 </resources>

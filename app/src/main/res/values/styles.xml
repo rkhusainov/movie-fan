@@ -8,4 +8,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="MainTitleTextAppearance">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
+
+    <style name="MainButtonBorderless" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/colorBlue</item>
+    </style>
+
 </resources>

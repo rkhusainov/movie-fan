@@ -1,4 +1,4 @@
-package com.github.rkhusainov.moviefan.ui.popular;
+package com.github.rkhusainov.moviefan.ui.today;
 
 import android.os.Bundle;
 
@@ -10,15 +10,15 @@ import android.view.ViewGroup;
 
 import com.github.rkhusainov.moviefan.R;
 
-public class PopularFragment extends Fragment {
+public class TodayFragment extends Fragment {
 
-    public static PopularFragment newInstance() {
-        return new PopularFragment();
+    public static TodayFragment newInstance() {
+        return new TodayFragment();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_popular, container, false);
+        return inflater.inflate(R.layout.fragment_today, container, false);
     }
 }

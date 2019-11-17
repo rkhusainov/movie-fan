@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,19 +15,17 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.rkhusainov.moviefan.R;
-import com.github.rkhusainov.moviefan.data.model.MovieResponse;
-import com.github.rkhusainov.moviefan.utils.ApiUtils;
+import com.github.rkhusainov.moviefan.data.model.Movie;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
+import java.util.List;
 
-public class PopularFragment extends Fragment {
+public class PopularFragment extends Fragment implements IPopularMoviesView {
 
     private RecyclerView mRecyclerView;
     private PopularAdapter mPopularAdapter = new PopularAdapter();
-    private Disposable mDisposable;
+    private PopularMoviesPresenter mPresenter;
+    private View mErrorView;
+    private ProgressBar mProgressBar;
 
     public static PopularFragment newInstance() {
         return new PopularFragment();
@@ -42,8 +40,11 @@ public class PopularFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView = view.findViewById(R.id.recycler);
+        mErrorView = view.findViewById(R.id.errorView);
+        mProgressBar = view.findViewById(R.id.progress_bar);
+        mPresenter = new PopularMoviesPresenter(this);
+        mPresenter.getMovies();
 
-        getMovies();
         initRecyclerView();
     }
 
@@ -55,26 +56,32 @@ public class PopularFragment extends Fragment {
         mRecyclerView.setAdapter(mPopularAdapter);
     }
 
-    private void getMovies() {
-        mDisposable = ApiUtils.getApi().getResponse()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<MovieResponse>() {
-                    @Override
-                    public void accept(MovieResponse movieResponse) throws Exception {
-                        mPopularAdapter.addData(movieResponse.getResults());
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Toast.makeText(getContext(), "Ошибка запроса", Toast.LENGTH_SHORT).show();
-                    }
-                });
+    @Override
+    public void showPopularMovies(List<Movie> movies) {
+        mPopularAdapter.addData(movies);
+        mRecyclerView.setVisibility(View.VISIBLE);
+        mErrorView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showProgress() {
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        mProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showError() {
+        mRecyclerView.setVisibility(View.GONE);
+        mErrorView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mDisposable.dispose();
+        mPresenter.handleDispose();
     }
 }

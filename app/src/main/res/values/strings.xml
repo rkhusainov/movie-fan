@@ -4,5 +4,6 @@
     <string name="today_at_the_cinema">Today At The Cinema</string>
     <string name="see_all">See all</string>
     <string name="number_prefix">#%d</string>
+    <string name="error">Something went wrong. Try again.</string>
 
 </resources>

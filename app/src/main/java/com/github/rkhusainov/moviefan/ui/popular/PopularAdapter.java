@@ -19,15 +19,28 @@ import java.util.List;
 
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularViewHolder> {
 
+    public static final int MAIN = 0;
+    public static final int POPULAR = 1;
     public static final String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
     public static final String IMAGE_SIZE = "w154/";
+    public static final String CARD_IMAGE_SIZE = "w342/";
     private List<Movie> mMovies = new ArrayList<>();
+    private int mItemViewType;
+
+    public PopularAdapter(int itemViewType) {
+        mItemViewType = itemViewType;
+    }
 
     @NonNull
     @Override
     public PopularViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.li_movies, parent, false);
+        View view = null;
+        if (mItemViewType == MAIN) {
+            view = inflater.inflate(R.layout.li_movies_main, parent, false);
+        } else if (mItemViewType == POPULAR) {
+            view = inflater.inflate(R.layout.li_movies, parent, false);
+        }
         return new PopularViewHolder(view);
     }
 
@@ -47,7 +60,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
         notifyDataSetChanged();
     }
 
-    protected static class PopularViewHolder extends RecyclerView.ViewHolder {
+    class PopularViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView mPosterImageView;
         private TextView mTitleTextView;
@@ -65,9 +78,15 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
         }
 
         private void bind(Movie movie) {
-            Picasso.get()
-                    .load(IMAGE_BASE_URL + IMAGE_SIZE + movie.getPosterPath())
-                    .into(mPosterImageView);
+            if (mItemViewType == MAIN) {
+                Picasso.get()
+                        .load(IMAGE_BASE_URL + CARD_IMAGE_SIZE + movie.getPosterPath())
+                        .into(mPosterImageView);
+            } else if (mItemViewType == POPULAR) {
+                Picasso.get()
+                        .load(IMAGE_BASE_URL + IMAGE_SIZE + movie.getPosterPath())
+                        .into(mPosterImageView);
+            }
 
             mTitleTextView.setText(movie.getTitle());
             mYearTextView.setText(DateUtils.format(movie.getReleaseDate()));

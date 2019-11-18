@@ -19,10 +19,12 @@ import com.github.rkhusainov.moviefan.data.model.Movie;
 
 import java.util.List;
 
+import static com.github.rkhusainov.moviefan.ui.popular.PopularAdapter.POPULAR;
+
 public class PopularFragment extends Fragment implements IPopularMoviesView {
 
     private RecyclerView mRecyclerView;
-    private PopularAdapter mPopularAdapter = new PopularAdapter();
+    private PopularAdapter mPopularAdapter = new PopularAdapter(POPULAR);
     private PopularMoviesPresenter mPresenter;
     private View mErrorView;
     private ProgressBar mProgressBar;
@@ -43,8 +45,8 @@ public class PopularFragment extends Fragment implements IPopularMoviesView {
         mErrorView = view.findViewById(R.id.errorView);
         mProgressBar = view.findViewById(R.id.progress_bar);
         mPresenter = new PopularMoviesPresenter(this);
-        mPresenter.getMovies();
 
+        mPresenter.onRefresh();
         initRecyclerView();
     }
 
@@ -61,6 +63,11 @@ public class PopularFragment extends Fragment implements IPopularMoviesView {
         mPopularAdapter.addData(movies);
         mRecyclerView.setVisibility(View.VISIBLE);
         mErrorView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onRefreshData() {
+        mPresenter.getMovies();
     }
 
     @Override

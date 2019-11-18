@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface IPopularMoviesView extends IBaseView {
     void showPopularMovies(List<Movie> movies);
+
+    void onRefreshData();
 }

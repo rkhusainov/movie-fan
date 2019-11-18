@@ -1,77 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    android:orientation="vertical"
-    tools:context=".ui.main.MainActivity">
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
+
+    <include
+        layout="@layout/v_error"
+        android:visibility="gone" />
 
     <LinearLayout
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:paddingBottom="8dp"
             android:background="@color/colorGray"
-            android:orientation="horizontal"
-            android:padding="@dimen/default_padding">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/most_popular_movies"
-                android:textAppearance="@style/MainTitleTextAppearance" />
+                android:orientation="horizontal"
+                >
 
-            <Button
-                android:id="@+id/btn_popular"
-                style="@style/MainButtonBorderless"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/see_all" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/most_popular_movies"
+                    android:textAppearance="@style/MainTitleTextAppearance"
+                    android:padding="@dimen/default_padding"/>
+
+                <Button
+                    android:id="@+id/btn_popular"
+                    style="@style/MainButtonBorderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/see_all" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_popular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_popular"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:paddingBottom="8dp"
             android:background="@color/colorGray"
-            android:orientation="horizontal"
-            android:padding="@dimen/default_padding">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/today_at_the_cinema"
-                android:textAppearance="@style/MainTitleTextAppearance" />
+                android:orientation="horizontal"
+                >
 
-            <Button
-                android:id="@+id/btn_today"
-                style="@style/MainButtonBorderless"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/see_all" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/today_at_the_cinema"
+                    android:padding="@dimen/default_padding"
+                    android:textAppearance="@style/MainTitleTextAppearance" />
+
+                <Button
+                    android:id="@+id/btn_today"
+                    style="@style/MainButtonBorderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/see_all" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_today"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</FrameLayout>
+

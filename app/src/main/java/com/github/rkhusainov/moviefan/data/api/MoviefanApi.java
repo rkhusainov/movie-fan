@@ -7,5 +7,5 @@ import retrofit2.http.GET;
 
 public interface MoviefanApi {
     @GET("3/movie/popular")
-    Single<MovieResponse> getResponse();
+    Single<MovieResponse> getPopularMovies();
 }

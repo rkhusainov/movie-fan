@@ -13,16 +13,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.rkhusainov.moviefan.R;
+import com.github.rkhusainov.moviefan.data.model.Movie;
 import com.github.rkhusainov.moviefan.ui.popular.PopularAdapter;
 import com.github.rkhusainov.moviefan.ui.popular.PopularFragment;
 import com.github.rkhusainov.moviefan.ui.today.TodayFragment;
 
-public class MainFragment extends Fragment {
+import java.util.List;
+
+import static com.github.rkhusainov.moviefan.ui.popular.PopularAdapter.MAIN;
+
+public class MainFragment extends Fragment implements IMainView {
 
     private Button mPopularBtn;
     private Button mTodayBtn;
     private RecyclerView mPopularRecyclerView;
-    private PopularAdapter mPopularAdapter = new PopularAdapter();
+    private PopularAdapter mPopularAdapter = new PopularAdapter(MAIN);
+    private MainPresenter mPresenter;
+    private View mMainLayout;
+    private View mErrorView;
 
     public static MainFragment newInstance() {
         return new MainFragment();
@@ -35,6 +43,9 @@ public class MainFragment extends Fragment {
         mPopularBtn = view.findViewById(R.id.btn_popular);
         mTodayBtn = view.findViewById(R.id.btn_today);
         mPopularRecyclerView = view.findViewById(R.id.recycler_popular);
+        mMainLayout = view.findViewById(R.id.main_layout);
+        mErrorView = view.findViewById(R.id.errorView);
+        mPresenter = new MainPresenter(this);
         return view;
     }
 
@@ -44,6 +55,7 @@ public class MainFragment extends Fragment {
 
         mPopularRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
         mPopularRecyclerView.setAdapter(mPopularAdapter);
+        mPresenter.onRefresh();
 
         mPopularBtn.setOnClickListener(v -> {
             getFragmentManager()
@@ -60,5 +72,38 @@ public class MainFragment extends Fragment {
                     .addToBackStack(null)
                     .commit();
         });
+    }
+
+    @Override
+    public void showPopularMovies(List<Movie> movies) {
+        mErrorView.setVisibility(View.GONE);
+        mPopularAdapter.addData(movies);
+    }
+
+    @Override
+    public void onRefreshData() {
+        mPresenter.getPopularMovies();
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void showError() {
+        mErrorView.setVisibility(View.VISIBLE);
+        mMainLayout.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.handleDetach();
     }
 }

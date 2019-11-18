@@ -2,20 +2,116 @@ package com.github.rkhusainov.moviefan.ui.detail;
 
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.github.rkhusainov.moviefan.R;
+import com.github.rkhusainov.moviefan.data.model.Detail;
+import com.github.rkhusainov.moviefan.data.model.Genre;
+import com.github.rkhusainov.moviefan.utils.DateUtils;
+import com.squareup.picasso.Picasso;
 
-public class DetailFragment extends Fragment {
+import java.util.List;
+
+public class DetailFragment extends Fragment implements IDetailView {
+
+    public static final String MOVIE_KEY = "MOVIE_KEY";
+    public static final String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
+    public static final String DETAIL_IMAGE_SIZE = "w200/";
+
+    private DetailPresenter mPresenter = new DetailPresenter(this);
+    private View mDetailLayout;
+    private View mErrorView;
+    private ProgressBar mProgressBar;
+    private ImageView mPosterImageView;
+    private TextView mMovieTitleTextView;
+    private TextView mMovieOverviewTextView;
+    private TextView mGenresTextView;
+    private TextView mReleaseYearTextView;
+    private TextView mVoteTextView;
+    private TextView mVoteCountTextView;
+    private int mMovieId;
+
+    public static DetailFragment newInstance(int move_id) {
+
+        Bundle args = new Bundle();
+        args.putInt(MOVIE_KEY, move_id);
+        DetailFragment fragment = new DetailFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_detail, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fr_detail, container, false);
+        mDetailLayout = view.findViewById(R.id.detail_layout);
+        mErrorView = view.findViewById(R.id.errorView);
+        mProgressBar = view.findViewById(R.id.progress_bar);
+        mPosterImageView = view.findViewById(R.id.iv_poster);
+        mMovieTitleTextView = view.findViewById(R.id.tv_movie_title);
+        mMovieOverviewTextView = view.findViewById(R.id.tv_movie_overview);
+        mGenresTextView = view.findViewById(R.id.tv_movie_genre);
+        mReleaseYearTextView = view.findViewById(R.id.tv_release_year);
+        mVoteTextView = view.findViewById(R.id.tv_vote);
+        mVoteCountTextView = view.findViewById(R.id.tv_vote_count);
+        return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        mMovieId = getArguments().getInt(MOVIE_KEY);
+        mPresenter.getDetail(mMovieId);
+    }
+
+    @Override
+    public void getDetail(Detail detail) {
+        bind(detail);
+        mDetailLayout.setVisibility(View.VISIBLE);
+        mErrorView.setVisibility(View.GONE);
+    }
+
+    private void bind(Detail detail) {
+        Picasso.get()
+                .load(IMAGE_BASE_URL + DETAIL_IMAGE_SIZE + detail.getPosterPath())
+                .into(mPosterImageView);
+
+        mMovieTitleTextView.setText(detail.getTitle());
+        mMovieOverviewTextView.setText((detail.getOverview()));
+
+        String separator = "";
+        List<Genre> genres = detail.getGenres();
+        for (Genre genre : genres) {
+            mGenresTextView.append(separator + genre.getName());
+            separator = getResources().getString(R.string.genres_separator);
+        }
+
+        mReleaseYearTextView.setText(DateUtils.format(detail.getReleaseDate()));
+        mVoteTextView.setText(String.valueOf(detail.getVoteAverage()));
+        mVoteCountTextView.setText(String.valueOf(detail.getVoteCount()));
+    }
+
+    @Override
+    public void showProgress() {
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgress() {
+        mProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showError() {
+        mErrorView.setVisibility(View.VISIBLE);
+        mDetailLayout.setVisibility(View.GONE);
     }
 }

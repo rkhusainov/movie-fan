@@ -5,8 +5,6 @@ import com.github.rkhusainov.moviefan.data.model.Movie;
 
 import java.util.List;
 
-public interface IPopularMoviesView extends IBaseView {
+public interface IPopularView extends IBaseView {
     void showPopularMovies(List<Movie> movies);
-
-    void onRefreshData();
 }

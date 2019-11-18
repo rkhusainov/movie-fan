@@ -1,5 +1,6 @@
 package com.github.rkhusainov.moviefan.ui.popular;
 
+import com.github.rkhusainov.moviefan.common.BasePresenter;
 import com.github.rkhusainov.moviefan.data.model.MovieResponse;
 import com.github.rkhusainov.moviefan.utils.ApiUtils;
 
@@ -9,17 +10,16 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class PopularMoviesPresenter {
+public class PopularPresenter extends BasePresenter {
 
-    private Disposable mDisposable;
-    private IPopularMoviesView mMoviesView;
+    private IPopularView mMoviesView;
 
-    public PopularMoviesPresenter(IPopularMoviesView moviesView) {
+    public PopularPresenter(IPopularView moviesView) {
         mMoviesView = moviesView;
     }
 
     public void getMovies() {
-        mDisposable = ApiUtils.getApi().getPopularMovies()
+        mCompositeDisposable.add(ApiUtils.getApi().getPopularMovies()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -44,16 +44,6 @@ public class PopularMoviesPresenter {
                     public void accept(Throwable throwable) throws Exception {
                         mMoviesView.showError();
                     }
-                });
-    }
-
-    public void onRefresh() {
-        mMoviesView.onRefreshData();
-    }
-
-    public void handleDispose() {
-        if (mDisposable != null) {
-            mDisposable.dispose();
-        }
+                }));
     }
 }

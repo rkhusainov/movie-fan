@@ -1,4 +1,4 @@
-package com.github.rkhusainov.moviefan.ui.popular;
+package com.github.rkhusainov.moviefan.ui.top;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +18,9 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularViewHolder> {
-
+public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolder> {
     public static final int MAIN = 0;
-    public static final int POPULAR = 1;
+    public static final int TOP = 1;
     public static final String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
     public static final String LIST_IMAGE_SIZE = "w154/";
     public static final String CARD_IMAGE_SIZE = "w342/";
@@ -30,26 +29,26 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
 
     private OnItemClickListener mOnItemClickListener;
 
-    public PopularAdapter(int itemViewType, OnItemClickListener onItemClickListener) {
+    public TopAdapter(int itemViewType, OnItemClickListener onItemClickListener) {
         mItemViewType = itemViewType;
         mOnItemClickListener = onItemClickListener;
     }
 
     @NonNull
     @Override
-    public PopularViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TopViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = null;
+        View view;
         if (mItemViewType == MAIN) {
             view = inflater.inflate(R.layout.li_movies_main, parent, false);
-        } else if (mItemViewType == POPULAR) {
+        } else {
             view = inflater.inflate(R.layout.li_popular_movies, parent, false);
         }
-        return new PopularViewHolder(view);
+        return new TopViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PopularViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TopViewHolder holder, int position) {
         Movie currentMovie = mMovies.get(position);
         holder.bind(currentMovie);
     }
@@ -64,7 +63,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
         notifyDataSetChanged();
     }
 
-    class PopularViewHolder extends RecyclerView.ViewHolder {
+    class TopViewHolder extends RecyclerView.ViewHolder {
 
         private ImageView mPosterImageView;
         private TextView mTitleTextView;
@@ -72,7 +71,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
         private TextView mNumberTextView;
         private TextView mVoteTextView;
 
-        public PopularViewHolder(@NonNull View itemView) {
+        public TopViewHolder(@NonNull View itemView) {
             super(itemView);
             mPosterImageView = itemView.findViewById(R.id.iv_poster);
             mTitleTextView = itemView.findViewById(R.id.tv_title);
@@ -92,7 +91,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
                 Picasso.get()
                         .load(IMAGE_BASE_URL + CARD_IMAGE_SIZE + movie.getPosterPath())
                         .into(mPosterImageView);
-            } else if (mItemViewType == POPULAR) {
+            } else {
                 Picasso.get()
                         .load(IMAGE_BASE_URL + LIST_IMAGE_SIZE + movie.getPosterPath())
                         .into(mPosterImageView);

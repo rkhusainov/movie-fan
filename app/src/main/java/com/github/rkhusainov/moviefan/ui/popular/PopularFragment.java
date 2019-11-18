@@ -15,17 +15,19 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.rkhusainov.moviefan.R;
+import com.github.rkhusainov.moviefan.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.data.model.Movie;
+import com.github.rkhusainov.moviefan.ui.detail.DetailFragment;
 
 import java.util.List;
 
 import static com.github.rkhusainov.moviefan.ui.popular.PopularAdapter.POPULAR;
 
-public class PopularFragment extends Fragment implements IPopularMoviesView {
+public class PopularFragment extends Fragment implements IPopularView, OnItemClickListener {
 
     private RecyclerView mRecyclerView;
-    private PopularAdapter mPopularAdapter = new PopularAdapter(POPULAR);
-    private PopularMoviesPresenter mPresenter;
+    private PopularAdapter mPopularAdapter = new PopularAdapter(POPULAR, this);
+    private PopularPresenter mPresenter;
     private View mErrorView;
     private ProgressBar mProgressBar;
 
@@ -35,7 +37,7 @@ public class PopularFragment extends Fragment implements IPopularMoviesView {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_popular, container, false);
+        return inflater.inflate(R.layout.fr_popular, container, false);
     }
 
     @Override
@@ -44,9 +46,9 @@ public class PopularFragment extends Fragment implements IPopularMoviesView {
         mRecyclerView = view.findViewById(R.id.recycler);
         mErrorView = view.findViewById(R.id.errorView);
         mProgressBar = view.findViewById(R.id.progress_bar);
-        mPresenter = new PopularMoviesPresenter(this);
+        mPresenter = new PopularPresenter(this);
 
-        mPresenter.onRefresh();
+        mPresenter.getMovies();
         initRecyclerView();
     }
 
@@ -66,11 +68,6 @@ public class PopularFragment extends Fragment implements IPopularMoviesView {
     }
 
     @Override
-    public void onRefreshData() {
-        mPresenter.getMovies();
-    }
-
-    @Override
     public void showProgress() {
         mProgressBar.setVisibility(View.VISIBLE);
     }
@@ -87,8 +84,13 @@ public class PopularFragment extends Fragment implements IPopularMoviesView {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mPresenter.handleDispose();
+    public void onClick(int movie_id) {
+        if (getFragmentManager() != null) {
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, DetailFragment.newInstance(movie_id))
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 }

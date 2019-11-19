@@ -98,7 +98,7 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolder> {
             }
 
             mTitleTextView.setText(movie.getTitle());
-            mYearTextView.setText(DateUtils.format(movie.getReleaseDate()));
+            mYearTextView.setText(DateUtils.yearFormat(movie.getReleaseDate()));
             mNumberTextView.setText(format(getAdapterPosition() + 1));
             mVoteTextView.setText(String.valueOf(movie.getVoteAverage()));
 

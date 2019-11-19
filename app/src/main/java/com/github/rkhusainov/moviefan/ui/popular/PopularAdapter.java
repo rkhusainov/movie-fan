@@ -99,7 +99,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
             }
 
             mTitleTextView.setText(movie.getTitle());
-            mYearTextView.setText(DateUtils.format(movie.getReleaseDate()));
+            mYearTextView.setText(DateUtils.yearFormat(movie.getReleaseDate()));
             mNumberTextView.setText(format(getAdapterPosition() + 1));
             mVoteTextView.setText(String.valueOf(movie.getVoteAverage()));
 

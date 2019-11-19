@@ -35,6 +35,7 @@ public class DetailFragment extends Fragment implements IDetailView {
     private TextView mMovieOverviewTextView;
     private TextView mGenresTextView;
     private TextView mReleaseYearTextView;
+    private TextView mRuntimeTextView;
     private TextView mVoteTextView;
     private TextView mVoteCountTextView;
     private int mMovieId;
@@ -59,6 +60,7 @@ public class DetailFragment extends Fragment implements IDetailView {
         mMovieOverviewTextView = view.findViewById(R.id.tv_movie_overview);
         mGenresTextView = view.findViewById(R.id.tv_movie_genre);
         mReleaseYearTextView = view.findViewById(R.id.tv_release_year);
+        mRuntimeTextView = view.findViewById(R.id.tv_movie_runtime);
         mVoteTextView = view.findViewById(R.id.tv_vote);
         mVoteCountTextView = view.findViewById(R.id.tv_vote_count);
         return view;
@@ -94,7 +96,8 @@ public class DetailFragment extends Fragment implements IDetailView {
             separator = getResources().getString(R.string.genres_separator);
         }
 
-        mReleaseYearTextView.setText(DateUtils.format(detail.getReleaseDate()));
+        mReleaseYearTextView.setText(DateUtils.yearFormat(detail.getReleaseDate()));
+        mRuntimeTextView.setText(DateUtils.runtimeFormat(detail.getRuntime()));
         mVoteTextView.setText(String.valueOf(detail.getVoteAverage()));
         mVoteCountTextView.setText(String.valueOf(detail.getVoteCount()));
     }

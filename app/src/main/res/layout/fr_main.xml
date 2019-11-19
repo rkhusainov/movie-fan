@@ -22,7 +22,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:background="@color/colorGray"
                 android:orientation="vertical"
                 android:paddingBottom="8dp">
@@ -54,14 +54,17 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_popular"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:background="@color/colorGray"
                 android:orientation="vertical"
                 android:paddingBottom="8dp">
@@ -86,14 +89,17 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_today"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:background="@color/colorGray"
                 android:orientation="vertical"
                 android:paddingBottom="8dp">
@@ -125,7 +131,10 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_top"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp" />
 
             </LinearLayout>
 

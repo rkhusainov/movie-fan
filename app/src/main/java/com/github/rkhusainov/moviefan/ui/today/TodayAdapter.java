@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
-import com.github.rkhusainov.moviefan.data.model.Movie;
+import com.github.rkhusainov.moviefan.data.model.movie.Movie;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -48,6 +48,7 @@ public class TodayAdapter extends RecyclerView.Adapter<TodayAdapter.TodayViewHol
     }
 
     public void addData(List<Movie> movies) {
+        mMovies.clear();
         mMovies.addAll(movies);
         notifyDataSetChanged();
     }

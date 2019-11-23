@@ -5,22 +5,30 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.rkhusainov.moviefan.R;
-import com.github.rkhusainov.moviefan.data.model.Detail;
-import com.github.rkhusainov.moviefan.data.model.Genre;
+import com.github.rkhusainov.moviefan.data.model.credit.Cast;
+import com.github.rkhusainov.moviefan.data.model.detail.Detail;
+import com.github.rkhusainov.moviefan.data.model.detail.Genre;
+import com.github.rkhusainov.moviefan.ui.credit.CastAdapter;
+import com.github.rkhusainov.moviefan.ui.credit.CastFragment;
+import com.github.rkhusainov.moviefan.ui.credit.CastPresenter;
+import com.github.rkhusainov.moviefan.ui.credit.ICastView;
 import com.github.rkhusainov.moviefan.utils.DateUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class DetailFragment extends Fragment implements IDetailView {
+public class DetailFragment extends Fragment implements IDetailView, ICastView {
 
     public static final String MOVIE_KEY = "MOVIE_KEY";
     public static final String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
@@ -39,6 +47,12 @@ public class DetailFragment extends Fragment implements IDetailView {
     private TextView mVoteTextView;
     private TextView mVoteCountTextView;
     private int mMovieId;
+
+    private Button mCastButton;
+
+    private RecyclerView mRecyclerView;
+    private CastAdapter mCastAdapter = new CastAdapter(CastAdapter.DETAIL);
+    private CastPresenter mCastPresenter;
 
     public static DetailFragment newInstance(int move_id) {
 
@@ -63,6 +77,24 @@ public class DetailFragment extends Fragment implements IDetailView {
         mRuntimeTextView = view.findViewById(R.id.tv_movie_runtime);
         mVoteTextView = view.findViewById(R.id.tv_vote);
         mVoteCountTextView = view.findViewById(R.id.tv_vote_count);
+
+        mRecyclerView = view.findViewById(R.id.recycler_cast);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+        mRecyclerView.setAdapter(mCastAdapter);
+
+        mCastPresenter = new CastPresenter(this);
+
+        mCastButton = view.findViewById(R.id.btn_cast);
+        mCastButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, CastFragment.newInstance(mMovieId))
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
         return view;
     }
 
@@ -72,6 +104,7 @@ public class DetailFragment extends Fragment implements IDetailView {
 
         mMovieId = getArguments().getInt(MOVIE_KEY);
         mPresenter.getDetail(mMovieId);
+        mCastPresenter.getCast(mMovieId);
     }
 
     @Override
@@ -97,9 +130,14 @@ public class DetailFragment extends Fragment implements IDetailView {
         }
 
         mReleaseYearTextView.setText(DateUtils.yearFormat(detail.getReleaseDate()));
-        mRuntimeTextView.setText(DateUtils.runtimeFormat(detail.getRuntime()));
+        mRuntimeTextView.setText(DateUtils.runtimeFormat(detail.getRuntime() != null ? detail.getRuntime() : 0));
         mVoteTextView.setText(String.valueOf(detail.getVoteAverage()));
         mVoteCountTextView.setText(String.valueOf(detail.getVoteCount()));
+    }
+
+    @Override
+    public void getCast(List<Cast> casts) {
+        mCastAdapter.addData(casts);
     }
 
     @Override

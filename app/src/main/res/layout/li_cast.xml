@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/iv_actor_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tv_actor_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@id/iv_actor_photo"
+        android:textAppearance="@style/TabTitleTextAppearance"
+        tools:textColor="@color/colorGray"
+        tools:text="Joker" />
+
+    <TextView
+        android:id="@+id/tv_actor_character"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_actor_name"
+        android:layout_marginStart="8dp"
+        android:layout_toEndOf="@id/iv_actor_photo"
+        android:textColor="@color/colorPrimary"
+        tools:text="2019" />
+
+</RelativeLayout>

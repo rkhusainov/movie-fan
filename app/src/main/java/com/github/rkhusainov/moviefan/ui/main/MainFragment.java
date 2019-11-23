@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
-import com.github.rkhusainov.moviefan.data.model.Movie;
+import com.github.rkhusainov.moviefan.data.model.movie.Movie;
 import com.github.rkhusainov.moviefan.ui.detail.DetailFragment;
 import com.github.rkhusainov.moviefan.ui.popular.PopularAdapter;
 import com.github.rkhusainov.moviefan.ui.popular.PopularFragment;

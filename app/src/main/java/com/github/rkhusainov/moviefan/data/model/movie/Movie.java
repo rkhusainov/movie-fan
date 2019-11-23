@@ -1,4 +1,4 @@
-package com.github.rkhusainov.moviefan.data.model;
+package com.github.rkhusainov.moviefan.data.model.movie;
 
 import com.google.gson.annotations.SerializedName;
 

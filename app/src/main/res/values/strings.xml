@@ -7,5 +7,6 @@
     <string name="error">Something went wrong. Try again.</string>
     <string name="top_rated_movies">Top Rated Movies</string>
     <string name="genres_separator">, </string>
+    <string name="actors">Actors</string>
 
 </resources>

@@ -1,7 +1,7 @@
 package com.github.rkhusainov.moviefan.ui.popular;
 
 import com.github.rkhusainov.moviefan.common.BasePresenter;
-import com.github.rkhusainov.moviefan.data.model.MovieResponse;
+import com.github.rkhusainov.moviefan.data.model.movie.MovieResponse;
 import com.github.rkhusainov.moviefan.utils.ApiUtils;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;

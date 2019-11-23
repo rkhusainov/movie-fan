@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
-import com.github.rkhusainov.moviefan.data.model.Movie;
+import com.github.rkhusainov.moviefan.data.model.movie.Movie;
 import com.github.rkhusainov.moviefan.utils.DateUtils;
 import com.squareup.picasso.Picasso;
 
@@ -59,6 +59,7 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolder> {
     }
 
     public void addData(List<Movie> movies) {
+        mMovies.clear();
         mMovies.addAll(movies);
         notifyDataSetChanged();
     }

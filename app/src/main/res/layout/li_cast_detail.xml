@@ -43,6 +43,7 @@
                 android:layout_height="50dp"
                 android:layout_below="@id/tv_actor_name"
                 android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:textColor="@color/colorLightGray"
                 tools:text="Joker" />
 

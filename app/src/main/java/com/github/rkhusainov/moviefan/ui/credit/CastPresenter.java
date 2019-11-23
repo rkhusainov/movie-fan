@@ -25,13 +25,13 @@ public class CastPresenter extends BasePresenter {
                 .doOnSubscribe(new Consumer<Disposable>() {
                     @Override
                     public void accept(Disposable disposable) throws Exception {
-
+                        mCastView.showProgress();
                     }
                 })
                 .doFinally(new Action() {
                     @Override
                     public void run() throws Exception {
-
+                        mCastView.hideProgress();
                     }
                 })
                 .subscribe(new Consumer<Credit>() {
@@ -42,7 +42,7 @@ public class CastPresenter extends BasePresenter {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-
+                        mCastView.showError();
                     }
                 }));
     }

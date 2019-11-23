@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +26,8 @@ public class CastFragment extends Fragment implements ICastView {
     private RecyclerView mRecyclerView;
     private CastAdapter mCastAdapter = new CastAdapter(CastAdapter.CAST);
     private int mMovieId;
+    private ProgressBar mProgressBar;
+    private View mErrorView;
 
     private CastPresenter mCastPresenter;
 
@@ -42,6 +45,8 @@ public class CastFragment extends Fragment implements ICastView {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fr_cast, container, false);
         mRecyclerView = view.findViewById(R.id.recycler_cast);
+        mProgressBar = view.findViewById(R.id.progress_bar);
+        mErrorView = view.findViewById(R.id.errorView);
         return view;
     }
 
@@ -71,20 +76,23 @@ public class CastFragment extends Fragment implements ICastView {
     @Override
     public void getCast(List<Cast> casts) {
         mCastAdapter.addData(casts);
+        mErrorView.setVisibility(View.GONE);
+        mRecyclerView.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showProgress() {
-
+        mProgressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
-
+        mProgressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void showError() {
-
+        mErrorView.setVisibility(View.VISIBLE);
+        mRecyclerView.setVisibility(View.GONE);
     }
 }

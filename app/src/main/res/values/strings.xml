@@ -7,7 +7,7 @@
     <string name="error">Ошибка запроса. Попробуйте позже.</string>
     <string name="top_rated_movies">Топ фильмов</string>
     <string name="genres_separator">,\u0020</string>
-    <string name="actors">Актеры</string>
+    <string name="actors">Актёры</string>
     <string name="coming_soon">Скоро в кино</string>
     <string name="release_date">Дата выхода</string>
 </resources>

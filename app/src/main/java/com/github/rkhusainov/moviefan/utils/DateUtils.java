@@ -47,6 +47,6 @@ public class DateUtils {
     public static String runtimeFormat(int min) {
         int hours = min / 60;
         int minutes = min % 60;
-        return String.format(Locale.getDefault(), "%dh %02dmin", hours, minutes);
+        return String.format(Locale.getDefault(), "%dч %02dмин", hours, minutes);
     }
 }

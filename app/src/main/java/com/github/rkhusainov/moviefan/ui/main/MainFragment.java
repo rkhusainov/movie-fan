@@ -19,17 +19,19 @@ import com.github.rkhusainov.moviefan.data.model.movie.Movie;
 import com.github.rkhusainov.moviefan.ui.detail.DetailFragment;
 import com.github.rkhusainov.moviefan.ui.popular.PopularAdapter;
 import com.github.rkhusainov.moviefan.ui.popular.PopularFragment;
+import com.github.rkhusainov.moviefan.ui.popular.PopularPresenter;
 import com.github.rkhusainov.moviefan.ui.today.TodayAdapter;
+import com.github.rkhusainov.moviefan.ui.today.TodayPresenter;
 import com.github.rkhusainov.moviefan.ui.top.TopAdapter;
 import com.github.rkhusainov.moviefan.ui.top.TopFragment;
-import com.github.rkhusainov.moviefan.ui.upcoming.IUpcomingView;
+import com.github.rkhusainov.moviefan.ui.top.TopPresenter;
 import com.github.rkhusainov.moviefan.ui.upcoming.UpcomingAdapter;
 import com.github.rkhusainov.moviefan.ui.upcoming.UpcomingFragment;
 import com.github.rkhusainov.moviefan.ui.upcoming.UpcomingPresenter;
 
 import java.util.List;
 
-public class MainFragment extends Fragment implements IMainView, IUpcomingView, OnItemClickListener {
+public class MainFragment extends Fragment implements IMainView, OnItemClickListener {
 
     private Button mPopularBtn;
     private Button mTopBtn;
@@ -43,7 +45,9 @@ public class MainFragment extends Fragment implements IMainView, IUpcomingView, 
     private TopAdapter mTopAdapter = new TopAdapter(TopAdapter.MAIN, this);
     private UpcomingAdapter mUpcomingAdapter = new UpcomingAdapter(UpcomingAdapter.MAIN, this);
     private ProgressBar mProgressBar;
-    private MainPresenter mPresenter;
+    private PopularPresenter mPopularPresenter;
+    private TodayPresenter mTodayPresenter;
+    private TopPresenter mTopPresenter;
     private UpcomingPresenter mUpcomingPresenter;
     private View mMainLayout;
     private View mErrorView;
@@ -66,8 +70,11 @@ public class MainFragment extends Fragment implements IMainView, IUpcomingView, 
         mMainLayout = view.findViewById(R.id.main_layout);
         mErrorView = view.findViewById(R.id.errorView);
         mProgressBar = view.findViewById(R.id.progress_bar);
-        mPresenter = new MainPresenter(this);
+        mPopularPresenter = new PopularPresenter(this);
+        mTodayPresenter = new TodayPresenter(this);
+        mTopPresenter = new TopPresenter(this);
         mUpcomingPresenter = new UpcomingPresenter(this);
+
         return view;
     }
 
@@ -84,9 +91,9 @@ public class MainFragment extends Fragment implements IMainView, IUpcomingView, 
         mUpcomingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
         mUpcomingRecyclerView.setAdapter(mUpcomingAdapter);
 
-        mPresenter.getPopularMovies();
-        mPresenter.getTodayMovies();
-        mPresenter.getTopMovies();
+        mPopularPresenter.getMovies();
+        mTodayPresenter.getTodayMovies();
+        mTopPresenter.getMovies();
         mUpcomingPresenter.getMovies();
 
         mPopularBtn.setOnClickListener(v -> {

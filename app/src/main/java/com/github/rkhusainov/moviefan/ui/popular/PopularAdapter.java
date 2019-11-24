@@ -43,7 +43,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
         if (mItemViewType == MAIN) {
             view = inflater.inflate(R.layout.li_movies_main, parent, false);
         } else if (mItemViewType == POPULAR) {
-            view = inflater.inflate(R.layout.li_popular_movies, parent, false);
+            view = inflater.inflate(R.layout.li_movies, parent, false);
         }
         return new PopularViewHolder(view);
     }

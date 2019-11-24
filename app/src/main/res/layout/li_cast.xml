@@ -18,7 +18,7 @@
         android:layout_marginStart="8dp"
         android:layout_toEndOf="@id/iv_actor_photo"
         android:textAppearance="@style/TabTitleTextAppearance"
-        tools:textColor="@color/colorGray"
+        tools:textColor="@color/colorGrayLight"
         tools:text="Joker" />
 
     <TextView
@@ -28,7 +28,7 @@
         android:layout_below="@id/tv_actor_name"
         android:layout_marginStart="8dp"
         android:layout_toEndOf="@id/iv_actor_photo"
-        android:textColor="@color/colorPrimary"
-        tools:text="2019" />
+        android:textColor="@color/colorGrayLight"
+        tools:text="Joaquin Phoenix" />
 
 </RelativeLayout>

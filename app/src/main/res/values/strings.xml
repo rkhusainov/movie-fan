@@ -1,12 +1,13 @@
 <resources>
     <string name="app_name">Movie fan</string>
-    <string name="most_popular_movies">Most Popular Movies</string>
-    <string name="today_at_the_cinema">Today At The Cinema</string>
-    <string name="see_all">See all</string>
+    <string name="most_popular_movies">Популярные фильмы</string>
+    <string name="today_at_the_cinema">Сегодня в кино</string>
+    <string name="see_all">Посмотреть все</string>
     <string name="number_prefix">#%d</string>
-    <string name="error">Something went wrong. Try again.</string>
-    <string name="top_rated_movies">Top Rated Movies</string>
-    <string name="genres_separator">, </string>
-    <string name="actors">Actors</string>
-
+    <string name="error">Ошибка запроса. Попробуйте позже.</string>
+    <string name="top_rated_movies">Топ фильмов</string>
+    <string name="genres_separator">,\u0020</string>
+    <string name="actors">Актеры</string>
+    <string name="coming_soon">Скоро в кино</string>
+    <string name="release_date">Дата выхода</string>
 </resources>

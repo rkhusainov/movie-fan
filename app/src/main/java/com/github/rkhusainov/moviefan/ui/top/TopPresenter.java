@@ -10,6 +10,9 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.github.rkhusainov.moviefan.BuildConfig.LANGUAGE;
+import static com.github.rkhusainov.moviefan.BuildConfig.REGION;
+
 public class TopPresenter extends BasePresenter {
 
     private ITopView mTopMoviesView;
@@ -19,7 +22,7 @@ public class TopPresenter extends BasePresenter {
     }
 
     public void getMovies() {
-        mCompositeDisposable.add(ApiUtils.getApi().getTopMovies()
+        mCompositeDisposable.add(ApiUtils.getApi().getTopMovies(LANGUAGE,REGION)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {

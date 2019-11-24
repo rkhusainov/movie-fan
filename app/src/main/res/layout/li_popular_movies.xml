@@ -27,7 +27,7 @@
         android:layout_below="@id/tv_title"
         android:layout_marginStart="8dp"
         android:layout_toEndOf="@id/iv_poster"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/colorGrayLight"
         tools:text="2019" />
 
     <TextView

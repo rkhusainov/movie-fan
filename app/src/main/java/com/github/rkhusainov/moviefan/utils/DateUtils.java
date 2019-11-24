@@ -18,6 +18,32 @@ public class DateUtils {
         return formattedDate;
     }
 
+    public static String shortReleaseDateFormat(String oldFormatDate) {
+
+        SimpleDateFormat oldFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        SimpleDateFormat newFormat = new SimpleDateFormat("dd MMM", Locale.getDefault());
+        String formattedDate = null;
+        try {
+            formattedDate = newFormat.format(oldFormat.parse(oldFormatDate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return formattedDate;
+    }
+
+    public static String longReleaseDateFormat(String oldFormatDate) {
+
+        SimpleDateFormat oldFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        SimpleDateFormat newFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.getDefault());
+        String formattedDate = null;
+        try {
+            formattedDate = newFormat.format(oldFormat.parse(oldFormatDate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return formattedDate;
+    }
+
     public static String runtimeFormat(int min) {
         int hours = min / 60;
         int minutes = min % 60;

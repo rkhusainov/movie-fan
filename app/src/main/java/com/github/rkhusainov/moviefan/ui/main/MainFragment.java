@@ -22,21 +22,29 @@ import com.github.rkhusainov.moviefan.ui.popular.PopularFragment;
 import com.github.rkhusainov.moviefan.ui.today.TodayAdapter;
 import com.github.rkhusainov.moviefan.ui.top.TopAdapter;
 import com.github.rkhusainov.moviefan.ui.top.TopFragment;
+import com.github.rkhusainov.moviefan.ui.upcoming.IUpcomingView;
+import com.github.rkhusainov.moviefan.ui.upcoming.UpcomingAdapter;
+import com.github.rkhusainov.moviefan.ui.upcoming.UpcomingFragment;
+import com.github.rkhusainov.moviefan.ui.upcoming.UpcomingPresenter;
 
 import java.util.List;
 
-public class MainFragment extends Fragment implements IMainView, OnItemClickListener {
+public class MainFragment extends Fragment implements IMainView, IUpcomingView, OnItemClickListener {
 
     private Button mPopularBtn;
     private Button mTopBtn;
+    private Button mUpcomingBtn;
     private RecyclerView mPopularRecyclerView;
     private RecyclerView mTodayRecyclerView;
     private RecyclerView mTopRecyclerView;
+    private RecyclerView mUpcomingRecyclerView;
     private PopularAdapter mPopularAdapter = new PopularAdapter(PopularAdapter.MAIN, this);
     private TodayAdapter mTodayAdapter = new TodayAdapter(this);
     private TopAdapter mTopAdapter = new TopAdapter(TopAdapter.MAIN, this);
+    private UpcomingAdapter mUpcomingAdapter = new UpcomingAdapter(UpcomingAdapter.MAIN, this);
     private ProgressBar mProgressBar;
     private MainPresenter mPresenter;
+    private UpcomingPresenter mUpcomingPresenter;
     private View mMainLayout;
     private View mErrorView;
 
@@ -50,13 +58,16 @@ public class MainFragment extends Fragment implements IMainView, OnItemClickList
         View view = inflater.inflate(R.layout.fr_main, container, false);
         mPopularBtn = view.findViewById(R.id.btn_popular);
         mTopBtn = view.findViewById(R.id.btn_top);
+        mUpcomingBtn = view.findViewById(R.id.btn_upcoming);
         mPopularRecyclerView = view.findViewById(R.id.recycler_popular);
         mTodayRecyclerView = view.findViewById(R.id.recycler_today);
         mTopRecyclerView = view.findViewById(R.id.recycler_top);
+        mUpcomingRecyclerView = view.findViewById(R.id.recycler_upcoming);
         mMainLayout = view.findViewById(R.id.main_layout);
         mErrorView = view.findViewById(R.id.errorView);
         mProgressBar = view.findViewById(R.id.progress_bar);
         mPresenter = new MainPresenter(this);
+        mUpcomingPresenter = new UpcomingPresenter(this);
         return view;
     }
 
@@ -70,10 +81,13 @@ public class MainFragment extends Fragment implements IMainView, OnItemClickList
         mTodayRecyclerView.setAdapter(mTodayAdapter);
         mTopRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
         mTopRecyclerView.setAdapter(mTopAdapter);
+        mUpcomingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false));
+        mUpcomingRecyclerView.setAdapter(mUpcomingAdapter);
 
         mPresenter.getPopularMovies();
         mPresenter.getTodayMovies();
         mPresenter.getTopMovies();
+        mUpcomingPresenter.getMovies();
 
         mPopularBtn.setOnClickListener(v -> {
             getFragmentManager()
@@ -89,6 +103,17 @@ public class MainFragment extends Fragment implements IMainView, OnItemClickList
                     .replace(R.id.fragment_container, TopFragment.newInstance())
                     .addToBackStack(null)
                     .commit();
+        });
+
+        mUpcomingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, UpcomingFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
+            }
         });
     }
 
@@ -111,6 +136,13 @@ public class MainFragment extends Fragment implements IMainView, OnItemClickList
         mMainLayout.setVisibility(View.VISIBLE);
         mErrorView.setVisibility(View.GONE);
         mTopAdapter.addData(movies);
+    }
+
+    @Override
+    public void showUpcomingMovies(List<Movie> movies) {
+        mMainLayout.setVisibility(View.VISIBLE);
+        mErrorView.setVisibility(View.GONE);
+        mUpcomingAdapter.addData(movies);
     }
 
     @Override

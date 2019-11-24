@@ -10,6 +10,9 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.github.rkhusainov.moviefan.BuildConfig.LANGUAGE;
+import static com.github.rkhusainov.moviefan.BuildConfig.REGION;
+
 public class MainPresenter extends BasePresenter {
 
     private IMainView mMainView;
@@ -19,7 +22,7 @@ public class MainPresenter extends BasePresenter {
     }
 
     public void getPopularMovies() {
-        mCompositeDisposable.add(ApiUtils.getApi().getPopularMovies()
+        mCompositeDisposable.add(ApiUtils.getApi().getPopularMovies(LANGUAGE,REGION)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -48,7 +51,7 @@ public class MainPresenter extends BasePresenter {
     }
 
     public void getTodayMovies() {
-        mCompositeDisposable.add(ApiUtils.getApi().getTodayMovies()
+        mCompositeDisposable.add(ApiUtils.getApi().getTodayMovies(LANGUAGE,REGION)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -77,7 +80,7 @@ public class MainPresenter extends BasePresenter {
     }
 
     public void getTopMovies() {
-        mCompositeDisposable.add(ApiUtils.getApi().getTopMovies()
+        mCompositeDisposable.add(ApiUtils.getApi().getTopMovies(LANGUAGE,REGION)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {

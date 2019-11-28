@@ -9,13 +9,13 @@ import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
+import com.github.rkhusainov.moviefan.common.PresenterFragment;
 import com.github.rkhusainov.moviefan.data.model.movie.Movie;
 import com.github.rkhusainov.moviefan.ui.detail.DetailFragment;
 
@@ -23,11 +23,11 @@ import java.util.List;
 
 import static com.github.rkhusainov.moviefan.ui.top.TopAdapter.TOP;
 
-public class TopFragment extends Fragment implements ITopView, OnItemClickListener {
+public class TopFragment extends PresenterFragment<TopPresenter> implements ITopView, OnItemClickListener {
 
     private RecyclerView mRecyclerView;
     private TopAdapter mTopAdapter = new TopAdapter(TOP, this);
-    private TopPresenter mPresenter;
+    private TopPresenter mTopPresenter;
     private View mErrorView;
     private ProgressBar mProgressBar;
 
@@ -46,9 +46,9 @@ public class TopFragment extends Fragment implements ITopView, OnItemClickListen
         mRecyclerView = view.findViewById(R.id.recycler);
         mErrorView = view.findViewById(R.id.errorView);
         mProgressBar = view.findViewById(R.id.progress_bar);
-        mPresenter = new TopPresenter(this);
+        mTopPresenter = new TopPresenter(this);
 
-        mPresenter.getMovies();
+        mTopPresenter.getMovies();
         initRecyclerView();
     }
 
@@ -92,5 +92,10 @@ public class TopFragment extends Fragment implements ITopView, OnItemClickListen
                     .addToBackStack(null)
                     .commit();
         }
+    }
+
+    @Override
+    protected TopPresenter getPresenter() {
+        return mTopPresenter;
     }
 }

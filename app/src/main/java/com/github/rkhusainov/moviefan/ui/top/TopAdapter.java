@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolder> {
+public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolderAbs> {
     public static final int MAIN = 0;
     public static final int TOP = 1;
     public static final String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
@@ -36,21 +36,31 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolder> {
 
     @NonNull
     @Override
-    public TopViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public TopViewHolderAbs onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view;
         if (mItemViewType == MAIN) {
-            view = inflater.inflate(R.layout.li_movies_main, parent, false);
+            View view = inflater.inflate(R.layout.li_movies_main_top, parent, false);
+            return new TopMainViewHolder(view);
+
         } else {
-            view = inflater.inflate(R.layout.li_movies, parent, false);
+            View view = inflater.inflate(R.layout.li_movies_top, parent, false);
+            return new TopViewHolder(view);
         }
-        return new TopViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TopViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TopViewHolderAbs holder, int position) {
         Movie currentMovie = mMovies.get(position);
+
+        // биндим общие элементы
         holder.bind(currentMovie);
+
+        // биндим отличающиеся элементы
+        if (mItemViewType == MAIN) {
+            ((TopMainViewHolder) holder).bind(currentMovie);
+        } else {
+            ((TopViewHolder) holder).bind(currentMovie);
+        }
     }
 
     @Override
@@ -64,43 +74,20 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolder> {
         notifyDataSetChanged();
     }
 
-    class TopViewHolder extends RecyclerView.ViewHolder {
+    abstract class TopViewHolderAbs extends RecyclerView.ViewHolder {
 
-        private ImageView mPosterImageView;
         private TextView mTitleTextView;
-        private TextView mYearTextView;
-        private TextView mNumberTextView;
         private TextView mVoteTextView;
 
-        public TopViewHolder(@NonNull View itemView) {
+        public TopViewHolderAbs(@NonNull View itemView) {
             super(itemView);
-            mPosterImageView = itemView.findViewById(R.id.iv_poster);
-            mTitleTextView = itemView.findViewById(R.id.tv_title);
-            mYearTextView = itemView.findViewById(R.id.tv_release_year);
-            mNumberTextView = itemView.findViewById(R.id.tv_number);
-            mVoteTextView = itemView.findViewById(R.id.tv_vote);
 
-            if (mItemViewType == MAIN) {
-                mYearTextView.setVisibility(View.GONE);
-            } else {
-                mYearTextView.setVisibility(View.VISIBLE);
-            }
+            mTitleTextView = itemView.findViewById(R.id.tv_title);
+            mVoteTextView = itemView.findViewById(R.id.tv_vote);
         }
 
         private void bind(Movie movie) {
-            if (mItemViewType == MAIN) {
-                Picasso.get()
-                        .load(IMAGE_BASE_URL + CARD_IMAGE_SIZE + movie.getPosterPath())
-                        .into(mPosterImageView);
-            } else {
-                Picasso.get()
-                        .load(IMAGE_BASE_URL + LIST_IMAGE_SIZE + movie.getPosterPath())
-                        .into(mPosterImageView);
-            }
-
             mTitleTextView.setText(movie.getTitle());
-            mYearTextView.setText(DateUtils.yearFormat(movie.getReleaseDate()));
-            mNumberTextView.setText(format(getAdapterPosition() + 1));
             mVoteTextView.setText(String.valueOf(movie.getVoteAverage()));
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +96,49 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolder> {
                     mOnItemClickListener.onClick(movie.getId());
                 }
             });
+        }
+    }
+
+    class TopMainViewHolder extends TopViewHolderAbs {
+
+        private ImageView mPosterImageView;
+
+        public TopMainViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            mPosterImageView = itemView.findViewById(R.id.iv_poster);
+        }
+
+        private void bind(Movie movie) {
+            Picasso.get().
+                    load(IMAGE_BASE_URL + CARD_IMAGE_SIZE + movie.getPosterPath())
+                    .into(mPosterImageView);
+        }
+    }
+
+    class TopViewHolder extends TopViewHolderAbs {
+
+        private ImageView mPosterImageView;
+        private TextView mYearTextView;
+        private TextView mNumberTextView;
+
+
+        public TopViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            mPosterImageView = itemView.findViewById(R.id.iv_poster);
+            mYearTextView = itemView.findViewById(R.id.tv_release_year);
+            mNumberTextView = itemView.findViewById(R.id.tv_number);
+
+        }
+
+        private void bind(Movie movie) {
+            Picasso.get().
+                    load(IMAGE_BASE_URL + LIST_IMAGE_SIZE + movie.getPosterPath())
+                    .into(mPosterImageView);
+
+            mYearTextView.setText(DateUtils.yearFormat(movie.getReleaseDate()));
+            mNumberTextView.setText(format(getAdapterPosition() + 1));
         }
 
         private String format(int position) {

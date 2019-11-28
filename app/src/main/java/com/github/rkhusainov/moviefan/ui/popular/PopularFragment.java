@@ -9,13 +9,13 @@ import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
+import com.github.rkhusainov.moviefan.common.PresenterFragment;
 import com.github.rkhusainov.moviefan.data.model.movie.Movie;
 import com.github.rkhusainov.moviefan.ui.detail.DetailFragment;
 
@@ -23,11 +23,11 @@ import java.util.List;
 
 import static com.github.rkhusainov.moviefan.ui.popular.PopularAdapter.POPULAR;
 
-public class PopularFragment extends Fragment implements IPopularView, OnItemClickListener {
+public class PopularFragment extends PresenterFragment<PopularPresenter> implements IPopularView, OnItemClickListener {
 
     private RecyclerView mRecyclerView;
     private PopularAdapter mPopularAdapter = new PopularAdapter(POPULAR, this);
-    private PopularPresenter mPresenter;
+    private PopularPresenter mPopularPresenter;
     private View mErrorView;
     private ProgressBar mProgressBar;
 
@@ -46,9 +46,9 @@ public class PopularFragment extends Fragment implements IPopularView, OnItemCli
         mRecyclerView = view.findViewById(R.id.recycler);
         mErrorView = view.findViewById(R.id.errorView);
         mProgressBar = view.findViewById(R.id.progress_bar);
-        mPresenter = new PopularPresenter(this);
+        mPopularPresenter = new PopularPresenter(this);
 
-        mPresenter.getMovies();
+        mPopularPresenter.getMovies();
         initRecyclerView();
     }
 
@@ -92,5 +92,10 @@ public class PopularFragment extends Fragment implements IPopularView, OnItemCli
                     .addToBackStack(null)
                     .commit();
         }
+    }
+
+    @Override
+    protected PopularPresenter getPresenter() {
+        return mPopularPresenter;
     }
 }

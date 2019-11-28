@@ -178,4 +178,13 @@ public class MainFragment extends Fragment implements IMainView, OnItemClickList
                     .commit();
         }
     }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mPopularPresenter.disposeAll();
+        mTodayPresenter.disposeAll();
+        mTopPresenter.disposeAll();
+        mUpcomingPresenter.disposeAll();
+    }
 }

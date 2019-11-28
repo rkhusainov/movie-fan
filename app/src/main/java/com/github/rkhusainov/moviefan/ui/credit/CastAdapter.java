@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder> {
+public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolderAbs> {
 
     public static final int DETAIL = 0;
     public static final int CAST = 1;
@@ -33,20 +33,30 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
 
     @NonNull
     @Override
-    public CastViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = null;
+    public CastViewHolderAbs onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         if (mItemViewType == DETAIL) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.li_cast_detail, parent, false);
-        } else if (mItemViewType == CAST) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.li_cast, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.li_cast_detail, parent, false);
+            return new CastMainViewHolder(view);
+        } else {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.li_cast, parent, false);
+            return new CastViewHolder(view);
         }
-        return new CastViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CastViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CastViewHolderAbs holder, int position) {
         Cast cast = mCasts.get(position);
+
+        // биндим общие элементы
         holder.bind(cast);
+
+        // биндим отличающиеся элементы
+        if (mItemViewType == DETAIL) {
+            ((CastMainViewHolder) holder).bind(cast);
+        } else {
+            ((CastViewHolder) holder).bind(cast);
+        }
     }
 
     @Override
@@ -60,33 +70,55 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
         notifyDataSetChanged();
     }
 
-    class CastViewHolder extends RecyclerView.ViewHolder {
+    abstract class CastViewHolderAbs extends RecyclerView.ViewHolder {
 
-        private ImageView mActorPhotoImageView;
         private TextView mActorNameTextView;
         private TextView mActorCharacterTextView;
 
-        public CastViewHolder(@NonNull View itemView) {
+        public CastViewHolderAbs(@NonNull View itemView) {
             super(itemView);
-            mActorPhotoImageView = itemView.findViewById(R.id.iv_actor_photo);
+
             mActorNameTextView = itemView.findViewById(R.id.tv_actor_name);
             mActorCharacterTextView = itemView.findViewById(R.id.tv_actor_character);
         }
 
         private void bind(Cast cast) {
-
-            if (mItemViewType == DETAIL) {
-                Picasso.get()
-                        .load(IMAGE_BASE_URL + CARD_IMAGE_SIZE + cast.getProfilePath())
-                        .into(mActorPhotoImageView);
-            } else if (mItemViewType == CAST) {
-                Picasso.get()
-                        .load(IMAGE_BASE_URL + LIST_IMAGE_SIZE + cast.getProfilePath())
-                        .into(mActorPhotoImageView);
-            }
-
             mActorNameTextView.setText(cast.getName());
             mActorCharacterTextView.setText(cast.getCharacter());
+        }
+    }
+
+    class CastMainViewHolder extends CastViewHolderAbs {
+
+        private ImageView mActorPhotoImageView;
+
+        public CastMainViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            mActorPhotoImageView = itemView.findViewById(R.id.iv_actor_photo);
+        }
+
+        void bind(Cast cast) {
+            Picasso.get()
+                    .load(IMAGE_BASE_URL + CARD_IMAGE_SIZE + cast.getProfilePath())
+                    .into(mActorPhotoImageView);
+        }
+    }
+
+    class CastViewHolder extends CastViewHolderAbs {
+
+        private ImageView mActorPhotoImageView;
+
+        public CastViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            mActorPhotoImageView = itemView.findViewById(R.id.iv_actor_photo);
+        }
+
+        void bind(Cast cast) {
+            Picasso.get()
+                    .load(IMAGE_BASE_URL + LIST_IMAGE_SIZE + cast.getProfilePath())
+                    .into(mActorPhotoImageView);
         }
     }
 }

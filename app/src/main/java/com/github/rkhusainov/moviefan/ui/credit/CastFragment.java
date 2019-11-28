@@ -15,11 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.rkhusainov.moviefan.R;
+import com.github.rkhusainov.moviefan.common.PresenterFragment;
 import com.github.rkhusainov.moviefan.data.model.credit.Cast;
 
 import java.util.List;
 
-public class CastFragment extends Fragment implements ICastView {
+public class CastFragment extends PresenterFragment<CastPresenter> implements ICastView {
 
     public static final String MOVIE_KEY = "MOVIE_KEY";
 
@@ -94,5 +95,10 @@ public class CastFragment extends Fragment implements ICastView {
     public void showError() {
         mErrorView.setVisibility(View.VISIBLE);
         mRecyclerView.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected CastPresenter getPresenter() {
+        return mCastPresenter;
     }
 }

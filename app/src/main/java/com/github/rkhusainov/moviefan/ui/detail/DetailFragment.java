@@ -11,11 +11,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.rkhusainov.moviefan.R;
+import com.github.rkhusainov.moviefan.common.PresenterFragment;
 import com.github.rkhusainov.moviefan.data.model.credit.Cast;
 import com.github.rkhusainov.moviefan.data.model.detail.Detail;
 import com.github.rkhusainov.moviefan.data.model.detail.Genre;
@@ -28,13 +28,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class DetailFragment extends Fragment implements IDetailView, ICastView {
+public class DetailFragment extends PresenterFragment<DetailPresenter> implements IDetailView, ICastView {
 
     public static final String MOVIE_KEY = "MOVIE_KEY";
     public static final String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
     public static final String DETAIL_IMAGE_SIZE = "w200/";
 
-    private DetailPresenter mPresenter = new DetailPresenter(this);
+    private DetailPresenter mDetailPresenter = new DetailPresenter(this);
     private View mDetailLayout;
     private View mErrorView;
     private ProgressBar mProgressBar;
@@ -105,7 +105,7 @@ public class DetailFragment extends Fragment implements IDetailView, ICastView {
         super.onActivityCreated(savedInstanceState);
 
         mMovieId = getArguments().getInt(MOVIE_KEY);
-        mPresenter.getDetail(mMovieId);
+        mDetailPresenter.getDetail(mMovieId);
         mCastPresenter.getCast(mMovieId);
     }
 
@@ -157,5 +157,16 @@ public class DetailFragment extends Fragment implements IDetailView, ICastView {
     public void showError() {
         mErrorView.setVisibility(View.VISIBLE);
         mDetailLayout.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected DetailPresenter getPresenter() {
+        return mDetailPresenter;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mCastPresenter.disposeAll();
     }
 }

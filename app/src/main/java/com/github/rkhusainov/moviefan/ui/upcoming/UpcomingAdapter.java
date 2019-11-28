@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.UpcomingViewHolder> {
+public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.UpcomingViewHolderAbs> {
     public static final int MAIN = 0;
     public static final int UPCOMING = 1;
     public static final String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
@@ -36,21 +36,31 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.Upcomi
 
     @NonNull
     @Override
-    public UpcomingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public UpcomingViewHolderAbs onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = null;
         if (mItemViewType == MAIN) {
-            view = inflater.inflate(R.layout.li_movies_main, parent, false);
-        } else if (mItemViewType == UPCOMING) {
-            view = inflater.inflate(R.layout.li_movies, parent, false);
+            View view = inflater.inflate(R.layout.li_movies_main_upcoming, parent, false);
+            return new UpcomingMainViewHolder(view);
+
+        } else {
+            View view = inflater.inflate(R.layout.li_movies_upcoming, parent, false);
+            return new UpcomingViewHolder(view);
         }
-        return new UpcomingViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UpcomingViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull UpcomingViewHolderAbs holder, int position) {
         Movie currentMovie = mMovies.get(position);
+
+        // биндим общие элементы
         holder.bind(currentMovie);
+
+        // биндим отличающиеся элементы
+        if (mItemViewType == MAIN) {
+            ((UpcomingMainViewHolder) holder).bind(currentMovie);
+        } else {
+            ((UpcomingViewHolder) holder).bind(currentMovie);
+        }
     }
 
     @Override
@@ -64,54 +74,20 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.Upcomi
         notifyDataSetChanged();
     }
 
-    class UpcomingViewHolder extends RecyclerView.ViewHolder {
 
-        private ImageView mPosterImageView;
+    abstract class UpcomingViewHolderAbs extends RecyclerView.ViewHolder {
+
         private TextView mTitleTextView;
-        private TextView mYearTextView;
-        private TextView mNumberTextView;
-        private TextView mVoteTextView;
-        private ImageView mStarImageView;
 
-        public UpcomingViewHolder(@NonNull View itemView) {
+        public UpcomingViewHolderAbs(@NonNull View itemView) {
             super(itemView);
 
-            mPosterImageView = itemView.findViewById(R.id.iv_poster);
             mTitleTextView = itemView.findViewById(R.id.tv_title);
-            mYearTextView = itemView.findViewById(R.id.tv_release_year);
-            mNumberTextView = itemView.findViewById(R.id.tv_number);
-            mVoteTextView = itemView.findViewById(R.id.tv_vote);
-            mStarImageView = itemView.findViewById(R.id.iv_star);
-
-            mNumberTextView.setVisibility(View.GONE);
-            if (mItemViewType == MAIN) {
-                mStarImageView.setVisibility(View.GONE);
-                mVoteTextView.setVisibility(View.GONE);
-            } else {
-                mVoteTextView.setVisibility(View.VISIBLE);
-            }
         }
 
-
-        void bind(Movie movie) {
-            if (mItemViewType == MAIN) {
-                Picasso.get()
-                        .load(IMAGE_BASE_URL + CARD_IMAGE_SIZE + movie.getPosterPath())
-                        .into(mPosterImageView);
-
-                mYearTextView.setText(DateUtils.shortReleaseDateFormat(movie.getReleaseDate()));
-            } else if (mItemViewType == UPCOMING) {
-                Picasso.get()
-                        .load(IMAGE_BASE_URL + LIST_IMAGE_SIZE + movie.getPosterPath())
-                        .into(mPosterImageView);
-
-                mYearTextView.setText(DateUtils.longReleaseDateFormat(movie.getReleaseDate()));
-            }
+        private void bind(Movie movie) {
 
             mTitleTextView.setText(movie.getTitle());
-
-            mNumberTextView.setText(format(getAdapterPosition() + 1));
-            mVoteTextView.setText(String.valueOf(movie.getVoteAverage()));
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -119,11 +95,53 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.Upcomi
                     mOnItemClickListener.onClick(movie.getId());
                 }
             });
+        }
+    }
 
+    class UpcomingMainViewHolder extends UpcomingViewHolderAbs {
+
+        private ImageView mPosterImageView;
+        private TextView mReleaseDateTextView;
+
+        public UpcomingMainViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            mPosterImageView = itemView.findViewById(R.id.iv_poster);
+            mReleaseDateTextView = itemView.findViewById(R.id.tv_release_date);
         }
 
-        private String format(int position) {
-            return String.format(itemView.getResources().getString(R.string.number_prefix), position);
+        void bind(Movie movie) {
+
+            Picasso.get()
+                    .load(IMAGE_BASE_URL + CARD_IMAGE_SIZE + movie.getPosterPath())
+                    .into(mPosterImageView);
+
+            mReleaseDateTextView.setText(DateUtils.shortReleaseDateFormat(movie.getReleaseDate()));
+        }
+    }
+
+    class UpcomingViewHolder extends UpcomingViewHolderAbs {
+
+        private ImageView mPosterImageView;
+        private TextView mReleaseDateTextView;
+        private TextView mVoteTextView;
+
+        public UpcomingViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            mPosterImageView = itemView.findViewById(R.id.iv_poster);
+            mReleaseDateTextView = itemView.findViewById(R.id.tv_release_date);
+            mVoteTextView = itemView.findViewById(R.id.tv_vote);
+        }
+
+        void bind(Movie movie) {
+
+            Picasso.get()
+                    .load(IMAGE_BASE_URL + LIST_IMAGE_SIZE + movie.getPosterPath())
+                    .into(mPosterImageView);
+
+            mReleaseDateTextView.setText(DateUtils.shortReleaseDateFormat(movie.getReleaseDate()));
+            mVoteTextView.setText(String.valueOf(movie.getVoteAverage()));
         }
     }
 }

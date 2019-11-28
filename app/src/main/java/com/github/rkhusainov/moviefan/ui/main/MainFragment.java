@@ -182,9 +182,20 @@ public class MainFragment extends Fragment implements IMainView, OnItemClickList
     @Override
     public void onDetach() {
         super.onDetach();
-        mPopularPresenter.disposeAll();
-        mTodayPresenter.disposeAll();
-        mTopPresenter.disposeAll();
-        mUpcomingPresenter.disposeAll();
+        if (mPopularPresenter != null) {
+            mPopularPresenter.disposeAll();
+        }
+
+        if (mTodayPresenter != null) {
+            mTodayPresenter.disposeAll();
+        }
+
+        if (mTopPresenter != null) {
+            mTopPresenter.disposeAll();
+        }
+
+        if (mUpcomingPresenter != null) {
+            mUpcomingPresenter.disposeAll();
+        }
     }
 }

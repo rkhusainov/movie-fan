@@ -167,6 +167,8 @@ public class DetailFragment extends PresenterFragment<DetailPresenter> implement
     @Override
     public void onDetach() {
         super.onDetach();
-        mCastPresenter.disposeAll();
+        if (mCastPresenter != null) {
+            mCastPresenter.disposeAll();
+        }
     }
 }

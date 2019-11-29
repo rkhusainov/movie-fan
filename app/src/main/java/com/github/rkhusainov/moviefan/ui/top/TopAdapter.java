@@ -112,6 +112,7 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolderAbs
         private void bind(Movie movie) {
             Picasso.get().
                     load(IMAGE_BASE_URL + CARD_IMAGE_SIZE + movie.getPosterPath())
+                    .placeholder(R.drawable.ic_movie_placeholder)
                     .into(mPosterImageView);
         }
     }
@@ -135,6 +136,7 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolderAbs
         private void bind(Movie movie) {
             Picasso.get().
                     load(IMAGE_BASE_URL + LIST_IMAGE_SIZE + movie.getPosterPath())
+                    .placeholder(R.drawable.ic_movie_placeholder)
                     .into(mPosterImageView);
 
             mYearTextView.setText(DateUtils.yearFormat(movie.getReleaseDate()));

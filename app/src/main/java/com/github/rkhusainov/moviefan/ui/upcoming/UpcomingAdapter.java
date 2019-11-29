@@ -114,6 +114,7 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.Upcomi
 
             Picasso.get()
                     .load(IMAGE_BASE_URL + CARD_IMAGE_SIZE + movie.getPosterPath())
+                    .placeholder(R.drawable.ic_movie_placeholder)
                     .into(mPosterImageView);
 
             mReleaseDateTextView.setText(DateUtils.shortReleaseDateFormat(movie.getReleaseDate()));
@@ -138,6 +139,7 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.Upcomi
 
             Picasso.get()
                     .load(IMAGE_BASE_URL + LIST_IMAGE_SIZE + movie.getPosterPath())
+                    .placeholder(R.drawable.ic_movie_placeholder)
                     .into(mPosterImageView);
 
             mReleaseDateTextView.setText(DateUtils.shortReleaseDateFormat(movie.getReleaseDate()));

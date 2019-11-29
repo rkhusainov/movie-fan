@@ -101,6 +101,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
         void bind(Cast cast) {
             Picasso.get()
                     .load(IMAGE_BASE_URL + CARD_IMAGE_SIZE + cast.getProfilePath())
+                    .placeholder(R.drawable.ic_actor_placeholder)
                     .into(mActorPhotoImageView);
         }
     }
@@ -118,6 +119,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
         void bind(Cast cast) {
             Picasso.get()
                     .load(IMAGE_BASE_URL + LIST_IMAGE_SIZE + cast.getProfilePath())
+                    .placeholder(R.drawable.ic_actor_placeholder)
                     .into(mActorPhotoImageView);
         }
     }

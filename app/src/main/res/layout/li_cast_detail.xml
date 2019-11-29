@@ -22,8 +22,7 @@
                 android:id="@+id/iv_actor_photo"
                 android:layout_width="130dp"
                 android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                tools:src="@mipmap/ic_launcher" />
+                tools:src="@drawable/ic_actor_placeholder" />
 
             <TextView
                 android:id="@+id/tv_actor_name"

@@ -71,6 +71,7 @@ public class TodayAdapter extends RecyclerView.Adapter<TodayAdapter.TodayViewHol
 
             Picasso.get()
                     .load(IMAGE_BASE_URL + CARD_IMAGE_SIZE + movie.getPosterPath())
+                    .placeholder(R.drawable.ic_movie_placeholder)
                     .into(mPosterImageView);
 
             mTitleTextView.setText(movie.getTitle());

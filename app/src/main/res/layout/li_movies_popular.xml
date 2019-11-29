@@ -7,9 +7,9 @@
 
     <ImageView
         android:id="@+id/iv_poster"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:src="@mipmap/ic_launcher" />
+        android:layout_width="80dp"
+        android:layout_height="120dp"
+        tools:src="@drawable/ic_movie_placeholder" />
 
     <TextView
         android:id="@+id/tv_title"

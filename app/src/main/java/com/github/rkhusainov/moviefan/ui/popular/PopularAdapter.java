@@ -3,8 +3,6 @@ package com.github.rkhusainov.moviefan.ui.popular;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,26 +10,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.data.model.movie.Movie;
-import com.github.rkhusainov.moviefan.utils.DateUtils;
-import com.squareup.picasso.Picasso;
+import com.github.rkhusainov.moviefan.databinding.MainPopularMovieBinding;
+import com.github.rkhusainov.moviefan.databinding.PopularMovieBinding;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularViewHolderAbs> {
 
     public static final int MAIN = 0;
     public static final int POPULAR = 1;
-    public static final String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
-    public static final String LIST_IMAGE_SIZE = "w154/";
-    public static final String CARD_IMAGE_SIZE = "w342/";
-    private List<Movie> mMovies = new ArrayList<>();
+
+    private List<Movie> mMovies;
     private int mItemViewType;
 
     private OnItemClickListener mOnItemClickListener;
 
-    public PopularAdapter(int itemViewType, OnItemClickListener onItemClickListener) {
+    public PopularAdapter(int itemViewType, List<Movie> movies, OnItemClickListener onItemClickListener) {
         mItemViewType = itemViewType;
+        mMovies = movies;
         mOnItemClickListener = onItemClickListener;
     }
 
@@ -39,26 +35,25 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
     @Override
     public PopularViewHolderAbs onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+
         if (mItemViewType == MAIN) {
-            View view = inflater.inflate(R.layout.li_movies_main_top, parent, false);
-            return new PopularMainViewHolder(view);
+            MainPopularMovieBinding binding = MainPopularMovieBinding.inflate(inflater, parent, false);
+            return new MainPopularViewHolder(binding);
 
         } else {
-            View view = inflater.inflate(R.layout.li_movies_top, parent, false);
-            return new PopularViewHolder(view);
+            PopularMovieBinding binding = PopularMovieBinding.inflate(inflater, parent, false);
+            return new PopularViewHolder(binding);
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull PopularViewHolderAbs holder, int position) {
-        Movie currentMovie = mMovies.get(position);
 
-        // биндим общие элементы
-        holder.bind(currentMovie);
+        Movie currentMovie = mMovies.get(position);
 
         // биндим отличающиеся элементы
         if (mItemViewType == MAIN) {
-            ((PopularMainViewHolder) holder).bind(currentMovie);
+            ((MainPopularViewHolder) holder).bind(currentMovie);
         } else {
             ((PopularViewHolder) holder).bind(currentMovie);
         }
@@ -69,77 +64,47 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
         return mMovies.size();
     }
 
-    public void addData(List<Movie> movies) {
-        mMovies.clear();
-        mMovies.addAll(movies);
-        notifyDataSetChanged();
-    }
 
     abstract class PopularViewHolderAbs extends RecyclerView.ViewHolder {
 
-        private TextView mTitleTextView;
-        private TextView mVoteTextView;
-
         public PopularViewHolderAbs(@NonNull View itemView) {
             super(itemView);
-
-            mTitleTextView = itemView.findViewById(R.id.tv_title);
-            mVoteTextView = itemView.findViewById(R.id.tv_vote);
-        }
-
-        private void bind(Movie movie) {
-            mTitleTextView.setText(movie.getTitle());
-            mVoteTextView.setText(String.valueOf(movie.getVoteAverage()));
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mOnItemClickListener.onClick(movie.getId());
-                }
-            });
         }
     }
 
-    class PopularMainViewHolder extends PopularViewHolderAbs {
+    class MainPopularViewHolder extends PopularViewHolderAbs {
 
-        private ImageView mPosterImageView;
+        private MainPopularMovieBinding mMainPopularMovieBinding;
 
-        public PopularMainViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public MainPopularViewHolder(MainPopularMovieBinding binding) {
+            super(binding.getRoot());
 
-            mPosterImageView = itemView.findViewById(R.id.iv_poster);
+            mMainPopularMovieBinding = binding;
         }
 
         private void bind(Movie movie) {
-            Picasso.get().
-                    load(IMAGE_BASE_URL + CARD_IMAGE_SIZE + movie.getPosterPath())
-                    .placeholder(R.drawable.ic_movie_placeholder)
-                    .into(mPosterImageView);
+
+            mMainPopularMovieBinding.setMovie(new MainPopularMovieListItemViewModel(movie));
+            mMainPopularMovieBinding.executePendingBindings();
+            mMainPopularMovieBinding.setOnItemClickListener(mOnItemClickListener);
         }
     }
 
     class PopularViewHolder extends PopularViewHolderAbs {
 
-        private ImageView mPosterImageView;
-        private TextView mYearTextView;
-        private TextView mNumberTextView;
+        private PopularMovieBinding mPopularMovieBinding;
 
-        public PopularViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public PopularViewHolder(PopularMovieBinding binding) {
+            super(binding.getRoot());
 
-            mPosterImageView = itemView.findViewById(R.id.iv_poster);
-            mYearTextView = itemView.findViewById(R.id.tv_release_year);
-            mNumberTextView = itemView.findViewById(R.id.tv_number);
+            mPopularMovieBinding = binding;
         }
 
         private void bind(Movie movie) {
-            Picasso.get().
-                    load(IMAGE_BASE_URL + LIST_IMAGE_SIZE + movie.getPosterPath())
-                    .placeholder(R.drawable.ic_movie_placeholder)
-                    .into(mPosterImageView);
 
-            mYearTextView.setText(DateUtils.yearFormat(movie.getReleaseDate()));
-            mNumberTextView.setText(format(getAdapterPosition() + 1));
+            mPopularMovieBinding.setMovie(new PopularMovieListItemViewModel(movie, format(getAdapterPosition() + 1)));
+            mPopularMovieBinding.executePendingBindings();
+            mPopularMovieBinding.setOnItemClickListener(mOnItemClickListener);
         }
 
         private String format(int position) {

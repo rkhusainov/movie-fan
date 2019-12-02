@@ -1,25 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    tools:context=".ui.popular.PopularFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data class="PopularBinding">
+
+        <import
+            alias="V"
+            type="android.view.View" />
+
+        <variable
+            name="popular"
+            type="com.github.rkhusainov.moviefan.ui.popular.PopularViewModel" />
+
+        <variable
+            name="onItemClickListener"
+            type="com.github.rkhusainov.moviefan.common.OnItemClickListener" />
+    </data>
+
+
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible" />
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical"
+        tools:context=".ui.popular.PopularFragment">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"/>
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="@{popular.isLoading? V.VISIBLE : V.GONE}"
+            />
 
-    <include
-        layout="@layout/v_error"
-        android:visibility="gone" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{popular.isErrorVisible ? V.GONE : V.VISIBLE}"
+            bind:clickHandler="@{popular.onItemClickListener}"
+            bind:data="@{popular.movies}"
+            bind:viewType="@{popular.viewType}" />
 
-</FrameLayout>
+
+        <include
+            layout="@layout/v_error"
+            android:visibility="@{popular.isErrorVisible ? V.VISIBLE : V.GONE}" />
+
+    </LinearLayout>
+
+</layout>
+
+

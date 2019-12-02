@@ -24,7 +24,7 @@ import java.util.List;
 public class UpcomingFragment extends Fragment implements IUpcomingView, OnItemClickListener {
 
     private RecyclerView mRecyclerView;
-    private UpcomingAdapter mUpcomingAdapter = new UpcomingAdapter(UpcomingAdapter.UPCOMING, this);
+    private UpcomingAdapter mUpcomingAdapter = new UpcomingAdapter(UpcomingAdapter.UPCOMING);
 
     private UpcomingPresenter mUpcomingPresenter;
     private View mErrorView;

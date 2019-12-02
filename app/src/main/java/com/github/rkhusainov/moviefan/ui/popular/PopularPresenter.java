@@ -21,32 +21,5 @@ public class PopularPresenter extends BasePresenter {
         mMoviesView = moviesView;
     }
 
-    public void getMovies() {
-        mCompositeDisposable.add(ApiUtils.getApi().getPopularMovies(LANGUAGE,REGION)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        mMoviesView.showProgress();
-                    }
-                })
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mMoviesView.hideProgress();
-                    }
-                })
-                .subscribe(new Consumer<MovieResponse>() {
-                    @Override
-                    public void accept(MovieResponse movieResponse) throws Exception {
-                        mMoviesView.showPopularMovies(movieResponse.getResults());
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        mMoviesView.showError();
-                    }
-                }));
-    }
+
 }

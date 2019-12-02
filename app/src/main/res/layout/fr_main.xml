@@ -1,200 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    android:orientation="vertical">
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
-    <ScrollView
-        android:id="@+id/main_layout"
+    <data class="MainPopularBinding">
+
+        <import
+            alias="V"
+            type="android.view.View" />
+
+        <variable
+            name="popular"
+            type="com.github.rkhusainov.moviefan.ui.popular.PopularViewModel" />
+
+        <variable
+            name="onItemClickListener"
+            type="com.github.rkhusainov.moviefan.common.OnItemClickListener" />
+
+        <variable
+            name="handler"
+            type="com.github.rkhusainov.moviefan.ui.main.MainFragment" />
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:orientation="vertical">
+            android:layout_gravity="center_horizontal"
+            android:visibility="@{popular.isLoading? V.VISIBLE : V.GONE}"/>
+
+        <ScrollView
+            android:id="@+id/main_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{popular.isErrorVisible ? V.GONE : V.VISIBLE}">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@color/colorGray"
-                android:orientation="vertical"
-                android:paddingBottom="8dp">
+                android:background="@color/colorPrimaryDark"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/colorGray"
+                    android:orientation="vertical"
+                    android:paddingBottom="8dp">
 
-                    <TextView
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingStart="@dimen/default_padding"
-                        android:paddingTop="@dimen/default_padding"
-                        android:paddingEnd="@dimen/default_padding"
-                        android:text="@string/most_popular_movies"
-                        android:textAppearance="@style/MainTitleTextAppearance" />
+                        android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/btn_popular"
-                        style="@style/MainButtonBorderless"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingStart="@dimen/default_padding"
+                            android:paddingTop="@dimen/default_padding"
+                            android:paddingEnd="@dimen/default_padding"
+                            android:text="@string/most_popular_movies"
+                            android:textAppearance="@style/MainTitleTextAppearance" />
+
+                        <Button
+                            android:id="@+id/btn_popular"
+                            style="@style/MainButtonBorderless"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/see_all"
+                            android:onClick="@{(v)->handler.openFragment(v)}"/>
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_popular"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/see_all" />
+                        android:clipToPadding="false"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        bind:viewType="@{popular.viewType}"
+                        bind:data="@{popular.movies}"
+                        bind:clickHandler="@{popular.onItemClickListener}"/>
 
                 </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_popular"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clipToPadding="false"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@color/colorGray"
-                android:orientation="vertical"
-                android:paddingBottom="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/colorGray"
+                    android:orientation="vertical"
+                    android:paddingBottom="8dp">
 
-                    <TextView
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingStart="@dimen/default_padding"
-                        android:paddingTop="@dimen/default_padding"
-                        android:paddingEnd="@dimen/default_padding"
-                        android:text="@string/today_at_the_cinema"
-                        android:textAppearance="@style/MainTitleTextAppearance" />
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingStart="@dimen/default_padding"
+                            android:paddingTop="@dimen/default_padding"
+                            android:paddingEnd="@dimen/default_padding"
+                            android:text="@string/today_at_the_cinema"
+                            android:textAppearance="@style/MainTitleTextAppearance" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_today"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp" />
 
                 </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_today"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clipToPadding="false"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@color/colorGray"
-                android:orientation="vertical"
-                android:paddingBottom="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/colorGray"
+                    android:orientation="vertical"
+                    android:paddingBottom="8dp">
 
-                    <TextView
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingStart="@dimen/default_padding"
-                        android:paddingTop="@dimen/default_padding"
-                        android:paddingEnd="@dimen/default_padding"
-                        android:text="@string/coming_soon"
-                        android:textAppearance="@style/MainTitleTextAppearance" />
+                        android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/btn_upcoming"
-                        style="@style/MainButtonBorderless"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingStart="@dimen/default_padding"
+                            android:paddingTop="@dimen/default_padding"
+                            android:paddingEnd="@dimen/default_padding"
+                            android:text="@string/coming_soon"
+                            android:textAppearance="@style/MainTitleTextAppearance" />
+
+                        <Button
+                            android:id="@+id/btn_upcoming"
+                            style="@style/MainButtonBorderless"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/see_all" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_upcoming"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/see_all" />
+                        android:clipToPadding="false"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp" />
 
                 </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_upcoming"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clipToPadding="false"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@color/colorGray"
-                android:orientation="vertical"
-                android:paddingBottom="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/colorGray"
+                    android:orientation="vertical"
+                    android:paddingBottom="8dp">
 
-                    <TextView
-                        android:layout_width="0dp"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingStart="@dimen/default_padding"
-                        android:paddingTop="@dimen/default_padding"
-                        android:paddingEnd="@dimen/default_padding"
-                        android:text="@string/top_rated_movies"
-                        android:textAppearance="@style/MainTitleTextAppearance" />
+                        android:orientation="horizontal">
 
-                    <Button
-                        android:id="@+id/btn_top"
-                        style="@style/MainButtonBorderless"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingStart="@dimen/default_padding"
+                            android:paddingTop="@dimen/default_padding"
+                            android:paddingEnd="@dimen/default_padding"
+                            android:text="@string/top_rated_movies"
+                            android:textAppearance="@style/MainTitleTextAppearance" />
+
+                        <Button
+                            android:id="@+id/btn_top"
+                            style="@style/MainButtonBorderless"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/see_all" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_top"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/see_all" />
+                        android:clipToPadding="false"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp" />
 
                 </LinearLayout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_top"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clipToPadding="false"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp" />
-
             </LinearLayout>
 
-        </LinearLayout>
+        </ScrollView>
 
-    </ScrollView>
+        <include
+            layout="@layout/v_error"
+            android:visibility="@{popular.isErrorVisible ? V.VISIBLE : V.GONE}"
+            tools:layout="@layout/v_error" />
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
+    </LinearLayout>
 
-    <include
-        layout="@layout/v_error"
-        android:visibility="gone"
-        tools:layout="@layout/v_error" />
+</layout>
 
-</FrameLayout>
+
+
 
 

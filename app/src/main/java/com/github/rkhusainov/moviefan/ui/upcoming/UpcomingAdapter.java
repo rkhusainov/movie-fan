@@ -29,9 +29,8 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.Upcomi
 
     private OnItemClickListener mOnItemClickListener;
 
-    public UpcomingAdapter(int viewType, OnItemClickListener onItemClickListener) {
+    public UpcomingAdapter(int viewType) {
         mItemViewType = viewType;
-        mOnItemClickListener = onItemClickListener;
     }
 
     @NonNull

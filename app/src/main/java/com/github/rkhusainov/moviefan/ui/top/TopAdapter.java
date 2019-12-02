@@ -29,9 +29,8 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolderAbs
 
     private OnItemClickListener mOnItemClickListener;
 
-    public TopAdapter(int itemViewType, OnItemClickListener onItemClickListener) {
+    public TopAdapter(int itemViewType) {
         mItemViewType = itemViewType;
-        mOnItemClickListener = onItemClickListener;
     }
 
     @NonNull

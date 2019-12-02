@@ -25,8 +25,7 @@ public class TodayAdapter extends RecyclerView.Adapter<TodayAdapter.TodayViewHol
 
     private OnItemClickListener mOnItemClickListener;
 
-    public TodayAdapter(OnItemClickListener onItemClickListener) {
-        mOnItemClickListener = onItemClickListener;
+    public TodayAdapter() {
     }
 
     @NonNull

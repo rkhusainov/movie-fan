@@ -26,7 +26,7 @@ import static com.github.rkhusainov.moviefan.ui.top.TopAdapter.TOP;
 public class TopFragment extends PresenterFragment<TopPresenter> implements ITopView, OnItemClickListener {
 
     private RecyclerView mRecyclerView;
-    private TopAdapter mTopAdapter = new TopAdapter(TOP, this);
+    private TopAdapter mTopAdapter = new TopAdapter(TOP);
     private TopPresenter mTopPresenter;
     private View mErrorView;
     private ProgressBar mProgressBar;

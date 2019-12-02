@@ -1,6 +1,6 @@
 package com.github.rkhusainov.moviefan.ui.popular;
 
-import android.graphics.PorterDuff;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,93 +9,52 @@ import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
-import com.github.rkhusainov.moviefan.common.PresenterFragment;
-import com.github.rkhusainov.moviefan.data.model.movie.Movie;
+import com.github.rkhusainov.moviefan.databinding.PopularBinding;
 import com.github.rkhusainov.moviefan.ui.detail.DetailFragment;
+import com.github.rkhusainov.moviefan.utils.CustomFactory;
 
-import java.util.List;
+public class PopularFragment extends Fragment {
 
-import static com.github.rkhusainov.moviefan.ui.popular.PopularAdapter.POPULAR;
+    public static final int POPULAR = 1;
 
-public class PopularFragment extends PresenterFragment<PopularPresenter> implements IPopularView, OnItemClickListener {
-
-    private RecyclerView mRecyclerView;
-    private PopularAdapter mPopularAdapter = new PopularAdapter(POPULAR, this);
-    private PopularPresenter mPopularPresenter;
-    private View mErrorView;
-    private ProgressBar mProgressBar;
+    private PopularViewModel mPopularViewModel;
 
     public static PopularFragment newInstance() {
         return new PopularFragment();
     }
 
+    private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
+        @Override
+        public void onClick(int movie_id) {
+            if (getFragmentManager() != null) {
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, DetailFragment.newInstance(movie_id))
+                        .addToBackStack(null)
+                        .commit();
+            }
+        }
+    };
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        CustomFactory factory = new CustomFactory(mOnItemClickListener, POPULAR);
+        mPopularViewModel = new ViewModelProvider(this, factory).get(PopularViewModel.class);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fr_popular, container, false);
-    }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mRecyclerView = view.findViewById(R.id.recycler);
-        mErrorView = view.findViewById(R.id.errorView);
-        mProgressBar = view.findViewById(R.id.progress_bar);
-        mPopularPresenter = new PopularPresenter(this);
-
-        mPopularPresenter.getMovies();
-        initRecyclerView();
-    }
-
-    private void initRecyclerView() {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        dividerItemDecoration.getDrawable().setColorFilter(getResources().getColor(R.color.colorWhite), PorterDuff.Mode.SRC_IN);
-        mRecyclerView.addItemDecoration(dividerItemDecoration);
-        mRecyclerView.setAdapter(mPopularAdapter);
-    }
-
-    @Override
-    public void showPopularMovies(List<Movie> movies) {
-        mPopularAdapter.addData(movies);
-        mRecyclerView.setVisibility(View.VISIBLE);
-        mErrorView.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void showProgress() {
-        mProgressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideProgress() {
-        mProgressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void showError() {
-        mRecyclerView.setVisibility(View.GONE);
-        mErrorView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onClick(int movie_id) {
-        if (getFragmentManager() != null) {
-            getFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, DetailFragment.newInstance(movie_id))
-                    .addToBackStack(null)
-                    .commit();
-        }
-    }
-
-    @Override
-    protected PopularPresenter getPresenter() {
-        return mPopularPresenter;
+        PopularBinding binding = PopularBinding.inflate(inflater, container, false);
+        binding.setPopular(mPopularViewModel);
+        binding.setLifecycleOwner(this);
+        return binding.getRoot();
     }
 }

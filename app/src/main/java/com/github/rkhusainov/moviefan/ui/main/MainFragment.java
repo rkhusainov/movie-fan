@@ -20,10 +20,12 @@ import com.github.rkhusainov.moviefan.ui.popular.PopularViewModel;
 import com.github.rkhusainov.moviefan.ui.today.TodayViewModel;
 import com.github.rkhusainov.moviefan.ui.top.TopAdapter;
 import com.github.rkhusainov.moviefan.ui.top.TopFragment;
+import com.github.rkhusainov.moviefan.ui.top.TopViewModel;
 import com.github.rkhusainov.moviefan.ui.upcoming.UpcomingAdapter;
 import com.github.rkhusainov.moviefan.ui.upcoming.UpcomingFragment;
 import com.github.rkhusainov.moviefan.utils.PopularMovieFactory;
 import com.github.rkhusainov.moviefan.utils.TodayMovieFactory;
+import com.github.rkhusainov.moviefan.utils.TopMovieFactory;
 
 public class MainFragment extends Fragment {
 
@@ -31,6 +33,7 @@ public class MainFragment extends Fragment {
 
     private PopularViewModel mPopularViewModel;
     private TodayViewModel mTodayViewModel;
+    private TopViewModel mTopViewModel;
 
     private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
         @Override
@@ -55,8 +58,10 @@ public class MainFragment extends Fragment {
 
         PopularMovieFactory popularMovieFactory = new PopularMovieFactory(mOnItemClickListener, MAIN);
         TodayMovieFactory todayMoviefactory = new TodayMovieFactory(mOnItemClickListener);
+        TopMovieFactory topMovieFactory = new TopMovieFactory(mOnItemClickListener, MAIN);
         mPopularViewModel = new ViewModelProvider(this, popularMovieFactory).get(PopularViewModel.class);
         mTodayViewModel = new ViewModelProvider(this, todayMoviefactory).get(TodayViewModel.class);
+        mTopViewModel = new ViewModelProvider(this, topMovieFactory).get(TopViewModel.class);
     }
 
     @Nullable
@@ -66,6 +71,7 @@ public class MainFragment extends Fragment {
         MainMovieBinding mainMovieBinding = MainMovieBinding.inflate(inflater, container, false);
         mainMovieBinding.setPopular(mPopularViewModel);
         mainMovieBinding.setToday(mTodayViewModel);
+        mainMovieBinding.setTop(mTopViewModel);
         mainMovieBinding.setHandler(this);
         mainMovieBinding.setLifecycleOwner(this);
         return mainMovieBinding.getRoot();

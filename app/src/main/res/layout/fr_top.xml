@@ -1,23 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data class="TopBinding">
+
+        <import
+            alias="V"
+            type="android.view.View" />
+
+        <variable
+            name="top"
+            type="com.github.rkhusainov.moviefan.ui.top.TopViewModel" />
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible" />
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="@{top.isLoading? V.VISIBLE : V.GONE}" />
 
-    <include
-        layout="@layout/v_error"
-        android:visibility="gone" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{top.isErrorVisible ? V.GONE : V.VISIBLE}"
+            bind:clickHandler="@{top.onItemClickListener}"
+            bind:dataTop="@{top.movies}"
+            bind:viewType="@{top.viewType}" />
 
-</FrameLayout>
+        <include
+            layout="@layout/v_error"
+            android:visibility="@{top.isErrorVisible ? V.VISIBLE : V.GONE}" />
+
+    </LinearLayout>
+
+</layout>
+

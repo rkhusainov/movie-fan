@@ -13,9 +13,6 @@
             name="popular"
             type="com.github.rkhusainov.moviefan.ui.popular.PopularViewModel" />
 
-        <variable
-            name="onItemClickListener"
-            type="com.github.rkhusainov.moviefan.common.OnItemClickListener" />
     </data>
 
 
@@ -40,7 +37,7 @@
             android:layout_height="match_parent"
             android:visibility="@{popular.isErrorVisible ? V.GONE : V.VISIBLE}"
             bind:clickHandler="@{popular.onItemClickListener}"
-            bind:data="@{popular.movies}"
+            bind:dataPopular="@{popular.movies}"
             bind:viewType="@{popular.viewType}" />
 
 

@@ -12,25 +12,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.data.model.movie.Movie;
-import com.github.rkhusainov.moviefan.utils.DateUtils;
-import com.squareup.picasso.Picasso;
+import com.github.rkhusainov.moviefan.databinding.MainTopMovieBinding;
+import com.github.rkhusainov.moviefan.databinding.TopMovieBinding;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolderAbs> {
     public static final int MAIN = 0;
-    public static final int TOP = 1;
-    public static final String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
-    public static final String LIST_IMAGE_SIZE = "w154/";
-    public static final String CARD_IMAGE_SIZE = "w342/";
-    private List<Movie> mMovies = new ArrayList<>();
+
+    private List<Movie> mMovies;
     private int mItemViewType;
 
     private OnItemClickListener mOnItemClickListener;
 
-    public TopAdapter(int itemViewType) {
+    public TopAdapter(int itemViewType, List<Movie> movies, OnItemClickListener listener) {
         mItemViewType = itemViewType;
+        mMovies = movies;
+        mOnItemClickListener = listener;
     }
 
     @NonNull
@@ -38,12 +36,12 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolderAbs
     public TopViewHolderAbs onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         if (mItemViewType == MAIN) {
-            View view = inflater.inflate(R.layout.li_movies_main_top, parent, false);
-            return new TopMainViewHolder(view);
+            MainTopMovieBinding binding = MainTopMovieBinding.inflate(inflater, parent, false);
+            return new MainTopViewHolder(binding);
 
         } else {
-            View view = inflater.inflate(R.layout.li_movies_top, parent, false);
-            return new TopViewHolder(view);
+            TopMovieBinding binding = TopMovieBinding.inflate(inflater, parent, false);
+            return new TopViewHolder(binding);
         }
     }
 
@@ -51,12 +49,9 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolderAbs
     public void onBindViewHolder(@NonNull TopViewHolderAbs holder, int position) {
         Movie currentMovie = mMovies.get(position);
 
-        // биндим общие элементы
-        holder.bind(currentMovie);
-
         // биндим отличающиеся элементы
         if (mItemViewType == MAIN) {
-            ((TopMainViewHolder) holder).bind(currentMovie);
+            ((MainTopViewHolder) holder).bind(currentMovie);
         } else {
             ((TopViewHolder) holder).bind(currentMovie);
         }
@@ -67,79 +62,44 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolderAbs
         return mMovies.size();
     }
 
-    public void addData(List<Movie> movies) {
-        mMovies.clear();
-        mMovies.addAll(movies);
-        notifyDataSetChanged();
-    }
-
     abstract class TopViewHolderAbs extends RecyclerView.ViewHolder {
-
-        private TextView mTitleTextView;
-        private TextView mVoteTextView;
 
         public TopViewHolderAbs(@NonNull View itemView) {
             super(itemView);
-
-            mTitleTextView = itemView.findViewById(R.id.tv_title);
-            mVoteTextView = itemView.findViewById(R.id.tv_vote);
-        }
-
-        private void bind(Movie movie) {
-            mTitleTextView.setText(movie.getTitle());
-            mVoteTextView.setText(String.valueOf(movie.getVoteAverage()));
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mOnItemClickListener.onClick(movie.getId());
-                }
-            });
         }
     }
 
-    class TopMainViewHolder extends TopViewHolderAbs {
+    class MainTopViewHolder extends TopViewHolderAbs {
 
-        private ImageView mPosterImageView;
+        private MainTopMovieBinding mBinding;
 
-        public TopMainViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public MainTopViewHolder(MainTopMovieBinding binding) {
+            super(binding.getRoot());
 
-            mPosterImageView = itemView.findViewById(R.id.iv_poster);
+            mBinding = binding;
         }
 
         private void bind(Movie movie) {
-            Picasso.get().
-                    load(IMAGE_BASE_URL + CARD_IMAGE_SIZE + movie.getPosterPath())
-                    .placeholder(R.drawable.ic_movie_placeholder)
-                    .into(mPosterImageView);
+            mBinding.setMovie(new MainTopMovieListItemViewModel(movie));
+            mBinding.executePendingBindings();
+            mBinding.setOnItemClickListener(mOnItemClickListener);
         }
     }
 
     class TopViewHolder extends TopViewHolderAbs {
 
-        private ImageView mPosterImageView;
-        private TextView mYearTextView;
-        private TextView mNumberTextView;
+        private TopMovieBinding mBinding;
 
+        public TopViewHolder(TopMovieBinding binding) {
+            super(binding.getRoot());
 
-        public TopViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            mPosterImageView = itemView.findViewById(R.id.iv_poster);
-            mYearTextView = itemView.findViewById(R.id.tv_release_year);
-            mNumberTextView = itemView.findViewById(R.id.tv_number);
-
+            mBinding = binding;
         }
 
         private void bind(Movie movie) {
-            Picasso.get().
-                    load(IMAGE_BASE_URL + LIST_IMAGE_SIZE + movie.getPosterPath())
-                    .placeholder(R.drawable.ic_movie_placeholder)
-                    .into(mPosterImageView);
-
-            mYearTextView.setText(DateUtils.yearFormat(movie.getReleaseDate()));
-            mNumberTextView.setText(format(getAdapterPosition() + 1));
+            mBinding.setMovie(new TopMovieListItemViewModel(movie, format(getAdapterPosition() + 1)));
+            mBinding.executePendingBindings();
+            mBinding.setOnItemClickListener(mOnItemClickListener);
         }
 
         private String format(int position) {

@@ -1,101 +1,57 @@
 package com.github.rkhusainov.moviefan.ui.top;
 
-import android.graphics.PorterDuff;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
-import com.github.rkhusainov.moviefan.common.PresenterFragment;
-import com.github.rkhusainov.moviefan.data.model.movie.Movie;
+import com.github.rkhusainov.moviefan.databinding.TopBinding;
 import com.github.rkhusainov.moviefan.ui.detail.DetailFragment;
+import com.github.rkhusainov.moviefan.utils.TopMovieFactory;
 
-import java.util.List;
+public class TopFragment extends Fragment {
 
-import static com.github.rkhusainov.moviefan.ui.top.TopAdapter.TOP;
+    public static final int TOP = 1;
 
-public class TopFragment extends PresenterFragment<TopPresenter> implements ITopView, OnItemClickListener {
+    private TopViewModel mTopViewModel;
 
-    private RecyclerView mRecyclerView;
-    private TopAdapter mTopAdapter = new TopAdapter(TOP);
-    private TopPresenter mTopPresenter;
-    private View mErrorView;
-    private ProgressBar mProgressBar;
+    private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
+        @Override
+        public void onClick(int movie_id) {
+            if (getFragmentManager() != null) {
+                getFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragment_container, DetailFragment.newInstance(movie_id))
+                        .addToBackStack(null)
+                        .commit();
+            }
+        }
+    };
 
     public static TopFragment newInstance() {
         return new TopFragment();
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+        TopMovieFactory factory = new TopMovieFactory(mOnItemClickListener, TOP);
+        mTopViewModel = new ViewModelProvider(this, factory).get(TopViewModel.class);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fr_top, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mRecyclerView = view.findViewById(R.id.recycler);
-        mErrorView = view.findViewById(R.id.errorView);
-        mProgressBar = view.findViewById(R.id.progress_bar);
-        mTopPresenter = new TopPresenter(this);
-
-        mTopPresenter.getMovies();
-        initRecyclerView();
-    }
-
-    private void initRecyclerView() {
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        dividerItemDecoration.getDrawable().setColorFilter(getResources().getColor(R.color.colorWhite), PorterDuff.Mode.SRC_IN);
-        mRecyclerView.addItemDecoration(dividerItemDecoration);
-        mRecyclerView.setAdapter(mTopAdapter);
-    }
-
-    @Override
-    public void showTopMovies(List<Movie> movies) {
-        mTopAdapter.addData(movies);
-        mRecyclerView.setVisibility(View.VISIBLE);
-        mErrorView.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void showProgress() {
-        mProgressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideProgress() {
-        mProgressBar.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void showError() {
-        mRecyclerView.setVisibility(View.GONE);
-        mErrorView.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void onClick(int movie_id) {
-        if (getFragmentManager() != null) {
-            getFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, DetailFragment.newInstance(movie_id))
-                    .addToBackStack(null)
-                    .commit();
-        }
-    }
-
-    @Override
-    protected TopPresenter getPresenter() {
-        return mTopPresenter;
+        TopBinding binding = TopBinding.inflate(inflater, container, false);
+        binding.setTop(mTopViewModel);
+        binding.setLifecycleOwner(this);
+        return binding.getRoot();
     }
 }

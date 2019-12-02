@@ -1,24 +1,18 @@
 package com.github.rkhusainov.moviefan.ui.today;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.data.model.movie.Movie;
 import com.github.rkhusainov.moviefan.databinding.MainTodayMovieBinding;
-import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class TodayAdapter extends RecyclerView.Adapter<TodayAdapter.TodayViewHolder> {
+public class TodayAdapter extends RecyclerView.Adapter<TodayAdapter.MainTodayViewHolder> {
 
     private List<Movie> mMovies;
 
@@ -31,14 +25,14 @@ public class TodayAdapter extends RecyclerView.Adapter<TodayAdapter.TodayViewHol
 
     @NonNull
     @Override
-    public TodayViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MainTodayViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         MainTodayMovieBinding binding = MainTodayMovieBinding.inflate(inflater, parent, false);
-        return new TodayViewHolder(binding);
+        return new MainTodayViewHolder(binding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TodayViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MainTodayViewHolder holder, int position) {
         Movie movie = mMovies.get(position);
         holder.bind(movie);
     }
@@ -48,11 +42,11 @@ public class TodayAdapter extends RecyclerView.Adapter<TodayAdapter.TodayViewHol
         return mMovies.size();
     }
 
-    class TodayViewHolder extends RecyclerView.ViewHolder {
+    class MainTodayViewHolder extends RecyclerView.ViewHolder {
 
         private MainTodayMovieBinding mMainTodayMovieBinding;
 
-        public TodayViewHolder(MainTodayMovieBinding binding) {
+        public MainTodayViewHolder(MainTodayMovieBinding binding) {
             super(binding.getRoot());
 
             mMainTodayMovieBinding = binding;

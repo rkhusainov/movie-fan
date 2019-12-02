@@ -17,6 +17,10 @@
         <variable
             name="today"
             type="com.github.rkhusainov.moviefan.ui.today.TodayViewModel" />
+        
+        <variable
+            name="top"
+            type="com.github.rkhusainov.moviefan.ui.top.TopViewModel" />
 
         <variable
             name="onItemClickListener"
@@ -94,7 +98,7 @@
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
                         bind:viewType="@{popular.viewType}"
-                        bind:data="@{popular.movies}"
+                        bind:dataPopular="@{popular.movies}"
                         bind:clickHandler="@{popular.onItemClickListener}"/>
 
                 </LinearLayout>
@@ -164,7 +168,8 @@
                             style="@style/MainButtonBorderless"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/see_all" />
+                            android:text="@string/see_all"
+                            android:onClick="@{(v)->handler.openFragment(v)}"/>
 
                     </LinearLayout>
 
@@ -174,7 +179,8 @@
                         android:layout_height="wrap_content"
                         android:clipToPadding="false"
                         android:paddingStart="8dp"
-                        android:paddingEnd="8dp" />
+                        android:paddingEnd="8dp"
+                        />
 
                 </LinearLayout>
 
@@ -206,7 +212,8 @@
                             style="@style/MainButtonBorderless"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/see_all" />
+                            android:text="@string/see_all"
+                            android:onClick="@{(v)->handler.openFragment(v)}"/>
 
                     </LinearLayout>
 
@@ -216,7 +223,10 @@
                         android:layout_height="wrap_content"
                         android:clipToPadding="false"
                         android:paddingStart="8dp"
-                        android:paddingEnd="8dp" />
+                        android:paddingEnd="8dp"
+                        bind:viewType="@{top.viewType}"
+                        bind:dataTop="@{top.movies}"
+                        bind:clickHandler="@{top.onItemClickListener}"/>
 
                 </LinearLayout>
 

@@ -19,7 +19,7 @@
     <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{()->onItemClickListener.onClick(movie.movieId)}"
+        android:onClick="@{()->onItemClickListener.onClick(movie.id)}"
         android:padding="8dp">
 
         <ImageView

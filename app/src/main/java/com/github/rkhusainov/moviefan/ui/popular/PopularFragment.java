@@ -5,10 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -16,7 +14,7 @@ import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.databinding.PopularBinding;
 import com.github.rkhusainov.moviefan.ui.detail.DetailFragment;
-import com.github.rkhusainov.moviefan.utils.CustomFactory;
+import com.github.rkhusainov.moviefan.utils.PopularMovieFactory;
 
 public class PopularFragment extends Fragment {
 
@@ -45,7 +43,7 @@ public class PopularFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        CustomFactory factory = new CustomFactory(mOnItemClickListener, POPULAR);
+        PopularMovieFactory factory = new PopularMovieFactory(mOnItemClickListener, POPULAR);
         mPopularViewModel = new ViewModelProvider(this, factory).get(PopularViewModel.class);
     }
 

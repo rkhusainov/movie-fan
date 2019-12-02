@@ -7,12 +7,12 @@ import androidx.lifecycle.ViewModelProvider;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.ui.popular.PopularViewModel;
 
-public class CustomFactory extends ViewModelProvider.NewInstanceFactory {
+public class PopularMovieFactory extends ViewModelProvider.NewInstanceFactory {
 
     private OnItemClickListener mOnItemClickListener;
     private int mViewType;
 
-    public CustomFactory(OnItemClickListener onItemClickListener, int viewType) {
+    public PopularMovieFactory(OnItemClickListener onItemClickListener, int viewType) {
         mOnItemClickListener = onItemClickListener;
         mViewType = viewType;
     }

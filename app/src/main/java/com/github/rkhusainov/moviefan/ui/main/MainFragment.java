@@ -23,9 +23,11 @@ import com.github.rkhusainov.moviefan.ui.top.TopFragment;
 import com.github.rkhusainov.moviefan.ui.top.TopViewModel;
 import com.github.rkhusainov.moviefan.ui.upcoming.UpcomingAdapter;
 import com.github.rkhusainov.moviefan.ui.upcoming.UpcomingFragment;
+import com.github.rkhusainov.moviefan.ui.upcoming.UpcomingViewModel;
 import com.github.rkhusainov.moviefan.utils.PopularMovieFactory;
 import com.github.rkhusainov.moviefan.utils.TodayMovieFactory;
 import com.github.rkhusainov.moviefan.utils.TopMovieFactory;
+import com.github.rkhusainov.moviefan.utils.UpcomingMovieFactory;
 
 public class MainFragment extends Fragment {
 
@@ -34,6 +36,7 @@ public class MainFragment extends Fragment {
     private PopularViewModel mPopularViewModel;
     private TodayViewModel mTodayViewModel;
     private TopViewModel mTopViewModel;
+    private UpcomingViewModel mUpcomingViewModel;
 
     private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
         @Override
@@ -59,9 +62,12 @@ public class MainFragment extends Fragment {
         PopularMovieFactory popularMovieFactory = new PopularMovieFactory(mOnItemClickListener, MAIN);
         TodayMovieFactory todayMoviefactory = new TodayMovieFactory(mOnItemClickListener);
         TopMovieFactory topMovieFactory = new TopMovieFactory(mOnItemClickListener, MAIN);
+        UpcomingMovieFactory upcomingMovieFactory = new UpcomingMovieFactory(mOnItemClickListener, MAIN);
+
         mPopularViewModel = new ViewModelProvider(this, popularMovieFactory).get(PopularViewModel.class);
         mTodayViewModel = new ViewModelProvider(this, todayMoviefactory).get(TodayViewModel.class);
         mTopViewModel = new ViewModelProvider(this, topMovieFactory).get(TopViewModel.class);
+        mUpcomingViewModel = new ViewModelProvider(this, upcomingMovieFactory).get(UpcomingViewModel.class);
     }
 
     @Nullable
@@ -72,6 +78,7 @@ public class MainFragment extends Fragment {
         mainMovieBinding.setPopular(mPopularViewModel);
         mainMovieBinding.setToday(mTodayViewModel);
         mainMovieBinding.setTop(mTopViewModel);
+        mainMovieBinding.setUpcoming(mUpcomingViewModel);
         mainMovieBinding.setHandler(this);
         mainMovieBinding.setLifecycleOwner(this);
         return mainMovieBinding.getRoot();

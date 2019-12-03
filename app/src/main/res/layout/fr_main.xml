@@ -23,6 +23,10 @@
             type="com.github.rkhusainov.moviefan.ui.top.TopViewModel" />
 
         <variable
+            name="upcoming"
+            type="com.github.rkhusainov.moviefan.ui.upcoming.UpcomingViewModel" />
+
+        <variable
             name="onItemClickListener"
             type="com.github.rkhusainov.moviefan.common.OnItemClickListener" />
 
@@ -180,6 +184,9 @@
                         android:clipToPadding="false"
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
+                        bind:viewType="@{upcoming.viewType}"
+                        bind:dataUpcoming="@{upcoming.movies}"
+                        bind:clickHandler="@{upcoming.onItemClickListener}"
                         />
 
                 </LinearLayout>

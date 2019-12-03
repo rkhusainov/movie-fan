@@ -8,8 +8,6 @@ public class MainTopMovieListItemViewModel extends TopMovieListItemAbsViewModel 
     public static final String CARD_IMAGE_SIZE = "w342/";
 
     private String mImageUrl;
-    private String mYearTextView;
-    private String mNumberTextView;
 
     public MainTopMovieListItemViewModel(Movie movie) {
         super(movie);
@@ -19,13 +17,5 @@ public class MainTopMovieListItemViewModel extends TopMovieListItemAbsViewModel 
 
     public String getImageUrl() {
         return mImageUrl;
-    }
-
-    public String getYearTextView() {
-        return mYearTextView;
-    }
-
-    public String getNumberTextView() {
-        return mNumberTextView;
     }
 }

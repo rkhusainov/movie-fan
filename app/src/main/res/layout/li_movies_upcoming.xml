@@ -1,62 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="8dp">
 
-    <ImageView
-        android:id="@+id/iv_poster"
-        android:layout_width="80dp"
-        android:layout_height="120dp"
-        tools:src="@drawable/ic_movie_placeholder" />
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <data class="UpcomingMovieBinding">
+
+        <variable
+            name="movie"
+            type="com.github.rkhusainov.moviefan.ui.upcoming.UpcomingMovieListItemViewModel" />
+
+        <variable
+            name="onItemClickListener"
+            type="com.github.rkhusainov.moviefan.common.OnItemClickListener" />
+
+    </data>
+
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="8dp"
-        android:layout_toEndOf="@id/iv_poster"
-        android:orientation="vertical">
+        android:onClick="@{()->onItemClickListener.onClick(movie.id)}"
+        android:padding="8dp">
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TabTitleTextAppearance"
-            tools:text="Joker"
-            tools:textColor="@color/colorGray"/>
-
-        <TextView
-            android:id="@+id/tv_release_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorGrayLight"
-            tools:text="2019" />
+        <ImageView
+            android:id="@+id/iv_poster"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            bind:imageUrl="@{movie.imageUrl}"
+            tools:src="@drawable/ic_movie_placeholder" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/iv_star"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_star"
-                android:layout_gravity="center"/>
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/iv_poster"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tv_vote"
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:textColor="@color/colorWhite"
-                tools:text="8.7"
-                tools:textColor="@color/colorPrimary" />
+                android:text="@{movie.titleTextView}"
+                android:textAppearance="@style/TabTitleTextAppearance"
+                tools:text="Joker"
+                tools:textColor="@color/colorGray" />
+
+            <TextView
+                android:id="@+id/tv_release_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{movie.yearTextView}"
+                android:textColor="@color/colorGrayLight"
+                tools:text="2019" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_star"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_star" />
+
+                <TextView
+                    android:id="@+id/tv_vote"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="@{movie.voteTextView}"
+                    android:textColor="@color/colorWhite"
+                    tools:text="8.7"
+                    tools:textColor="@color/colorPrimary" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
-</RelativeLayout>
+</layout>
+

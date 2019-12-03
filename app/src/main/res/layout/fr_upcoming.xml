@@ -1,25 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    tools:context=".ui.upcoming.UpcomingFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data class="UpcomingBinding">
+
+        <import
+            alias="V"
+            type="android.view.View" />
+
+
+        <variable
+            name="upcoming"
+            type="com.github.rkhusainov.moviefan.ui.upcoming.UpcomingViewModel" />
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible" />
+        android:background="@color/colorPrimaryDark"
+        tools:context=".ui.upcoming.UpcomingFragment"
+        android:orientation="vertical">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="@{upcoming.isLoading? V.VISIBLE : V.GONE}" />
 
-    <include
-        layout="@layout/v_error"
-        android:visibility="gone" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{upcoming.isErrorVisible ? V.GONE : V.VISIBLE}"
+            bind:clickHandler="@{upcoming.onItemClickListener}"
+            bind:dataTop="@{upcoming.movies}"
+            bind:viewType="@{upcoming.viewType}" />
 
-</FrameLayout>
+        <include
+            layout="@layout/v_error"
+            android:visibility="@{upcoming.isErrorVisible ? V.VISIBLE : V.GONE}" />
+
+    </LinearLayout>
+
+</layout>
+

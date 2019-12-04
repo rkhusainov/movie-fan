@@ -3,19 +3,14 @@ package com.github.rkhusainov.moviefan.ui.upcoming;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.data.model.movie.Movie;
 import com.github.rkhusainov.moviefan.databinding.MainUpcomingMovieBinding;
 import com.github.rkhusainov.moviefan.databinding.UpcomingMovieBinding;
-import com.github.rkhusainov.moviefan.utils.DateUtils;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 

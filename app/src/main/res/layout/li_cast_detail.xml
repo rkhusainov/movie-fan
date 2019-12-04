@@ -1,53 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+<layout>
 
-    <androidx.cardview.widget.CardView
+    <data class="DetailCastMovieBinding">
+
+        <variable
+            name="cast"
+            type="com.github.rkhusainov.moviefan.ui.credit.DetailCastListItemViewModel" />
+
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/colorMiddleGray"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="5dp"
-        app:cardUseCompatPadding="true">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:layout_width="130dp"
-            android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/colorMiddleGray"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="5dp"
+            app:cardUseCompatPadding="true">
 
-            <ImageView
-                android:id="@+id/iv_actor_photo"
+            <RelativeLayout
                 android:layout_width="130dp"
-                android:layout_height="200dp"
-                tools:src="@drawable/ic_actor_placeholder" />
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tv_actor_name"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_below="@id/iv_actor_photo"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginTop="8dp"
-                android:textAppearance="@style/TabTitleTextAppearance"
-                tools:text="Joaquin Phoenix"
-                tools:textColor="@color/colorWhite" />
+                <ImageView
+                    android:id="@+id/iv_actor_photo"
+                    android:layout_width="130dp"
+                    android:layout_height="200dp"
+                    tools:src="@drawable/ic_actor_placeholder"
+                    app:imageUrl="@{cast.imageUrl}"/>
 
-            <TextView
-                android:id="@+id/tv_actor_character"
-                android:layout_width="wrap_content"
-                android:layout_height="52dp"
-                android:layout_below="@id/tv_actor_name"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:textColor="@color/colorGrayLight"
-                tools:text="Joker" />
+                <TextView
+                    android:id="@+id/tv_actor_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/iv_actor_photo"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
+                    android:textAppearance="@style/TabTitleTextAppearance"
+                    tools:text="Joaquin Phoenix"
+                    tools:textColor="@color/colorWhite"
+                    android:text="@{cast.actorNameTextView}"/>
 
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_actor_character"
+                    android:layout_width="wrap_content"
+                    android:layout_height="52dp"
+                    android:layout_below="@id/tv_actor_name"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:textColor="@color/colorGrayLight"
+                    tools:text="Joker"
+                    android:text="@{cast.actorCharacterTextView}"/>
 
-    </androidx.cardview.widget.CardView>
+            </RelativeLayout>
 
-</FrameLayout>
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
+
+</layout>
+

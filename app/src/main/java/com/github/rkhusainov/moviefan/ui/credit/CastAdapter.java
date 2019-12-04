@@ -9,51 +9,46 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.rkhusainov.moviefan.Constants;
 import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.data.model.credit.Cast;
-import com.squareup.picasso.Picasso;
+import com.github.rkhusainov.moviefan.databinding.CastMovieBinding;
+import com.github.rkhusainov.moviefan.databinding.DetailCastMovieBinding;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolderAbs> {
 
-    public static final int DETAIL = 0;
-    public static final int CAST = 1;
-    public static final String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
-    public static final String LIST_IMAGE_SIZE = "w154/";
-    public static final String CARD_IMAGE_SIZE = "w342/";
-
-    private List<Cast> mCasts = new ArrayList<>();
+    private List<Cast> mCasts;
     private int mItemViewType;
 
-    public CastAdapter(int itemViewType) {
+    public CastAdapter(int itemViewType, List<Cast> casts) {
         mItemViewType = itemViewType;
+        mCasts = casts;
     }
 
     @NonNull
     @Override
     public CastViewHolderAbs onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
-        if (mItemViewType == DETAIL) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.li_cast_detail, parent, false);
-            return new CastMainViewHolder(view);
+        if (mItemViewType == Constants.DETAIL) {
+            DetailCastMovieBinding binding = DetailCastMovieBinding.inflate(inflater, parent, false);
+            return new DetailCastViewHolder(binding);
         } else {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.li_cast, parent, false);
-            return new CastViewHolder(view);
+            CastMovieBinding binding = CastMovieBinding.inflate(inflater, parent, false);
+            return new CastViewHolder(binding);
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull CastViewHolderAbs holder, int position) {
+
         Cast cast = mCasts.get(position);
 
-        // биндим общие элементы
-        holder.bind(cast);
-
         // биндим отличающиеся элементы
-        if (mItemViewType == DETAIL) {
-            ((CastMainViewHolder) holder).bind(cast);
+        if (mItemViewType == Constants.DETAIL) {
+            ((DetailCastViewHolder) holder).bind(cast);
         } else {
             ((CastViewHolder) holder).bind(cast);
         }
@@ -64,63 +59,42 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
         return mCasts.size();
     }
 
-    public void addData(List<Cast> casts) {
-        mCasts.clear();
-        mCasts.addAll(casts);
-        notifyDataSetChanged();
-    }
-
     abstract class CastViewHolderAbs extends RecyclerView.ViewHolder {
-
-        private TextView mActorNameTextView;
-        private TextView mActorCharacterTextView;
 
         public CastViewHolderAbs(@NonNull View itemView) {
             super(itemView);
-
-            mActorNameTextView = itemView.findViewById(R.id.tv_actor_name);
-            mActorCharacterTextView = itemView.findViewById(R.id.tv_actor_character);
-        }
-
-        private void bind(Cast cast) {
-            mActorNameTextView.setText(cast.getName());
-            mActorCharacterTextView.setText(cast.getCharacter());
         }
     }
 
-    class CastMainViewHolder extends CastViewHolderAbs {
+    class DetailCastViewHolder extends CastViewHolderAbs {
 
-        private ImageView mActorPhotoImageView;
+        private DetailCastMovieBinding mDetailCastMovieBinding;
 
-        public CastMainViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public DetailCastViewHolder(DetailCastMovieBinding binding) {
+            super(binding.getRoot());
 
-            mActorPhotoImageView = itemView.findViewById(R.id.iv_actor_photo);
+            mDetailCastMovieBinding = binding;
         }
 
         void bind(Cast cast) {
-            Picasso.get()
-                    .load(IMAGE_BASE_URL + CARD_IMAGE_SIZE + cast.getProfilePath())
-                    .placeholder(R.drawable.ic_actor_placeholder)
-                    .into(mActorPhotoImageView);
+            mDetailCastMovieBinding.setCast(new DetailCastListItemViewModel(cast));
+            mDetailCastMovieBinding.executePendingBindings();
         }
     }
 
     class CastViewHolder extends CastViewHolderAbs {
 
-        private ImageView mActorPhotoImageView;
+        private CastMovieBinding mCastMovieBinding;
 
-        public CastViewHolder(@NonNull View itemView) {
-            super(itemView);
+        public CastViewHolder(CastMovieBinding binding) {
+            super(binding.getRoot());
 
-            mActorPhotoImageView = itemView.findViewById(R.id.iv_actor_photo);
+            mCastMovieBinding = binding;
         }
 
         void bind(Cast cast) {
-            Picasso.get()
-                    .load(IMAGE_BASE_URL + LIST_IMAGE_SIZE + cast.getProfilePath())
-                    .placeholder(R.drawable.ic_actor_placeholder)
-                    .into(mActorPhotoImageView);
+            mCastMovieBinding.setCast(new CastListItemViewModel(cast));
+            mCastMovieBinding.executePendingBindings();
         }
     }
 }

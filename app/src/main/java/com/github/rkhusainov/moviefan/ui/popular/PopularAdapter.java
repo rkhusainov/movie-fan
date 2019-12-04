@@ -18,7 +18,6 @@ import java.util.List;
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularViewHolderAbs> {
 
     public static final int MAIN = 0;
-    public static final int POPULAR = 1;
 
     private List<Movie> mMovies;
     private int mItemViewType;

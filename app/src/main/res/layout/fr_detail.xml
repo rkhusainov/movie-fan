@@ -1,228 +1,271 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    tools:context=".ui.detail.DetailFragment">
+<layout>
 
-    <ScrollView
-        android:id="@+id/detail_layout"
+    <data class="DetailBinding">
+
+        <import
+            alias="V"
+            type="android.view.View" />
+
+        <variable
+            name="detail"
+            type="com.github.rkhusainov.moviefan.ui.detail.DetailViewModel" />
+
+        <variable
+            name="cast"
+            type="com.github.rkhusainov.moviefan.ui.credit.CastViewModel" />
+
+        <variable
+            name="handler"
+            type="com.github.rkhusainov.moviefan.ui.detail.DetailFragment" />
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
+        android:background="@color/colorPrimaryDark"
+        tools:context=".ui.detail.DetailFragment"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="visible">
+            android:layout_gravity="center_horizontal"
+            android:visibility="@{detail.isLoading? V.VISIBLE : V.GONE}"/>
+
+        <ScrollView
+            android:id="@+id/detail_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@color/colorGray"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:visibility="visible">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tv_movie_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                        android:textColor="@color/colorWhite"
-                        tools:text="Joker" />
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/colorGray"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/tv_release_year"
+                            android:id="@+id/tv_movie_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                            android:textColor="@color/colorWhite"
+                            tools:text="Joker"
+                            android:text="@{detail.movieTitleTextView}"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_release_year"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorGrayLight"
+                                tools:text="2019"
+                                android:text="@{detail.releaseYearTextView}"/>
+
+                            <TextView
+                                android:id="@+id/tv_movie_runtime"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:textColor="@color/colorGrayLight"
+                                tools:text="2h 2min"
+                                android:text="@{detail.runtimeTextView}"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/colorPrimary" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/iv_poster"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:src="@drawable/ic_launcher_foreground"
+                            bind:imageUrl="@{detail.posterUrl}"/>
+
+                        <TextView
+                            android:id="@+id/tv_movie_genre"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_toEndOf="@id/iv_poster"
+                            android:textColor="@color/colorWhite"
+                            tools:text="Crime"
+                            android:text="@{detail.genres}"/>
+
+                        <TextView
+                            android:id="@+id/tv_movie_overview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/tv_movie_genre"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_toEndOf="@id/iv_poster"
+                            android:textColor="@color/colorWhite"
+                            tools:text="Gottam City"
+                            android:text="@{detail.movieOverviewTextView}"/>
+
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/colorPrimary" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/release_date"
+                            android:textColor="@color/colorWhite"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+
+                        <TextView
+                            android:id="@+id/tv_release_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/colorGrayLight"
-                            tools:text="2019" />
+                            tools:text="01 December 2019"
+                            android:text="@{detail.releaseDateTextView}"/>
 
-                        <TextView
-                            android:id="@+id/tv_movie_runtime"
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@color/colorPrimary" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/ic_star"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
+                            android:src="@drawable/ic_star" />
+
+                        <TextView
+                            android:id="@+id/tv_vote"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="@color/colorWhite"
+                            tools:text="8,8"
+                            android:text="@{detail.voteTextView}"/>
+
+                        <TextView
+                            android:id="@+id/tv_vote_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:textColor="@color/colorGrayLight"
-                            tools:text="2h 2min" />
+                            tools:text="468659"
+                            android:text="@{detail.voteCountTextView}"/>
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@color/colorPrimary" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/iv_poster"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:src="@drawable/ic_launcher_foreground" />
-
-                    <TextView
-                        android:id="@+id/tv_movie_genre"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_toEndOf="@id/iv_poster"
-                        android:textColor="@color/colorWhite"
-                        tools:text="Crime" />
-
-                    <TextView
-                        android:id="@+id/tv_movie_overview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/tv_movie_genre"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_toEndOf="@id/iv_poster"
-                        android:textColor="@color/colorWhite"
-                        tools:text="Gottam City" />
-
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@color/colorPrimary" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginBottom="16dp"
+                    android:background="@color/colorGray"
+                    android:orientation="vertical"
+                    android:paddingBottom="8dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/release_date"
-                        android:textColor="@color/colorWhite"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+                        android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_release_date"
-                        android:layout_width="wrap_content"
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingStart="@dimen/default_padding"
+                            android:paddingTop="@dimen/default_padding"
+                            android:paddingEnd="@dimen/default_padding"
+                            android:text="@string/actors"
+                            android:textAppearance="@style/MainTitleTextAppearance" />
+
+                        <Button
+                            android:id="@+id/btn_cast"
+                            style="@style/MainButtonBorderless"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/see_all"
+                            android:onClick="@{()->handler.openAllCast()}"
+                            />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_cast"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorGrayLight"
-                        tools:text="01 December 2019"/>
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@color/colorPrimary" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/ic_star"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_star" />
-
-                    <TextView
-                        android:id="@+id/tv_vote"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textColor="@color/colorWhite"
-                        tools:text="8,8" />
-
-                    <TextView
-                        android:id="@+id/tv_vote_count"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/colorGrayLight"
-                        tools:text="468659" />
+                        android:clipToPadding="false"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        bind:viewType="@{cast.viewType}"
+                        bind:dataCast="@{cast.casts}"
+                        />
 
                 </LinearLayout>
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:background="@color/colorGray"
-                android:orientation="vertical"
-                android:paddingBottom="8dp">
+        </ScrollView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+        <include
+            layout="@layout/v_error"
+            android:visibility="@{detail.isErrorVisible ? V.VISIBLE : V.GONE}" />
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingStart="@dimen/default_padding"
-                        android:paddingTop="@dimen/default_padding"
-                        android:paddingEnd="@dimen/default_padding"
-                        android:text="@string/actors"
-                        android:textAppearance="@style/MainTitleTextAppearance" />
+    </LinearLayout>
 
-                    <Button
-                        android:id="@+id/btn_cast"
-                        style="@style/MainButtonBorderless"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/see_all" />
 
-                </LinearLayout>
+</layout>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_cast"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:clipToPadding="false"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </ScrollView>
-
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" />
-
-    <include
-        layout="@layout/v_error"
-        android:visibility="gone" />
-
-</FrameLayout>
 

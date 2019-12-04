@@ -1,22 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data class="CastBinding">
+
+        <import
+            alias="V"
+            type="android.view.View" />
+
+        <variable
+            name="cast"
+            type="com.github.rkhusainov.moviefan.ui.credit.CastViewModel" />
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical">
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:visibility="@{cast.isLoading? V.VISIBLE : V.GONE}"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_cast"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:visibility="@{cast.isErrorVisible ? V.GONE : V.VISIBLE}"
+            bind:dataCast="@{cast.casts}"
+            bind:viewType="@{cast.viewType}" />
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"/>
+        <include
+            layout="@layout/v_error"
+            android:visibility="@{cast.isErrorVisible ? V.VISIBLE : V.GONE}" />
 
-    <include
-        layout="@layout/v_error"
-        android:visibility="gone" />
+    </LinearLayout>
 
-</FrameLayout>
+</layout>
+

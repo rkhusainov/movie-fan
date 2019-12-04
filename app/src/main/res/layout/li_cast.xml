@@ -1,40 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="8dp">
 
-    <ImageView
-        android:id="@+id/iv_actor_photo"
-        android:layout_width="80dp"
-        android:layout_height="120dp"
-        tools:src="@drawable/ic_actor_placeholder" />
+<layout xmlns:bind="http://schemas.android.com/apk/res-auto">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <data class="CastMovieBinding">
+
+        <variable
+            name="cast"
+            type="com.github.rkhusainov.moviefan.ui.credit.CastListItemViewModel" />
+
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="8dp"
-        android:layout_toEndOf="@id/iv_actor_photo"
-        android:orientation="vertical">
+        android:padding="8dp">
 
-        <TextView
-            android:id="@+id/tv_actor_name"
+        <ImageView
+            android:id="@+id/iv_actor_photo"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            tools:src="@drawable/ic_actor_placeholder"
+            bind:imageUrl="@{cast.imageUrl}"/>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:textAppearance="@style/TabTitleTextAppearance"
-            tools:text="Joker"
-            tools:textColor="@color/colorGrayLight" />
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@id/iv_actor_photo"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_actor_character"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/colorGrayLight"
-            tools:text="Joaquin Phoenix" />
+            <TextView
+                android:id="@+id/tv_actor_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:textAppearance="@style/TabTitleTextAppearance"
+                tools:text="Joker"
+                tools:textColor="@color/colorGrayLight"
+                android:text="@{cast.actorNameTextView}"/>
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_actor_character"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorGrayLight"
+                tools:text="Joaquin Phoenix"
+                android:text="@{cast.actorCharacterTextView}"/>
 
-</RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>
+

@@ -24,6 +24,7 @@ import com.github.rkhusainov.moviefan.ui.top.TopViewModel;
 import com.github.rkhusainov.moviefan.ui.upcoming.UpcomingAdapter;
 import com.github.rkhusainov.moviefan.ui.upcoming.UpcomingFragment;
 import com.github.rkhusainov.moviefan.ui.upcoming.UpcomingViewModel;
+import com.github.rkhusainov.moviefan.utils.CastFactory;
 import com.github.rkhusainov.moviefan.utils.PopularMovieFactory;
 import com.github.rkhusainov.moviefan.utils.TodayMovieFactory;
 import com.github.rkhusainov.moviefan.utils.TopMovieFactory;

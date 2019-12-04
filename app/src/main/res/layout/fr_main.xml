@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data class="MainMovieBinding">
 
@@ -17,7 +17,7 @@
         <variable
             name="today"
             type="com.github.rkhusainov.moviefan.ui.today.TodayViewModel" />
-        
+
         <variable
             name="top"
             type="com.github.rkhusainov.moviefan.ui.top.TopViewModel" />
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:visibility="@{popular.isLoading? V.VISIBLE : V.GONE}"/>
+            android:visibility="@{popular.isLoading? V.VISIBLE : V.GONE}" />
 
         <ScrollView
             android:id="@+id/main_layout"
@@ -89,8 +89,8 @@
                             style="@style/MainButtonBorderless"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/see_all"
-                            android:onClick="@{(v)->handler.openFragment(v)}"/>
+                            android:onClick="@{(v)->handler.openFragment(v)}"
+                            android:text="@string/see_all" />
 
                     </LinearLayout>
 
@@ -101,9 +101,9 @@
                         android:clipToPadding="false"
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
-                        bind:viewType="@{popular.viewType}"
+                        bind:clickHandler="@{popular.onItemClickListener}"
                         bind:dataPopular="@{popular.movies}"
-                        bind:clickHandler="@{popular.onItemClickListener}"/>
+                        bind:viewType="@{popular.viewType}" />
 
                 </LinearLayout>
 
@@ -139,8 +139,8 @@
                         android:clipToPadding="false"
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
-                        bind:data="@{today.movies}"
-                        bind:clickHandler="@{today.onItemClickListener}"/>
+                        bind:clickHandler="@{today.onItemClickListener}"
+                        bind:data="@{today.movies}" />
 
                 </LinearLayout>
 
@@ -172,8 +172,8 @@
                             style="@style/MainButtonBorderless"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/see_all"
-                            android:onClick="@{(v)->handler.openFragment(v)}"/>
+                            android:onClick="@{(v)->handler.openFragment(v)}"
+                            android:text="@string/see_all" />
 
                     </LinearLayout>
 
@@ -184,10 +184,9 @@
                         android:clipToPadding="false"
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
-                        bind:viewType="@{upcoming.viewType}"
-                        bind:dataUpcoming="@{upcoming.movies}"
                         bind:clickHandler="@{upcoming.onItemClickListener}"
-                        />
+                        bind:dataUpcoming="@{upcoming.movies}"
+                        bind:viewType="@{upcoming.viewType}" />
 
                 </LinearLayout>
 
@@ -219,8 +218,8 @@
                             style="@style/MainButtonBorderless"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/see_all"
-                            android:onClick="@{(v)->handler.openFragment(v)}"/>
+                            android:onClick="@{(v)->handler.openFragment(v)}"
+                            android:text="@string/see_all" />
 
                     </LinearLayout>
 
@@ -231,9 +230,9 @@
                         android:clipToPadding="false"
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
-                        bind:viewType="@{top.viewType}"
+                        bind:clickHandler="@{top.onItemClickListener}"
                         bind:dataTop="@{top.movies}"
-                        bind:clickHandler="@{top.onItemClickListener}"/>
+                        bind:viewType="@{top.viewType}" />
 
                 </LinearLayout>
 
@@ -243,8 +242,7 @@
 
         <include
             layout="@layout/v_error"
-            android:visibility="@{popular.isErrorVisible ? V.VISIBLE : V.GONE}"
-            tools:layout="@layout/v_error" />
+            android:visibility="@{popular.isErrorVisible ? V.VISIBLE : V.GONE}" />
 
     </LinearLayout>
 

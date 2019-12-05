@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.github.rkhusainov.moviefan.Constants;
 import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.databinding.TopBinding;
@@ -17,8 +18,6 @@ import com.github.rkhusainov.moviefan.ui.detail.DetailFragment;
 import com.github.rkhusainov.moviefan.utils.TopMovieFactory;
 
 public class TopFragment extends Fragment {
-
-    public static final int TOP = 1;
 
     private TopViewModel mTopViewModel;
 
@@ -43,7 +42,7 @@ public class TopFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        TopMovieFactory factory = new TopMovieFactory(mOnItemClickListener, TOP);
+        TopMovieFactory factory = new TopMovieFactory(mOnItemClickListener, Constants.TOP);
         mTopViewModel = new ViewModelProvider(this, factory).get(TopViewModel.class);
     }
 

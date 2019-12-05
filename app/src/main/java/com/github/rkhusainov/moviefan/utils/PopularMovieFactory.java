@@ -21,9 +21,6 @@ public class PopularMovieFactory extends ViewModelProvider.NewInstanceFactory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
 
-        if (modelClass == PopularViewModel.class) {
             return (T) new PopularViewModel(mOnItemClickListener, mViewType);
-        }
-        return null;
     }
 }

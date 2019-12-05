@@ -30,6 +30,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
     @NonNull
     @Override
     public CastViewHolderAbs onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
         if (mItemViewType == Constants.DETAIL) {
@@ -46,7 +47,6 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
 
         Cast cast = mCasts.get(position);
 
-        // биндим отличающиеся элементы
         if (mItemViewType == Constants.DETAIL) {
             ((DetailCastViewHolder) holder).bind(cast);
         } else {

@@ -21,9 +21,6 @@ public class TopMovieFactory extends ViewModelProvider.NewInstanceFactory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
 
-        if (modelClass == TopViewModel.class) {
             return (T) new TopViewModel(mOnItemClickListener, mViewType);
-        }
-        return null;
     }
 }

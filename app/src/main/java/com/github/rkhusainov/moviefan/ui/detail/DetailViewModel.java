@@ -14,7 +14,6 @@ import com.github.rkhusainov.moviefan.utils.ApiUtils;
 import com.github.rkhusainov.moviefan.utils.DateUtils;
 
 import java.util.List;
-import java.util.Timer;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -24,8 +23,6 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 import static android.content.ContentValues.TAG;
-import static com.github.rkhusainov.moviefan.BuildConfig.LANGUAGE;
-import static com.github.rkhusainov.moviefan.BuildConfig.REGION;
 
 public class DetailViewModel extends AndroidViewModel {
 
@@ -52,7 +49,7 @@ public class DetailViewModel extends AndroidViewModel {
     }
 
     public void loadDetail(int movieId) {
-        mCompositeDisposable.add(ApiUtils.getApi().getDetail(movieId, LANGUAGE, REGION)
+        mCompositeDisposable.add(ApiUtils.getApi().getDetail(movieId, Constants.LANGUAGE, Constants.REGION)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {

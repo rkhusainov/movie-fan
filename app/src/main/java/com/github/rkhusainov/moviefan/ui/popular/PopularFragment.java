@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.github.rkhusainov.moviefan.Constants;
 import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.databinding.PopularBinding;
@@ -17,8 +18,6 @@ import com.github.rkhusainov.moviefan.ui.detail.DetailFragment;
 import com.github.rkhusainov.moviefan.utils.PopularMovieFactory;
 
 public class PopularFragment extends Fragment {
-
-    public static final int POPULAR = 1;
 
     private PopularViewModel mPopularViewModel;
 
@@ -43,7 +42,7 @@ public class PopularFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        PopularMovieFactory factory = new PopularMovieFactory(mOnItemClickListener, POPULAR);
+        PopularMovieFactory factory = new PopularMovieFactory(mOnItemClickListener, Constants.POPULAR);
         mPopularViewModel = new ViewModelProvider(this, factory).get(PopularViewModel.class);
     }
 

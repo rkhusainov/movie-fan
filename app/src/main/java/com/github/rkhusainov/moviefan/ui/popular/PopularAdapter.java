@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.rkhusainov.moviefan.Constants;
 import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.data.model.movie.Movie;
@@ -16,8 +17,6 @@ import com.github.rkhusainov.moviefan.databinding.PopularMovieBinding;
 import java.util.List;
 
 public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularViewHolderAbs> {
-
-    public static final int MAIN = 0;
 
     private List<Movie> mMovies;
     private int mItemViewType;
@@ -33,9 +32,10 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
     @NonNull
     @Override
     public PopularViewHolderAbs onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
-        if (mItemViewType == MAIN) {
+        if (mItemViewType == Constants.MAIN) {
             MainPopularMovieBinding binding = MainPopularMovieBinding.inflate(inflater, parent, false);
             return new MainPopularViewHolder(binding);
 
@@ -50,8 +50,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
 
         Movie currentMovie = mMovies.get(position);
 
-        // биндим отличающиеся элементы
-        if (mItemViewType == MAIN) {
+        if (mItemViewType == Constants.MAIN) {
             ((MainPopularViewHolder) holder).bind(currentMovie);
         } else {
             ((PopularViewHolder) holder).bind(currentMovie);
@@ -62,7 +61,6 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
     public int getItemCount() {
         return mMovies.size();
     }
-
 
     abstract class PopularViewHolderAbs extends RecyclerView.ViewHolder {
 
@@ -82,7 +80,6 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
         }
 
         private void bind(Movie movie) {
-
             mMainPopularMovieBinding.setMovie(new MainPopularMovieListItemViewModel(movie));
             mMainPopularMovieBinding.executePendingBindings();
             mMainPopularMovieBinding.setOnItemClickListener(mOnItemClickListener);
@@ -100,7 +97,6 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.PopularV
         }
 
         private void bind(Movie movie) {
-
             mPopularMovieBinding.setMovie(new PopularMovieListItemViewModel(movie, format(getAdapterPosition() + 1)));
             mPopularMovieBinding.executePendingBindings();
             mPopularMovieBinding.setOnItemClickListener(mOnItemClickListener);

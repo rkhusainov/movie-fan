@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.rkhusainov.moviefan.Constants;
 import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.data.model.movie.Movie;
@@ -18,7 +19,6 @@ import com.github.rkhusainov.moviefan.databinding.TopMovieBinding;
 import java.util.List;
 
 public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolderAbs> {
-    public static final int MAIN = 0;
 
     private List<Movie> mMovies;
     private int mItemViewType;
@@ -34,8 +34,10 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolderAbs
     @NonNull
     @Override
     public TopViewHolderAbs onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        if (mItemViewType == MAIN) {
+
+        if (mItemViewType == Constants.MAIN) {
             MainTopMovieBinding binding = MainTopMovieBinding.inflate(inflater, parent, false);
             return new MainTopViewHolder(binding);
 
@@ -47,10 +49,10 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolderAbs
 
     @Override
     public void onBindViewHolder(@NonNull TopViewHolderAbs holder, int position) {
+
         Movie currentMovie = mMovies.get(position);
 
-        // биндим отличающиеся элементы
-        if (mItemViewType == MAIN) {
+        if (mItemViewType == Constants.MAIN) {
             ((MainTopViewHolder) holder).bind(currentMovie);
         } else {
             ((TopViewHolder) holder).bind(currentMovie);

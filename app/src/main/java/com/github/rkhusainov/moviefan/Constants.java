@@ -12,6 +12,12 @@ public interface Constants {
     int MAIN = 0;
     int DETAIL = 0;
     int POPULAR = 1;
+    int TOP = 1;
+    int UPCOMING = 1;
     int CAST = 1;
+
+    // language and location constants
+    String LANGUAGE = "ru-RU";
+    String REGION = "RU";
 
 }

@@ -13,8 +13,7 @@ android {
 
         buildConfigField "String", "API_URL", '"https://api.themoviedb.org/"'
         buildConfigField "String", "API_KEY", '"974d4bbd8ddc62ef40e4a9fe7a69d4a8"'
-        buildConfigField "String", "LANGUAGE", '"ru-RU"'
-        buildConfigField "String", "REGION", '"RU"'
+
     }
     buildTypes {
         release {

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.rkhusainov.moviefan.Constants;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.data.model.movie.Movie;
 import com.github.rkhusainov.moviefan.databinding.MainUpcomingMovieBinding;
@@ -15,7 +16,6 @@ import com.github.rkhusainov.moviefan.databinding.UpcomingMovieBinding;
 import java.util.List;
 
 public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.UpcomingViewHolderAbs> {
-    public static final int MAIN = 0;
 
     private List<Movie> mMovies;
     private int mItemViewType;
@@ -34,7 +34,7 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.Upcomi
 
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
-        if (mItemViewType == MAIN) {
+        if (mItemViewType == Constants.MAIN) {
             MainUpcomingMovieBinding binding = MainUpcomingMovieBinding.inflate(inflater, parent, false);
             return new MainUpcomingViewHolder(binding);
 
@@ -49,8 +49,7 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.Upcomi
 
         Movie currentMovie = mMovies.get(position);
 
-        // биндим отличающиеся элементы
-        if (mItemViewType == MAIN) {
+        if (mItemViewType == Constants.MAIN) {
             ((MainUpcomingViewHolder) holder).bind(currentMovie);
         } else {
             ((UpcomingViewHolder) holder).bind(currentMovie);
@@ -81,7 +80,6 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.Upcomi
         }
 
         void bind(Movie movie) {
-
             mBinding.setMovie(new MainUpcomingMovieListItemViewModel(movie));
             mBinding.executePendingBindings();
             mBinding.setOnItemClickListener(mOnItemClickListener);
@@ -99,7 +97,6 @@ public class UpcomingAdapter extends RecyclerView.Adapter<UpcomingAdapter.Upcomi
         }
 
         void bind(Movie movie) {
-
             mBinding.setMovie(new UpcomingMovieListItemViewModel(movie));
             mBinding.executePendingBindings();
             mBinding.setOnItemClickListener(mOnItemClickListener);

@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.github.rkhusainov.moviefan.Constants;
 import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.databinding.UpcomingBinding;
@@ -19,7 +20,6 @@ import com.github.rkhusainov.moviefan.utils.UpcomingMovieFactory;
 
 public class UpcomingFragment extends Fragment {
 
-    public static final int UPCOMING = 1;
     private UpcomingViewModel mUpcomingViewModel;
 
     private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
@@ -43,7 +43,7 @@ public class UpcomingFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        UpcomingMovieFactory factory = new UpcomingMovieFactory(mOnItemClickListener, UPCOMING);
+        UpcomingMovieFactory factory = new UpcomingMovieFactory(mOnItemClickListener, Constants.UPCOMING);
         mUpcomingViewModel = new ViewModelProvider(this, factory).get(UpcomingViewModel.class);
     }
 

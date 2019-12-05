@@ -4,6 +4,7 @@ import com.github.rkhusainov.moviefan.data.model.credit.Cast;
 import com.github.rkhusainov.moviefan.Constants;
 
 public class DetailCastListItemViewModel extends CastListItemAbsViewModel{
+
     private String mImageUrl;
 
     public DetailCastListItemViewModel(Cast cast) {

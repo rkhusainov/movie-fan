@@ -3,6 +3,7 @@ package com.github.rkhusainov.moviefan.ui.popular;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.github.rkhusainov.moviefan.Constants;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.data.model.movie.Movie;
 import com.github.rkhusainov.moviefan.data.model.movie.MovieResponse;
@@ -17,9 +18,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-
-import static com.github.rkhusainov.moviefan.BuildConfig.LANGUAGE;
-import static com.github.rkhusainov.moviefan.BuildConfig.REGION;
 
 public class PopularViewModel extends ViewModel {
 
@@ -40,7 +38,7 @@ public class PopularViewModel extends ViewModel {
     }
 
     public void loadMovies() {
-        mCompositeDisposable.add(ApiUtils.getApi().getPopularMovies(LANGUAGE, REGION)
+        mCompositeDisposable.add(ApiUtils.getApi().getPopularMovies(Constants.LANGUAGE, Constants.REGION)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -93,6 +91,6 @@ public class PopularViewModel extends ViewModel {
     protected void onCleared() {
         super.onCleared();
 
-        mCompositeDisposable.clear();
+        mCompositeDisposable.dispose();
     }
 }

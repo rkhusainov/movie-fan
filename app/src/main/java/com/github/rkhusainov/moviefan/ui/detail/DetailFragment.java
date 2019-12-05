@@ -27,7 +27,6 @@ import static android.content.ContentValues.TAG;
 public class DetailFragment extends Fragment {
 
     public static final String MOVIE_KEY = "MOVIE_KEY";
-    public static final String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
 
     private int mMovieId;
 

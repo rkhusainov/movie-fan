@@ -22,9 +22,6 @@ public class UpcomingMovieFactory extends ViewModelProvider.NewInstanceFactory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
 
-        if (modelClass == UpcomingViewModel.class) {
             return (T) new UpcomingViewModel(mOnItemClickListener, mViewType);
-        }
-        return null;
     }
 }

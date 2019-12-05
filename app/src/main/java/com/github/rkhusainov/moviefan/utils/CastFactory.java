@@ -21,10 +21,6 @@ public class CastFactory extends ViewModelProvider.NewInstanceFactory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-
-        if (modelClass == CastViewModel.class) {
             return (T) new CastViewModel(mViewType, mMovieId);
-        }
-        return null;
     }
 }

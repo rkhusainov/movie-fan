@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.github.rkhusainov.moviefan.Constants;
 import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.databinding.MainMovieBinding;
@@ -31,8 +32,6 @@ import com.github.rkhusainov.moviefan.utils.TopMovieFactory;
 import com.github.rkhusainov.moviefan.utils.UpcomingMovieFactory;
 
 public class MainFragment extends Fragment {
-
-    public static final int MAIN = 0;
 
     private PopularViewModel mPopularViewModel;
     private TodayViewModel mTodayViewModel;
@@ -60,10 +59,10 @@ public class MainFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        PopularMovieFactory popularMovieFactory = new PopularMovieFactory(mOnItemClickListener, MAIN);
+        PopularMovieFactory popularMovieFactory = new PopularMovieFactory(mOnItemClickListener, Constants.MAIN);
         TodayMovieFactory todayMoviefactory = new TodayMovieFactory(mOnItemClickListener);
-        TopMovieFactory topMovieFactory = new TopMovieFactory(mOnItemClickListener, MAIN);
-        UpcomingMovieFactory upcomingMovieFactory = new UpcomingMovieFactory(mOnItemClickListener, MAIN);
+        TopMovieFactory topMovieFactory = new TopMovieFactory(mOnItemClickListener, Constants.MAIN);
+        UpcomingMovieFactory upcomingMovieFactory = new UpcomingMovieFactory(mOnItemClickListener, Constants.MAIN);
 
         mPopularViewModel = new ViewModelProvider(this, popularMovieFactory).get(PopularViewModel.class);
         mTodayViewModel = new ViewModelProvider(this, todayMoviefactory).get(TodayViewModel.class);

@@ -22,9 +22,6 @@ public class DetailFactory extends ViewModelProvider.NewInstanceFactory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
 
-        if (modelClass == DetailViewModel.class) {
             return (T) new DetailViewModel(mMovieId,mApplication);
-        }
-        return null;
     }
 }

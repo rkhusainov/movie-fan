@@ -39,7 +39,7 @@ public class ApiUtils {
         if (sRetrofit == null) {
             sRetrofit = new Retrofit.Builder()
                     .baseUrl(API_URL)
-                    //// need for interceptors
+                    // need for interceptors
                     .client(getClient())
                     .addConverterFactory(GsonConverterFactory.create(sGson))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

@@ -22,8 +22,6 @@ public class CastFragment extends Fragment {
 
     public static final String MOVIE_KEY = "MOVIE_KEY";
 
-    private int mMovieId;
-
     private CastViewModel mCastViewModel;
 
     public static CastFragment newInstance(int movieId) {
@@ -39,9 +37,9 @@ public class CastFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        mMovieId = getArguments().getInt(MOVIE_KEY);
+        int movieId = getArguments().getInt(MOVIE_KEY);
 
-        CastFactory castFactory = new CastFactory(Constants.CAST, mMovieId);
+        CastFactory castFactory = new CastFactory(Constants.CAST, movieId);
         mCastViewModel = new ViewModelProvider(this, castFactory).get(CastViewModel.class);
     }
 

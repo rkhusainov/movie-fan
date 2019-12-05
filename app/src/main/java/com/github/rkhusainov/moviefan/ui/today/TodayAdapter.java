@@ -15,7 +15,6 @@ import java.util.List;
 public class TodayAdapter extends RecyclerView.Adapter<TodayAdapter.MainTodayViewHolder> {
 
     private List<Movie> mMovies;
-
     private OnItemClickListener mOnItemClickListener;
 
     public TodayAdapter(List<Movie> movies, OnItemClickListener onItemClickListener) {
@@ -26,7 +25,9 @@ public class TodayAdapter extends RecyclerView.Adapter<TodayAdapter.MainTodayVie
     @NonNull
     @Override
     public MainTodayViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+
         MainTodayMovieBinding binding = MainTodayMovieBinding.inflate(inflater, parent, false);
         return new MainTodayViewHolder(binding);
     }

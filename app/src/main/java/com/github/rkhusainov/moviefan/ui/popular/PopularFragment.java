@@ -51,7 +51,7 @@ public class PopularFragment extends Fragment {
 
         PopularBinding binding = PopularBinding.inflate(inflater, container, false);
         binding.setPopular(mPopularViewModel);
-        binding.setLifecycleOwner(this);
+        binding.setLifecycleOwner(this); // getViewLifecycleOwner()
         return binding.getRoot();
     }
 }

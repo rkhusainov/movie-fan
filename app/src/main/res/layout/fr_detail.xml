@@ -8,6 +8,10 @@
             alias="V"
             type="android.view.View" />
 
+        <import
+            alias="D"
+            type="com.github.rkhusainov.moviefan.utils.DateUtils" />
+
         <variable
             name="detail"
             type="com.github.rkhusainov.moviefan.ui.detail.DetailViewModel" />
@@ -20,23 +24,28 @@
             name="handler"
             type="com.github.rkhusainov.moviefan.ui.detail.DetailFragment" />
 
+        <variable
+            name="constant"
+            type="com.github.rkhusainov.moviefan.Constants" />
+
+
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:bind="http://schemas.android.com/apk/res-auto"
         android:background="@color/colorPrimaryDark"
-        tools:context=".ui.detail.DetailFragment"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:context=".ui.detail.DetailFragment">
 
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:visibility="@{detail.isLoading? V.VISIBLE : V.GONE}"/>
+            android:visibility="@{detail.isLoading? V.VISIBLE : V.GONE}" />
 
         <ScrollView
             android:id="@+id/detail_layout"
@@ -66,10 +75,10 @@
                             android:id="@+id/tv_movie_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="@{detail.detailLiveData.title}"
                             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                             android:textColor="@color/colorWhite"
-                            tools:text="Joker"
-                            android:text="@{detail.movieTitleTextView}"/>
+                            tools:text="Joker" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -80,18 +89,18 @@
                                 android:id="@+id/tv_release_year"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:text='@{detail.detailLiveData.releaseDate != null ? D.yearFormat(detail.detailLiveData.releaseDate) : ""}'
                                 android:textColor="@color/colorGrayLight"
-                                tools:text="2019"
-                                android:text="@{detail.releaseYearTextView}"/>
+                                tools:text="2019" />
 
                             <TextView
                                 android:id="@+id/tv_movie_runtime"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
+                                android:text='@{detail.detailLiveData.releaseDate != null ? D.runtimeFormat(detail.detailLiveData.runtime) : ""}'
                                 android:textColor="@color/colorGrayLight"
-                                tools:text="2h 2min"
-                                android:text="@{detail.runtimeTextView}"/>
+                                tools:text="2h 2min" />
 
                         </LinearLayout>
 
@@ -112,8 +121,8 @@
                             android:id="@+id/iv_poster"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            tools:src="@drawable/ic_launcher_foreground"
-                            bind:imageUrl="@{detail.posterUrl}"/>
+                            bind:imageUrl="@{constant.IMAGE_BASE_URL + constant.DETAIL_IMAGE_SIZE +detail.detailLiveData.posterPath}"
+                            tools:src="@drawable/ic_launcher_foreground" />
 
                         <TextView
                             android:id="@+id/tv_movie_genre"
@@ -122,8 +131,8 @@
                             android:layout_marginStart="16dp"
                             android:layout_toEndOf="@id/iv_poster"
                             android:textColor="@color/colorWhite"
-                            tools:text="Crime"
-                            android:text="@{detail.genres}"/>
+                            bind:genres='@{detail.detailLiveData.genres}'
+                            tools:text="Crime" />
 
                         <TextView
                             android:id="@+id/tv_movie_overview"
@@ -133,9 +142,9 @@
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
                             android:layout_toEndOf="@id/iv_poster"
+                            android:text="@{detail.detailLiveData.overview}"
                             android:textColor="@color/colorWhite"
-                            tools:text="Gottam City"
-                            android:text="@{detail.movieOverviewTextView}"/>
+                            tools:text="Gottam City" />
 
                     </RelativeLayout>
 
@@ -155,16 +164,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/release_date"
-                            android:textColor="@color/colorWhite"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"/>
+                            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/colorWhite" />
 
                         <TextView
                             android:id="@+id/tv_release_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text='@{detail.detailLiveData.releaseDate != null ? D.longReleaseDateFormat(detail.detailLiveData.releaseDate) : ""}'
                             android:textColor="@color/colorGrayLight"
-                            tools:text="01 December 2019"
-                            android:text="@{detail.releaseDateTextView}"/>
+                            tools:text="01 December 2019" />
 
                     </LinearLayout>
 
@@ -191,18 +200,18 @@
                             android:id="@+id/tv_vote"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="@{String.valueOf(detail.detailLiveData.voteAverage)}"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                             android:textColor="@color/colorWhite"
-                            tools:text="8,8"
-                            android:text="@{detail.voteTextView}"/>
+                            tools:text="8,8" />
 
                         <TextView
                             android:id="@+id/tv_vote_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:text="@{String.valueOf(detail.detailLiveData.voteCount)}"
                             android:textColor="@color/colorGrayLight"
-                            tools:text="468659"
-                            android:text="@{detail.voteCountTextView}"/>
+                            tools:text="468659" />
 
                     </LinearLayout>
 
@@ -236,9 +245,8 @@
                             style="@style/MainButtonBorderless"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/see_all"
                             android:onClick="@{()->handler.openAllCast()}"
-                            />
+                            android:text="@string/see_all" />
 
                     </LinearLayout>
 
@@ -249,9 +257,8 @@
                         android:clipToPadding="false"
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
-                        bind:viewType="@{cast.viewType}"
                         bind:dataCast="@{cast.casts}"
-                        />
+                        bind:viewType="@{cast.viewType}" />
 
                 </LinearLayout>
 

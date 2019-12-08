@@ -2,6 +2,7 @@ package com.github.rkhusainov.moviefan.utils;
 
 import android.graphics.PorterDuff;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -12,6 +13,7 @@ import com.github.rkhusainov.moviefan.Constants;
 import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.data.model.credit.Cast;
+import com.github.rkhusainov.moviefan.data.model.detail.Genre;
 import com.github.rkhusainov.moviefan.data.model.movie.Movie;
 import com.github.rkhusainov.moviefan.ui.credit.CastAdapter;
 import com.github.rkhusainov.moviefan.ui.popular.PopularAdapter;
@@ -106,5 +108,19 @@ public class CustomBindingAdapter {
         }
 
         recyclerView.setAdapter(adapter);
+    }
+
+    @BindingAdapter("bind:genres")
+    public static void formatGenres(TextView textView, List<Genre> genres) {
+        if (genres != null) {
+
+            StringBuilder builder = new StringBuilder();
+            String separator = "";
+            for (Genre genre : genres) {
+                builder.append(separator + genre.getName());
+                separator = ",";
+            }
+            textView.setText(builder);
+        }
     }
 }

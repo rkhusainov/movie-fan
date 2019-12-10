@@ -16,7 +16,7 @@ public class Crew {
     @SerializedName("name")
     private String name;
     @SerializedName("profile_path")
-    private Object profilePath;
+    private String profilePath;
 
     public String getCreditId() {
         return creditId;
@@ -66,11 +66,11 @@ public class Crew {
         this.name = name;
     }
 
-    public Object getProfilePath() {
+    public String getProfilePath() {
         return profilePath;
     }
 
-    public void setProfilePath(Object profilePath) {
+    public void setProfilePath(String profilePath) {
         this.profilePath = profilePath;
     }
 }

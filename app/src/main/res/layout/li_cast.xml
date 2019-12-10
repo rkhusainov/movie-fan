@@ -6,7 +6,7 @@
 
         <variable
             name="cast"
-            type="com.github.rkhusainov.moviefan.ui.credit.CastListItemViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.credit.CastListItemViewModel" />
 
     </data>
 

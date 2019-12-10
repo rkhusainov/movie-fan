@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data class="MainMovieBinding">
 
@@ -12,27 +11,27 @@
 
         <variable
             name="popular"
-            type="com.github.rkhusainov.moviefan.ui.popular.PopularViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.popular.PopularViewModel" />
 
         <variable
             name="today"
-            type="com.github.rkhusainov.moviefan.ui.today.TodayViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.today.TodayViewModel" />
 
         <variable
             name="top"
-            type="com.github.rkhusainov.moviefan.ui.top.TopViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.top.TopViewModel" />
 
         <variable
             name="upcoming"
-            type="com.github.rkhusainov.moviefan.ui.upcoming.UpcomingViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingViewModel" />
 
         <variable
             name="onItemClickListener"
-            type="com.github.rkhusainov.moviefan.common.OnItemClickListener" />
+            type="com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener" />
 
         <variable
             name="handler"
-            type="com.github.rkhusainov.moviefan.ui.main.MainFragment" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.main.MainFragment" />
 
     </data>
 

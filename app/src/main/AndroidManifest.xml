@@ -13,9 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".common.SingleFragmentActivity" />
+        <activity android:name=".presentation.common.SingleFragmentActivity" />
 
-        <activity android:name=".ui.main.MainActivity"
+        <activity android:name=".presentation.ui.main.MainActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action

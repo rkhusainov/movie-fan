@@ -10,23 +10,23 @@
 
         <import
             alias="D"
-            type="com.github.rkhusainov.moviefan.utils.DateUtils" />
+            type="com.github.rkhusainov.moviefan.presentation.utils.DateUtils" />
 
         <variable
             name="detail"
-            type="com.github.rkhusainov.moviefan.ui.detail.DetailViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.detail.DetailViewModel" />
 
         <variable
             name="cast"
-            type="com.github.rkhusainov.moviefan.ui.credit.CastViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.credit.CastViewModel" />
 
         <variable
             name="handler"
-            type="com.github.rkhusainov.moviefan.ui.detail.DetailFragment" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.detail.DetailFragment" />
 
         <variable
             name="constant"
-            type="com.github.rkhusainov.moviefan.Constants" />
+            type="com.github.rkhusainov.moviefan.presentation.Constants" />
 
 
     </data>
@@ -38,7 +38,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark"
         android:orientation="vertical"
-        tools:context=".ui.detail.DetailFragment">
+        tools:context=".presentation.ui.detail.DetailFragment">
 
         <ProgressBar
             android:id="@+id/progress_bar"

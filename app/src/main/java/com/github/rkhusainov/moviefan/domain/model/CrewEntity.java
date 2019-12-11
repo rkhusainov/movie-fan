@@ -1,5 +1,7 @@
 package com.github.rkhusainov.moviefan.domain.model;
 
+import java.util.Objects;
+
 public class CrewEntity {
     private Integer mId;
     private String mCreditId;
@@ -79,5 +81,37 @@ public class CrewEntity {
 
     public void setProfilePath(String profilePath) {
         mProfilePath = profilePath;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CrewEntity that = (CrewEntity) o;
+        return Objects.equals(mId, that.mId) &&
+                Objects.equals(mCreditId, that.mCreditId) &&
+                Objects.equals(mDepartment, that.mDepartment) &&
+                Objects.equals(mGender, that.mGender) &&
+                Objects.equals(mJob, that.mJob) &&
+                Objects.equals(mName, that.mName) &&
+                Objects.equals(mProfilePath, that.mProfilePath);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mId, mCreditId, mDepartment, mGender, mJob, mName, mProfilePath);
+    }
+
+    @Override
+    public String toString() {
+        return "CrewEntity{" +
+                "mId=" + mId +
+                ", mCreditId='" + mCreditId + '\'' +
+                ", mDepartment='" + mDepartment + '\'' +
+                ", mGender=" + mGender +
+                ", mJob='" + mJob + '\'' +
+                ", mName='" + mName + '\'' +
+                ", mProfilePath='" + mProfilePath + '\'' +
+                '}';
     }
 }

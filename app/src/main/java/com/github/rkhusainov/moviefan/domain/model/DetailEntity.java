@@ -6,6 +6,7 @@ import com.github.rkhusainov.moviefan.data.model.detail.ProductionCountry;
 import com.github.rkhusainov.moviefan.data.model.detail.SpokenLanguage;
 
 import java.util.List;
+import java.util.Objects;
 
 public class DetailEntity {
     private Integer mId;
@@ -278,5 +279,98 @@ public class DetailEntity {
 
     public void setVoteCount(Integer voteCount) {
         mVoteCount = voteCount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DetailEntity that = (DetailEntity) o;
+        return Objects.equals(mId, that.mId) &&
+                Objects.equals(mAdult, that.mAdult) &&
+                Objects.equals(mBackdropPath, that.mBackdropPath) &&
+                Objects.equals(mBelongsToCollection, that.mBelongsToCollection) &&
+                Objects.equals(mBudget, that.mBudget) &&
+                Objects.equals(mGenres, that.mGenres) &&
+                Objects.equals(mHomepage, that.mHomepage) &&
+                Objects.equals(mImdbId, that.mImdbId) &&
+                Objects.equals(mOriginalLanguage, that.mOriginalLanguage) &&
+                Objects.equals(mOriginalTitle, that.mOriginalTitle) &&
+                Objects.equals(mOverview, that.mOverview) &&
+                Objects.equals(mPopularity, that.mPopularity) &&
+                Objects.equals(mPosterPath, that.mPosterPath) &&
+                Objects.equals(mProductionCompanies, that.mProductionCompanies) &&
+                Objects.equals(mProductionCountries, that.mProductionCountries) &&
+                Objects.equals(mReleaseDate, that.mReleaseDate) &&
+                Objects.equals(mRevenue, that.mRevenue) &&
+                Objects.equals(mRuntime, that.mRuntime) &&
+                Objects.equals(mSpokenLanguages, that.mSpokenLanguages) &&
+                Objects.equals(mStatus, that.mStatus) &&
+                Objects.equals(mTagline, that.mTagline) &&
+                Objects.equals(mTitle, that.mTitle) &&
+                Objects.equals(mVideo, that.mVideo) &&
+                Objects.equals(mVoteAverage, that.mVoteAverage) &&
+                Objects.equals(mVoteCount, that.mVoteCount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+                mId,
+                mAdult,
+                mBackdropPath,
+                mBelongsToCollection,
+                mBudget,
+                mGenres,
+                mHomepage,
+                mImdbId,
+                mOriginalLanguage,
+                mOriginalTitle,
+                mOverview,
+                mPopularity,
+                mPosterPath,
+                mProductionCompanies,
+                mProductionCountries,
+                mReleaseDate,
+                mRevenue,
+                mRuntime,
+                mSpokenLanguages,
+                mStatus,
+                mTagline,
+                mTitle,
+                mVideo,
+                mVoteAverage,
+                mVoteCount);
+    }
+
+    @Override
+    public String toString() {
+        return "DetailEntity{" +
+                "mId=" + mId +
+                ", mAdult=" + mAdult +
+                ", mBackdropPath='" + mBackdropPath + '\'' +
+                ", mBelongsToCollection=" + mBelongsToCollection +
+                ", mBudget=" + mBudget +
+                ", mGenres=" + mGenres +
+                ", mHomepage='" + mHomepage + '\'' +
+                ", mImdbId='" + mImdbId + '\'' +
+                ", mOriginalLanguage='" + mOriginalLanguage + '\'' +
+                ", mOriginalTitle='" + mOriginalTitle + '\'' +
+                ", mOverview='" + mOverview + '\'' +
+                ", mPopularity=" + mPopularity +
+                ", mPosterPath='" + mPosterPath + '\'' +
+                ", mProductionCompanies=" + mProductionCompanies +
+                ", mProductionCountries=" + mProductionCountries +
+                ", mReleaseDate='" + mReleaseDate + '\'' +
+                ", mRevenue=" + mRevenue +
+                ", mRuntime=" + mRuntime +
+                ", mSpokenLanguages=" + mSpokenLanguages +
+                ", mStatus='" + mStatus + '\'' +
+                ", mTagline='" + mTagline + '\'' +
+                ", mTitle='" + mTitle + '\'' +
+                ", mVideo=" + mVideo +
+                ", mVoteAverage=" + mVoteAverage +
+                ", mVoteCount=" + mVoteCount +
+                '}';
     }
 }

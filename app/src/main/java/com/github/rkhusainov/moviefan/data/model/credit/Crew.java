@@ -2,75 +2,109 @@ package com.github.rkhusainov.moviefan.data.model.credit;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 public class Crew {
     @SerializedName("credit_id")
-    private String creditId;
+    private String mCreditId;
     @SerializedName("department")
-    private String department;
+    private String mDepartment;
     @SerializedName("gender")
-    private Integer gender;
+    private Integer mGender;
     @SerializedName("id")
-    private Integer id;
+    private Integer mId;
     @SerializedName("job")
-    private String job;
+    private String mJob;
     @SerializedName("name")
-    private String name;
+    private String mName;
     @SerializedName("profile_path")
-    private String profilePath;
+    private String mProfilePath;
 
     public String getCreditId() {
-        return creditId;
+        return mCreditId;
     }
 
     public void setCreditId(String creditId) {
-        this.creditId = creditId;
+        mCreditId = creditId;
     }
 
     public String getDepartment() {
-        return department;
+        return mDepartment;
     }
 
     public void setDepartment(String department) {
-        this.department = department;
+        mDepartment = department;
     }
 
     public Integer getGender() {
-        return gender;
+        return mGender;
     }
 
     public void setGender(Integer gender) {
-        this.gender = gender;
+        mGender = gender;
     }
 
     public Integer getId() {
-        return id;
+        return mId;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        mId = id;
     }
 
     public String getJob() {
-        return job;
+        return mJob;
     }
 
     public void setJob(String job) {
-        this.job = job;
+        mJob = job;
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        mName = name;
     }
 
     public String getProfilePath() {
-        return profilePath;
+        return mProfilePath;
     }
 
     public void setProfilePath(String profilePath) {
-        this.profilePath = profilePath;
+        mProfilePath = profilePath;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Crew crew = (Crew) o;
+        return Objects.equals(mCreditId, crew.mCreditId) &&
+                Objects.equals(mDepartment, crew.mDepartment) &&
+                Objects.equals(mGender, crew.mGender) &&
+                Objects.equals(mId, crew.mId) &&
+                Objects.equals(mJob, crew.mJob) &&
+                Objects.equals(mName, crew.mName) &&
+                Objects.equals(mProfilePath, crew.mProfilePath);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mCreditId, mDepartment, mGender, mId, mJob, mName, mProfilePath);
+    }
+
+    @Override
+    public String toString() {
+        return "Crew{" +
+                "mCreditId='" + mCreditId + '\'' +
+                ", mDepartment='" + mDepartment + '\'' +
+                ", mGender=" + mGender +
+                ", mId=" + mId +
+                ", mJob='" + mJob + '\'' +
+                ", mName='" + mName + '\'' +
+                ", mProfilePath='" + mProfilePath + '\'' +
+                '}';
     }
 }

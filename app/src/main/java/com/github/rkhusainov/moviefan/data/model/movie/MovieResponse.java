@@ -3,6 +3,7 @@ package com.github.rkhusainov.moviefan.data.model.movie;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MovieResponse {
     @SerializedName("page")
@@ -44,5 +45,31 @@ public class MovieResponse {
 
     public void setResults(List<Movie> movies) {
         mMovies = movies;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MovieResponse that = (MovieResponse) o;
+        return Objects.equals(mPage, that.mPage) &&
+                Objects.equals(mTotalResults, that.mTotalResults) &&
+                Objects.equals(totalPages, that.totalPages) &&
+                Objects.equals(mMovies, that.mMovies);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mPage, mTotalResults, totalPages, mMovies);
+    }
+
+    @Override
+    public String toString() {
+        return "MovieResponse{" +
+                "mPage=" + mPage +
+                ", mTotalResults=" + mTotalResults +
+                ", totalPages=" + totalPages +
+                ", mMovies=" + mMovies +
+                '}';
     }
 }

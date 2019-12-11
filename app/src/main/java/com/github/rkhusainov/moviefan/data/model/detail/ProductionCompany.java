@@ -2,45 +2,73 @@ package com.github.rkhusainov.moviefan.data.model.detail;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 public class ProductionCompany {
     @SerializedName("id")
-    private Integer id;
+    private Integer mId;
     @SerializedName("logo_path")
-    private String logoPath;
+    private String mLogoPath;
     @SerializedName("name")
-    private String name;
+    private String mName;
     @SerializedName("origin_country")
-    private String originCountry;
+    private String mOriginCountry;
 
     public Integer getId() {
-        return id;
+        return mId;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        mId = id;
     }
 
     public String getLogoPath() {
-        return logoPath;
+        return mLogoPath;
     }
 
     public void setLogoPath(String logoPath) {
-        this.logoPath = logoPath;
+        mLogoPath = logoPath;
     }
 
     public String getName() {
-        return name;
+        return mName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        mName = name;
     }
 
     public String getOriginCountry() {
-        return originCountry;
+        return mOriginCountry;
     }
 
     public void setOriginCountry(String originCountry) {
-        this.originCountry = originCountry;
+        mOriginCountry = originCountry;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductionCompany that = (ProductionCompany) o;
+        return Objects.equals(mId, that.mId) &&
+                Objects.equals(mLogoPath, that.mLogoPath) &&
+                Objects.equals(mName, that.mName) &&
+                Objects.equals(mOriginCountry, that.mOriginCountry);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mId, mLogoPath, mName, mOriginCountry);
+    }
+
+    @Override
+    public String toString() {
+        return "ProductionCompany{" +
+                "mId=" + mId +
+                ", mLogoPath='" + mLogoPath + '\'' +
+                ", mName='" + mName + '\'' +
+                ", mOriginCountry='" + mOriginCountry + '\'' +
+                '}';
     }
 }

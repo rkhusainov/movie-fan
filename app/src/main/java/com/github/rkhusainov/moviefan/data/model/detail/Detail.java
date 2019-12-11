@@ -3,248 +3,350 @@ package com.github.rkhusainov.moviefan.data.model.detail;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Detail {
     @SerializedName("adult")
-    private Boolean adult;
+    private Boolean mAdult;
     @SerializedName("backdrop_path")
-    private String backdropPath;
+    private String mBackdropPath;
     @SerializedName("belongs_to_collection")
-    private Object belongsToCollection;
+    private Object mBelongsToCollection;
     @SerializedName("budget")
-    private Integer budget;
+    private Integer mBudget;
     @SerializedName("genres")
-    private List<Genre> genres = null;
+    private List<Genre> mGenres = null;
     @SerializedName("homepage")
-    private String homepage;
+    private String mHomepage;
     @SerializedName("id")
-    private Integer id;
+    private Integer mId;
     @SerializedName("imdb_id")
-    private String imdbId;
+    private String mImdbId;
     @SerializedName("original_language")
-    private String originalLanguage;
+    private String mOriginalLanguage;
     @SerializedName("original_title")
-    private String originalTitle;
+    private String mOriginalTitle;
     @SerializedName("overview")
-    private String overview;
+    private String mOverview;
     @SerializedName("popularity")
-    private Double popularity;
+    private Double mPopularity;
     @SerializedName("poster_path")
-    private String posterPath;
+    private String mPosterPath;
     @SerializedName("production_companies")
-    private List<ProductionCompany> productionCompanies = null;
+    private List<ProductionCompany> mProductionCompanies = null;
     @SerializedName("production_countries")
-    private List<ProductionCountry> productionCountries = null;
+    private List<ProductionCountry> mProductionCountries = null;
     @SerializedName("release_date")
-    private String releaseDate;
+    private String mReleaseDate;
     @SerializedName("revenue")
-    private Integer revenue;
+    private Integer mRevenue;
     @SerializedName("runtime")
-    private Integer runtime;
+    private Integer mRuntime;
     @SerializedName("spoken_languages")
-    private List<SpokenLanguage> spokenLanguages = null;
+    private List<SpokenLanguage> mSpokenLanguages = null;
     @SerializedName("status")
-    private String status;
+    private String mStatus;
     @SerializedName("tagline")
-    private String tagline;
+    private String mTagline;
     @SerializedName("title")
-    private String title;
+    private String mTitle;
     @SerializedName("video")
-    private Boolean video;
+    private Boolean mVideo;
     @SerializedName("vote_average")
-    private Double voteAverage;
+    private Double mVoteAverage;
     @SerializedName("vote_count")
-    private Integer voteCount;
+    private Integer mVoteCount;
 
     public Boolean getAdult() {
-        return adult;
+        return mAdult;
     }
 
     public void setAdult(Boolean adult) {
-        this.adult = adult;
+        mAdult = adult;
     }
 
     public String getBackdropPath() {
-        return backdropPath;
+        return mBackdropPath;
     }
 
     public void setBackdropPath(String backdropPath) {
-        this.backdropPath = backdropPath;
+        mBackdropPath = backdropPath;
     }
 
     public Object getBelongsToCollection() {
-        return belongsToCollection;
+        return mBelongsToCollection;
     }
 
     public void setBelongsToCollection(Object belongsToCollection) {
-        this.belongsToCollection = belongsToCollection;
+        mBelongsToCollection = belongsToCollection;
     }
 
     public Integer getBudget() {
-        return budget;
+        return mBudget;
     }
 
     public void setBudget(Integer budget) {
-        this.budget = budget;
+        mBudget = budget;
     }
 
     public List<Genre> getGenres() {
-        return genres;
+        return mGenres;
     }
 
     public void setGenres(List<Genre> genres) {
-        this.genres = genres;
+        mGenres = genres;
     }
 
     public String getHomepage() {
-        return homepage;
+        return mHomepage;
     }
 
     public void setHomepage(String homepage) {
-        this.homepage = homepage;
+        mHomepage = homepage;
     }
 
     public Integer getId() {
-        return id;
+        return mId;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        mId = id;
     }
 
     public String getImdbId() {
-        return imdbId;
+        return mImdbId;
     }
 
     public void setImdbId(String imdbId) {
-        this.imdbId = imdbId;
+        mImdbId = imdbId;
     }
 
     public String getOriginalLanguage() {
-        return originalLanguage;
+        return mOriginalLanguage;
     }
 
     public void setOriginalLanguage(String originalLanguage) {
-        this.originalLanguage = originalLanguage;
+        mOriginalLanguage = originalLanguage;
     }
 
     public String getOriginalTitle() {
-        return originalTitle;
+        return mOriginalTitle;
     }
 
     public void setOriginalTitle(String originalTitle) {
-        this.originalTitle = originalTitle;
+        mOriginalTitle = originalTitle;
     }
 
     public String getOverview() {
-        return overview;
+        return mOverview;
     }
 
     public void setOverview(String overview) {
-        this.overview = overview;
+        mOverview = overview;
     }
 
     public Double getPopularity() {
-        return popularity;
+        return mPopularity;
     }
 
     public void setPopularity(Double popularity) {
-        this.popularity = popularity;
+        mPopularity = popularity;
     }
 
     public String getPosterPath() {
-        return posterPath;
+        return mPosterPath;
     }
 
     public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
+        mPosterPath = posterPath;
     }
 
     public List<ProductionCompany> getProductionCompanies() {
-        return productionCompanies;
+        return mProductionCompanies;
     }
 
     public void setProductionCompanies(List<ProductionCompany> productionCompanies) {
-        this.productionCompanies = productionCompanies;
+        mProductionCompanies = productionCompanies;
     }
 
     public List<ProductionCountry> getProductionCountries() {
-        return productionCountries;
+        return mProductionCountries;
     }
 
     public void setProductionCountries(List<ProductionCountry> productionCountries) {
-        this.productionCountries = productionCountries;
+        mProductionCountries = productionCountries;
     }
 
     public String getReleaseDate() {
-        return releaseDate;
+        return mReleaseDate;
     }
 
     public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
+        mReleaseDate = releaseDate;
     }
 
     public Integer getRevenue() {
-        return revenue;
+        return mRevenue;
     }
 
     public void setRevenue(Integer revenue) {
-        this.revenue = revenue;
+        mRevenue = revenue;
     }
 
     public Integer getRuntime() {
-        return runtime;
+        return mRuntime;
     }
 
     public void setRuntime(Integer runtime) {
-        this.runtime = runtime;
+        mRuntime = runtime;
+    }
+
+    public List<SpokenLanguage> getSpokenLanguages() {
+        return mSpokenLanguages;
+    }
+
+    public void setSpokenLanguages(List<SpokenLanguage> spokenLanguages) {
+        mSpokenLanguages = spokenLanguages;
     }
 
     public String getStatus() {
-        return status;
+        return mStatus;
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        mStatus = status;
     }
 
     public String getTagline() {
-        return tagline;
+        return mTagline;
     }
 
     public void setTagline(String tagline) {
-        this.tagline = tagline;
+        mTagline = tagline;
     }
 
     public String getTitle() {
-        return title;
+        return mTitle;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        mTitle = title;
     }
 
     public Boolean getVideo() {
-        return video;
+        return mVideo;
     }
 
     public void setVideo(Boolean video) {
-        this.video = video;
+        mVideo = video;
     }
 
     public Double getVoteAverage() {
-        return voteAverage;
+        return mVoteAverage;
     }
 
     public void setVoteAverage(Double voteAverage) {
-        this.voteAverage = voteAverage;
+        mVoteAverage = voteAverage;
     }
 
     public Integer getVoteCount() {
-        return voteCount;
+        return mVoteCount;
     }
 
     public void setVoteCount(Integer voteCount) {
-        this.voteCount = voteCount;
+        mVoteCount = voteCount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Detail detail = (Detail) o;
+        return Objects.equals(mAdult, detail.mAdult) &&
+                Objects.equals(mBackdropPath, detail.mBackdropPath) &&
+                Objects.equals(mBelongsToCollection, detail.mBelongsToCollection) &&
+                Objects.equals(mBudget, detail.mBudget) &&
+                Objects.equals(mGenres, detail.mGenres) &&
+                Objects.equals(mHomepage, detail.mHomepage) &&
+                Objects.equals(mId, detail.mId) &&
+                Objects.equals(mImdbId, detail.mImdbId) &&
+                Objects.equals(mOriginalLanguage, detail.mOriginalLanguage) &&
+                Objects.equals(mOriginalTitle, detail.mOriginalTitle) &&
+                Objects.equals(mOverview, detail.mOverview) &&
+                Objects.equals(mPopularity, detail.mPopularity) &&
+                Objects.equals(mPosterPath, detail.mPosterPath) &&
+                Objects.equals(mProductionCompanies, detail.mProductionCompanies) &&
+                Objects.equals(mProductionCountries, detail.mProductionCountries) &&
+                Objects.equals(mReleaseDate, detail.mReleaseDate) &&
+                Objects.equals(mRevenue, detail.mRevenue) &&
+                Objects.equals(mRuntime, detail.mRuntime) &&
+                Objects.equals(mSpokenLanguages, detail.mSpokenLanguages) &&
+                Objects.equals(mStatus, detail.mStatus) &&
+                Objects.equals(mTagline, detail.mTagline) &&
+                Objects.equals(mTitle, detail.mTitle) &&
+                Objects.equals(mVideo, detail.mVideo) &&
+                Objects.equals(mVoteAverage, detail.mVoteAverage) &&
+                Objects.equals(mVoteCount, detail.mVoteCount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+                mAdult,
+                mBackdropPath,
+                mBelongsToCollection,
+                mBudget,
+                mGenres,
+                mHomepage,
+                mId,
+                mImdbId,
+                mOriginalLanguage,
+                mOriginalTitle,
+                mOverview,
+                mPopularity,
+                mPosterPath,
+                mProductionCompanies,
+                mProductionCountries,
+                mReleaseDate,
+                mRevenue,
+                mRuntime,
+                mSpokenLanguages,
+                mStatus,
+                mTagline,
+                mTitle,
+                mVideo,
+                mVoteAverage,
+                mVoteCount);
+    }
+
+    @Override
+    public String toString() {
+        return "Detail{" +
+                "mAdult=" + mAdult +
+                ", mBackdropPath='" + mBackdropPath + '\'' +
+                ", mBelongsToCollection=" + mBelongsToCollection +
+                ", mBudget=" + mBudget +
+                ", mGenres=" + mGenres +
+                ", mHomepage='" + mHomepage + '\'' +
+                ", mId=" + mId +
+                ", mImdbId='" + mImdbId + '\'' +
+                ", mOriginalLanguage='" + mOriginalLanguage + '\'' +
+                ", mOriginalTitle='" + mOriginalTitle + '\'' +
+                ", mOverview='" + mOverview + '\'' +
+                ", mPopularity=" + mPopularity +
+                ", mPosterPath='" + mPosterPath + '\'' +
+                ", mProductionCompanies=" + mProductionCompanies +
+                ", mProductionCountries=" + mProductionCountries +
+                ", mReleaseDate='" + mReleaseDate + '\'' +
+                ", mRevenue=" + mRevenue +
+                ", mRuntime=" + mRuntime +
+                ", mSpokenLanguages=" + mSpokenLanguages +
+                ", mStatus='" + mStatus + '\'' +
+                ", mTagline='" + mTagline + '\'' +
+                ", mTitle='" + mTitle + '\'' +
+                ", mVideo=" + mVideo +
+                ", mVoteAverage=" + mVoteAverage +
+                ", mVoteCount=" + mVoteCount +
+                '}';
     }
 }

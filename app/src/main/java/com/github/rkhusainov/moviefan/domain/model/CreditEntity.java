@@ -1,41 +1,66 @@
 package com.github.rkhusainov.moviefan.domain.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CreditEntity {
-    private Integer id;
-    private List<CastEntity> cast;
-    private List<CrewEntity> crew;
+    private Integer mId;
+    private List<CastEntity> mCast;
+    private List<CrewEntity> mCrew;
 
     public CreditEntity(Integer id,
                         List<CastEntity> cast,
                         List<CrewEntity> crew) {
-        this.id = id;
-        this.cast = cast;
-        this.crew = crew;
+        mId = id;
+        mCast = cast;
+        mCrew = crew;
     }
 
     public Integer getId() {
-        return id;
+        return mId;
     }
 
     public void setId(Integer id) {
-        this.id = id;
+        mId = id;
     }
 
     public List<CastEntity> getCast() {
-        return cast;
+        return mCast;
     }
 
     public void setCast(List<CastEntity> cast) {
-        this.cast = cast;
+        mCast = cast;
     }
 
     public List<CrewEntity> getCrew() {
-        return crew;
+        return mCrew;
     }
 
     public void setCrew(List<CrewEntity> crew) {
-        this.crew = crew;
+        mCrew = crew;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CreditEntity entity = (CreditEntity) o;
+        return Objects.equals(mId, entity.mId) &&
+                Objects.equals(mCast, entity.mCast) &&
+                Objects.equals(mCrew, entity.mCrew);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mId, mCast, mCrew);
+    }
+
+    @Override
+    public String toString() {
+        return "CreditEntity{" +
+                "mId=" + mId +
+                ", mCast=" + mCast +
+                ", mCrew=" + mCrew +
+                '}';
     }
 }

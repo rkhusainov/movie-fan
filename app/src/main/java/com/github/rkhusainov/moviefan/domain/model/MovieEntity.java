@@ -1,6 +1,7 @@
 package com.github.rkhusainov.moviefan.domain.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MovieEntity {
     private Integer mId;
@@ -158,5 +159,51 @@ public class MovieEntity {
 
     public void setGenreIds(List<Integer> genreIds) {
         mGenreIds = genreIds;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MovieEntity that = (MovieEntity) o;
+        return Objects.equals(mId, that.mId) &&
+                Objects.equals(mTitle, that.mTitle) &&
+                Objects.equals(mOriginalTitle, that.mOriginalTitle) &&
+                Objects.equals(mPopularity, that.mPopularity) &&
+                Objects.equals(mPosterPath, that.mPosterPath) &&
+                Objects.equals(mVoteAverage, that.mVoteAverage) &&
+                Objects.equals(mVoteCount, that.mVoteCount) &&
+                Objects.equals(mOverview, that.mOverview) &&
+                Objects.equals(mReleaseDate, that.mReleaseDate) &&
+                Objects.equals(mVideo, that.mVideo) &&
+                Objects.equals(mAdult, that.mAdult) &&
+                Objects.equals(mBackdropPath, that.mBackdropPath) &&
+                Objects.equals(mOriginalLanguage, that.mOriginalLanguage) &&
+                Objects.equals(mGenreIds, that.mGenreIds);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mId, mTitle, mOriginalTitle, mPopularity, mPosterPath, mVoteAverage, mVoteCount, mOverview, mReleaseDate, mVideo, mAdult, mBackdropPath, mOriginalLanguage, mGenreIds);
+    }
+
+    @Override
+    public String toString() {
+        return "MovieEntity{" +
+                "mId=" + mId +
+                ", mTitle='" + mTitle + '\'' +
+                ", mOriginalTitle='" + mOriginalTitle + '\'' +
+                ", mPopularity=" + mPopularity +
+                ", mPosterPath='" + mPosterPath + '\'' +
+                ", mVoteAverage=" + mVoteAverage +
+                ", mVoteCount=" + mVoteCount +
+                ", mOverview='" + mOverview + '\'' +
+                ", mReleaseDate='" + mReleaseDate + '\'' +
+                ", mVideo=" + mVideo +
+                ", mAdult=" + mAdult +
+                ", mBackdropPath='" + mBackdropPath + '\'' +
+                ", mOriginalLanguage='" + mOriginalLanguage + '\'' +
+                ", mGenreIds=" + mGenreIds +
+                '}';
     }
 }

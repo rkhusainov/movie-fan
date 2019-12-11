@@ -1,21 +1,23 @@
-package com.github.rkhusainov.moviefan.presentation.utils;
+package com.github.rkhusainov.moviefan.presentation.factory;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.github.rkhusainov.moviefan.data.mapper.DetailMapper;
+import com.github.rkhusainov.moviefan.data.mapper.CastMapper;
 import com.github.rkhusainov.moviefan.data.repository.MovieRepository;
 import com.github.rkhusainov.moviefan.domain.interactor.IMovieInteractor;
 import com.github.rkhusainov.moviefan.domain.interactor.MovieInteractor;
 import com.github.rkhusainov.moviefan.domain.repository.IMovieRepository;
-import com.github.rkhusainov.moviefan.presentation.ui.detail.DetailViewModel;
+import com.github.rkhusainov.moviefan.presentation.ui.credit.CastViewModel;
 
-public class DetailFactory extends ViewModelProvider.NewInstanceFactory {
+public class CastFactory extends ViewModelProvider.NewInstanceFactory {
 
+    private int mViewType;
     private int mMovieId;
 
-    public DetailFactory(int movieId) {
+    public CastFactory(int viewType, int movieId) {
+        mViewType = viewType;
         mMovieId = movieId;
     }
 
@@ -23,10 +25,11 @@ public class DetailFactory extends ViewModelProvider.NewInstanceFactory {
     @NonNull
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-        IMovieRepository repository = new MovieRepository(new DetailMapper());
-        IMovieInteractor interactor = new MovieInteractor(repository);
-        return (T) new DetailViewModel(
+        IMovieRepository movieRepository = new MovieRepository(new CastMapper());
+        IMovieInteractor movieInteractor = new MovieInteractor(movieRepository);
+        return (T) new CastViewModel(
+                mViewType,
                 mMovieId,
-                interactor);
+                movieInteractor);
     }
 }

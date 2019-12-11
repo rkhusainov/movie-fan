@@ -11,7 +11,7 @@
 
         <variable
             name="popular"
-            type="com.github.rkhusainov.moviefan.presentation.ui.popular.PopularViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.popular.PopularMovieViewModel" />
 
     </data>
 
@@ -21,7 +21,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark"
         android:orientation="vertical"
-        tools:context=".presentation.ui.popular.PopularFragment">
+        tools:context=".presentation.ui.popular.PopularMovieFragment">
 
         <ProgressBar
             android:id="@+id/progress_bar"
@@ -42,7 +42,7 @@
 
 
         <include
-            layout="@layout/v_error"
+            layout="@layout/error_view"
             android:visibility="@{popular.isErrorVisible ? V.VISIBLE : V.GONE}" />
 
     </LinearLayout>

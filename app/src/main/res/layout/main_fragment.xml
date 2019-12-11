@@ -11,19 +11,19 @@
 
         <variable
             name="popular"
-            type="com.github.rkhusainov.moviefan.presentation.ui.popular.PopularViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.popular.PopularMovieViewModel" />
 
         <variable
             name="today"
-            type="com.github.rkhusainov.moviefan.presentation.ui.today.TodayViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.today.TodayMovieViewModel" />
 
         <variable
             name="top"
-            type="com.github.rkhusainov.moviefan.presentation.ui.top.TopViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.top.TopMovieViewModel" />
 
         <variable
             name="upcoming"
-            type="com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingMovieViewModel" />
 
         <variable
             name="onItemClickListener"
@@ -240,7 +240,7 @@
         </ScrollView>
 
         <include
-            layout="@layout/v_error"
+            layout="@layout/error_view"
             android:visibility="@{popular.isErrorVisible ? V.VISIBLE : V.GONE}" />
 
     </LinearLayout>

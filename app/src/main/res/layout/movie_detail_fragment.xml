@@ -14,7 +14,7 @@
 
         <variable
             name="detail"
-            type="com.github.rkhusainov.moviefan.presentation.ui.detail.DetailViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.detail.MovieDetailViewModel" />
 
         <variable
             name="cast"
@@ -22,7 +22,7 @@
 
         <variable
             name="handler"
-            type="com.github.rkhusainov.moviefan.presentation.ui.detail.DetailFragment" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.detail.MovieDetailFragment" />
 
         <variable
             name="constant"
@@ -38,7 +38,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark"
         android:orientation="vertical"
-        tools:context=".presentation.ui.detail.DetailFragment">
+        tools:context=".presentation.ui.detail.MovieDetailFragment">
 
         <ProgressBar
             android:id="@+id/progress_bar"
@@ -267,7 +267,7 @@
         </ScrollView>
 
         <include
-            layout="@layout/v_error"
+            layout="@layout/error_view"
             android:visibility="@{detail.isErrorVisible ? V.VISIBLE : V.GONE}" />
 
     </LinearLayout>

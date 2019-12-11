@@ -36,7 +36,7 @@
             bind:viewType="@{cast.viewType}" />
 
         <include
-            layout="@layout/v_error"
+            layout="@layout/error_view"
             android:visibility="@{cast.isErrorVisible ? V.VISIBLE : V.GONE}" />
 
     </LinearLayout>

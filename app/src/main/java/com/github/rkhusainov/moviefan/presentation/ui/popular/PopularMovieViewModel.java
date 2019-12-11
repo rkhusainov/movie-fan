@@ -1,4 +1,4 @@
-package com.github.rkhusainov.moviefan.presentation.ui.top;
+package com.github.rkhusainov.moviefan.presentation.ui.popular;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -17,20 +17,20 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class TopViewModel extends ViewModel {
+public class PopularMovieViewModel extends ViewModel {
 
     private final CompositeDisposable mCompositeDisposable;
     private OnItemClickListener mOnItemClickListener;
     private IMovieInteractor mMovieInteractor;
 
     private MutableLiveData<Integer> mViewType = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mIsLoading = new MutableLiveData<>();
+    private MutableLiveData<Boolean> mIsLoading = new MutableLiveData();
     private MutableLiveData<Boolean> mIsErrorVisible = new MutableLiveData();
     private MutableLiveData<List<MovieEntity>> mMovies = new MutableLiveData<>();
 
-    public TopViewModel(OnItemClickListener onItemClickListener, int viewType, IMovieInteractor interactor) {
-        mCompositeDisposable = new CompositeDisposable();
+    public PopularMovieViewModel(OnItemClickListener onItemClickListener, int viewType, IMovieInteractor interactor) {
         mOnItemClickListener = onItemClickListener;
+        mCompositeDisposable = new CompositeDisposable();
         mMovieInteractor = interactor;
         loadMovies();
         mMovies.setValue(new ArrayList<>());
@@ -38,7 +38,7 @@ public class TopViewModel extends ViewModel {
     }
 
     public void loadMovies() {
-        mCompositeDisposable.add(mMovieInteractor.getTopMovies()
+        mCompositeDisposable.add(mMovieInteractor.getPopularMovies()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {

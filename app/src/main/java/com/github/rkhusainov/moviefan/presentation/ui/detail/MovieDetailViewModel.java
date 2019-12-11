@@ -1,14 +1,10 @@
-package com.github.rkhusainov.moviefan.presentation.ui.popular;
+package com.github.rkhusainov.moviefan.presentation.ui.detail;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.github.rkhusainov.moviefan.domain.interactor.IMovieInteractor;
-import com.github.rkhusainov.moviefan.domain.model.MovieEntity;
-import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.github.rkhusainov.moviefan.domain.model.DetailEntity;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -17,28 +13,25 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class PopularViewModel extends ViewModel {
+public class MovieDetailViewModel extends ViewModel {
 
-    private final CompositeDisposable mCompositeDisposable;
-    private OnItemClickListener mOnItemClickListener;
+    private CompositeDisposable mCompositeDisposable;
     private IMovieInteractor mMovieInteractor;
 
-    private MutableLiveData<Integer> mViewType = new MutableLiveData<>();
     private MutableLiveData<Boolean> mIsLoading = new MutableLiveData();
     private MutableLiveData<Boolean> mIsErrorVisible = new MutableLiveData();
-    private MutableLiveData<List<MovieEntity>> mMovies = new MutableLiveData<>();
+    private MutableLiveData<DetailEntity> mDetailLiveData = new MutableLiveData<>();
 
-    public PopularViewModel(OnItemClickListener onItemClickListener, int viewType, IMovieInteractor interactor) {
-        mOnItemClickListener = onItemClickListener;
+
+    public MovieDetailViewModel(int movieId, IMovieInteractor interactor) {
+
         mCompositeDisposable = new CompositeDisposable();
         mMovieInteractor = interactor;
-        loadMovies();
-        mMovies.setValue(new ArrayList<>());
-        mViewType.postValue(viewType);
+        loadDetail(movieId);
     }
 
-    public void loadMovies() {
-        mCompositeDisposable.add(mMovieInteractor.getPopularMovies()
+    public void loadDetail(int movieId) {
+        mCompositeDisposable.add(mMovieInteractor.getDetail(movieId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -53,11 +46,10 @@ public class PopularViewModel extends ViewModel {
                         mIsLoading.postValue(false);
                     }
                 })
-                .subscribe(new Consumer<List<MovieEntity>>() {
+                .subscribe(new Consumer<DetailEntity>() {
                     @Override
-                    public void accept(List<MovieEntity> movieEntities) throws Exception {
-                        mIsErrorVisible.postValue(false);
-                        mMovies.postValue(movieEntities);
+                    public void accept(DetailEntity detailEntity) throws Exception {
+                        mDetailLiveData.setValue(detailEntity);
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -67,12 +59,9 @@ public class PopularViewModel extends ViewModel {
                 }));
     }
 
-    public OnItemClickListener getOnItemClickListener() {
-        return mOnItemClickListener;
-    }
 
-    public MutableLiveData<Integer> getViewType() {
-        return mViewType;
+    public MutableLiveData<DetailEntity> getDetailLiveData() {
+        return mDetailLiveData;
     }
 
     public MutableLiveData<Boolean> getIsLoading() {
@@ -81,15 +70,5 @@ public class PopularViewModel extends ViewModel {
 
     public MutableLiveData<Boolean> getIsErrorVisible() {
         return mIsErrorVisible;
-    }
-
-    public MutableLiveData<List<MovieEntity>> getMovies() {
-        return mMovies;
-    }
-
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-        mCompositeDisposable.dispose();
     }
 }

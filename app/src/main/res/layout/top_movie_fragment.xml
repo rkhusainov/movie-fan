@@ -11,7 +11,7 @@
 
         <variable
             name="top"
-            type="com.github.rkhusainov.moviefan.presentation.ui.top.TopViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.top.TopMovieViewModel" />
 
     </data>
 
@@ -38,7 +38,7 @@
             bind:viewType="@{top.viewType}" />
 
         <include
-            layout="@layout/v_error"
+            layout="@layout/error_view"
             android:visibility="@{top.isErrorVisible ? V.VISIBLE : V.GONE}" />
 
     </LinearLayout>

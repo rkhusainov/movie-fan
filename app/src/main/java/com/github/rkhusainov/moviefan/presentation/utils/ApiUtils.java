@@ -23,8 +23,10 @@ public class ApiUtils {
         if (sClient == null) {
             OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
             builder.addInterceptor(new ApiKeyInterceptor());
-            if (!BuildConfig.BUILD_TYPE.contains("release")) {
-                builder.addInterceptor(new HttpLoggingInterceptor());
+            if (BuildConfig.DEBUG) {
+                HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+                logging.level(HttpLoggingInterceptor.Level.BODY);
+                builder.addInterceptor(logging);
             }
             sClient = builder.build();
         }

@@ -11,7 +11,7 @@
 
         <variable
             name="upcoming"
-            type="com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingMovieViewModel" />
 
     </data>
 
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark"
-        tools:context=".presentation.ui.upcoming.UpcomingFragment"
+        tools:context=".presentation.ui.upcoming.UpcomingMovieFragment"
         android:orientation="vertical">
 
         <ProgressBar
@@ -40,7 +40,7 @@
             bind:viewType="@{upcoming.viewType}" />
 
         <include
-            layout="@layout/v_error"
+            layout="@layout/error_view"
             android:visibility="@{upcoming.isErrorVisible ? V.VISIBLE : V.GONE}" />
 
     </LinearLayout>

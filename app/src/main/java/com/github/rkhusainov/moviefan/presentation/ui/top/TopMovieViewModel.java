@@ -1,4 +1,4 @@
-package com.github.rkhusainov.moviefan.presentation.ui.upcoming;
+package com.github.rkhusainov.moviefan.presentation.ui.top;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -17,7 +17,7 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class UpcomingViewModel extends ViewModel {
+public class TopMovieViewModel extends ViewModel {
 
     private final CompositeDisposable mCompositeDisposable;
     private OnItemClickListener mOnItemClickListener;
@@ -28,7 +28,7 @@ public class UpcomingViewModel extends ViewModel {
     private MutableLiveData<Boolean> mIsErrorVisible = new MutableLiveData();
     private MutableLiveData<List<MovieEntity>> mMovies = new MutableLiveData<>();
 
-    public UpcomingViewModel(OnItemClickListener onItemClickListener, int viewType, IMovieInteractor interactor) {
+    public TopMovieViewModel(OnItemClickListener onItemClickListener, int viewType, IMovieInteractor interactor) {
         mCompositeDisposable = new CompositeDisposable();
         mOnItemClickListener = onItemClickListener;
         mMovieInteractor = interactor;
@@ -38,7 +38,7 @@ public class UpcomingViewModel extends ViewModel {
     }
 
     public void loadMovies() {
-        mCompositeDisposable.add(mMovieInteractor.getUpcomingMovies()
+        mCompositeDisposable.add(mMovieInteractor.getTopMovies()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {

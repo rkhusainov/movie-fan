@@ -1,4 +1,4 @@
-package com.github.rkhusainov.moviefan.presentation.utils;
+package com.github.rkhusainov.moviefan.presentation.factory;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
@@ -10,7 +10,7 @@ import com.github.rkhusainov.moviefan.domain.interactor.IMovieInteractor;
 import com.github.rkhusainov.moviefan.domain.interactor.MovieInteractor;
 import com.github.rkhusainov.moviefan.domain.repository.IMovieRepository;
 import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
-import com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingViewModel;
+import com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingMovieViewModel;
 
 public class UpcomingMovieFactory extends ViewModelProvider.NewInstanceFactory {
 
@@ -29,7 +29,7 @@ public class UpcomingMovieFactory extends ViewModelProvider.NewInstanceFactory {
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         IMovieRepository movieRepository = new MovieRepository(new MovieMapper());
         IMovieInteractor movieInteractor = new MovieInteractor(movieRepository);
-            return (T) new UpcomingViewModel(
+            return (T) new UpcomingMovieViewModel(
                     mOnItemClickListener,
                     mViewType,
                     movieInteractor);

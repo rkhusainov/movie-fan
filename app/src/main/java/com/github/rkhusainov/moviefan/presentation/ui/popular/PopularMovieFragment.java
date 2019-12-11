@@ -1,4 +1,4 @@
-package com.github.rkhusainov.moviefan.presentation.ui.top;
+package com.github.rkhusainov.moviefan.presentation.ui.popular;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,15 +11,19 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.github.rkhusainov.moviefan.R;
-import com.github.rkhusainov.moviefan.databinding.TopBinding;
+import com.github.rkhusainov.moviefan.databinding.PopularBinding;
 import com.github.rkhusainov.moviefan.presentation.Constants;
 import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
-import com.github.rkhusainov.moviefan.presentation.ui.detail.DetailFragment;
-import com.github.rkhusainov.moviefan.presentation.utils.TopMovieFactory;
+import com.github.rkhusainov.moviefan.presentation.factory.PopularMovieFactory;
+import com.github.rkhusainov.moviefan.presentation.ui.detail.MovieDetailFragment;
 
-public class TopFragment extends Fragment {
+public class PopularMovieFragment extends Fragment {
 
-    private TopViewModel mTopViewModel;
+    private PopularMovieViewModel mPopularMovieViewModel;
+
+    public static PopularMovieFragment newInstance() {
+        return new PopularMovieFragment();
+    }
 
     private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
         @Override
@@ -27,29 +31,26 @@ public class TopFragment extends Fragment {
             if (getFragmentManager() != null) {
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, DetailFragment.newInstance(movie_id))
+                        .replace(R.id.fragment_container, MovieDetailFragment.newInstance(movie_id))
                         .addToBackStack(null)
                         .commit();
             }
         }
     };
 
-    public static TopFragment newInstance() {
-        return new TopFragment();
-    }
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        TopMovieFactory factory = new TopMovieFactory(mOnItemClickListener, Constants.TOP);
-        mTopViewModel = new ViewModelProvider(this, factory).get(TopViewModel.class);
+        PopularMovieFactory factory = new PopularMovieFactory(mOnItemClickListener, Constants.POPULAR);
+        mPopularMovieViewModel = new ViewModelProvider(this, factory).get(PopularMovieViewModel.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        TopBinding binding = TopBinding.inflate(inflater, container, false);
-        binding.setTop(mTopViewModel);
+
+        PopularBinding binding = PopularBinding.inflate(inflater, container, false);
+        binding.setPopular(mPopularMovieViewModel);
         binding.setLifecycleOwner(this);
         return binding.getRoot();
     }

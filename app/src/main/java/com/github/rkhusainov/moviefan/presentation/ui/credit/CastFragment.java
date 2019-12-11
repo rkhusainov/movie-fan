@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.github.rkhusainov.moviefan.databinding.CastBinding;
 import com.github.rkhusainov.moviefan.presentation.Constants;
-import com.github.rkhusainov.moviefan.presentation.utils.CastFactory;
+import com.github.rkhusainov.moviefan.presentation.factory.CastFactory;
 
 public class CastFragment extends Fragment {
 

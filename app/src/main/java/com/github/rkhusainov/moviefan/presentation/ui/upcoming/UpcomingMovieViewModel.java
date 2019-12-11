@@ -1,4 +1,4 @@
-package com.github.rkhusainov.moviefan.presentation.ui.today;
+package com.github.rkhusainov.moviefan.presentation.ui.upcoming;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -17,27 +17,28 @@ import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class TodayViewModel extends ViewModel {
+public class UpcomingMovieViewModel extends ViewModel {
 
     private final CompositeDisposable mCompositeDisposable;
     private OnItemClickListener mOnItemClickListener;
     private IMovieInteractor mMovieInteractor;
 
-    private MutableLiveData<Boolean> mIsLoading = new MutableLiveData();
+    private MutableLiveData<Integer> mViewType = new MutableLiveData<>();
+    private MutableLiveData<Boolean> mIsLoading = new MutableLiveData<>();
     private MutableLiveData<Boolean> mIsErrorVisible = new MutableLiveData();
     private MutableLiveData<List<MovieEntity>> mMovies = new MutableLiveData<>();
 
-    public TodayViewModel(OnItemClickListener onItemClickListener, IMovieInteractor interactor) {
+    public UpcomingMovieViewModel(OnItemClickListener onItemClickListener, int viewType, IMovieInteractor interactor) {
         mCompositeDisposable = new CompositeDisposable();
         mOnItemClickListener = onItemClickListener;
         mMovieInteractor = interactor;
         loadMovies();
         mMovies.setValue(new ArrayList<>());
+        mViewType.postValue(viewType);
     }
 
-
     public void loadMovies() {
-        mCompositeDisposable.add(mMovieInteractor.getTodayMovies()
+        mCompositeDisposable.add(mMovieInteractor.getUpcomingMovies()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe(new Consumer<Disposable>() {
@@ -68,6 +69,10 @@ public class TodayViewModel extends ViewModel {
 
     public OnItemClickListener getOnItemClickListener() {
         return mOnItemClickListener;
+    }
+
+    public MutableLiveData<Integer> getViewType() {
+        return mViewType;
     }
 
     public MutableLiveData<Boolean> getIsLoading() {

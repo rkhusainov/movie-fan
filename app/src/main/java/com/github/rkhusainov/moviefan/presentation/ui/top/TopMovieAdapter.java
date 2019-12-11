@@ -16,14 +16,14 @@ import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
 
 import java.util.List;
 
-public class TopAdapter extends RecyclerView.Adapter<TopAdapter.TopViewHolderAbs> {
+public class TopMovieAdapter extends RecyclerView.Adapter<TopMovieAdapter.TopViewHolderAbs> {
 
     private List<MovieEntity> mMovies;
     private int mItemViewType;
 
     private OnItemClickListener mOnItemClickListener;
 
-    public TopAdapter(int itemViewType, List<MovieEntity> movies, OnItemClickListener listener) {
+    public TopMovieAdapter(int itemViewType, List<MovieEntity> movies, OnItemClickListener listener) {
         mItemViewType = itemViewType;
         mMovies = movies;
         mOnItemClickListener = listener;

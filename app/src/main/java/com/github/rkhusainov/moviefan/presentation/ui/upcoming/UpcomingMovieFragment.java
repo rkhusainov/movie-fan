@@ -15,12 +15,12 @@ import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.databinding.UpcomingBinding;
 import com.github.rkhusainov.moviefan.presentation.Constants;
 import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
-import com.github.rkhusainov.moviefan.presentation.ui.detail.DetailFragment;
-import com.github.rkhusainov.moviefan.presentation.utils.UpcomingMovieFactory;
+import com.github.rkhusainov.moviefan.presentation.factory.UpcomingMovieFactory;
+import com.github.rkhusainov.moviefan.presentation.ui.detail.MovieDetailFragment;
 
-public class UpcomingFragment extends Fragment {
+public class UpcomingMovieFragment extends Fragment {
 
-    private UpcomingViewModel mUpcomingViewModel;
+    private UpcomingMovieViewModel mUpcomingMovieViewModel;
 
     private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
         @Override
@@ -28,15 +28,15 @@ public class UpcomingFragment extends Fragment {
             if (getFragmentManager() != null) {
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, DetailFragment.newInstance(movie_id))
+                        .replace(R.id.fragment_container, MovieDetailFragment.newInstance(movie_id))
                         .addToBackStack(null)
                         .commit();
             }
         }
     };
 
-    public static UpcomingFragment newInstance() {
-        return new UpcomingFragment();
+    public static UpcomingMovieFragment newInstance() {
+        return new UpcomingMovieFragment();
     }
 
     @Override
@@ -44,7 +44,7 @@ public class UpcomingFragment extends Fragment {
         super.onAttach(context);
 
         UpcomingMovieFactory factory = new UpcomingMovieFactory(mOnItemClickListener, Constants.UPCOMING);
-        mUpcomingViewModel = new ViewModelProvider(this, factory).get(UpcomingViewModel.class);
+        mUpcomingMovieViewModel = new ViewModelProvider(this, factory).get(UpcomingMovieViewModel.class);
     }
 
     @Nullable
@@ -52,7 +52,7 @@ public class UpcomingFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         UpcomingBinding binding = UpcomingBinding.inflate(inflater, container, false);
-        binding.setUpcoming(mUpcomingViewModel);
+        binding.setUpcoming(mUpcomingMovieViewModel);
         binding.setLifecycleOwner(this);
         return binding.getRoot();
     }

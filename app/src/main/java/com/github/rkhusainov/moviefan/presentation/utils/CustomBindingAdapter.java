@@ -16,10 +16,10 @@ import com.github.rkhusainov.moviefan.domain.model.MovieEntity;
 import com.github.rkhusainov.moviefan.presentation.Constants;
 import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.presentation.ui.credit.CastAdapter;
-import com.github.rkhusainov.moviefan.presentation.ui.popular.PopularAdapter;
-import com.github.rkhusainov.moviefan.presentation.ui.today.TodayAdapter;
-import com.github.rkhusainov.moviefan.presentation.ui.top.TopAdapter;
-import com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingAdapter;
+import com.github.rkhusainov.moviefan.presentation.ui.popular.PopularMovieAdapter;
+import com.github.rkhusainov.moviefan.presentation.ui.today.TodayMovieAdapter;
+import com.github.rkhusainov.moviefan.presentation.ui.top.TopMovieAdapter;
+import com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingMovieAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public class CustomBindingAdapter {
     @BindingAdapter({"bind:viewType", "bind:dataPopular", "bind:clickHandler"})
     public static void configurePopularRecyclerView(RecyclerView recyclerView, int viewType, List<MovieEntity> movies, OnItemClickListener listener) {
 
-        PopularAdapter adapter = new PopularAdapter(viewType, movies, listener);
+        PopularMovieAdapter adapter = new PopularMovieAdapter(viewType, movies, listener);
 
         if (viewType == Constants.MAIN) {
             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), RecyclerView.HORIZONTAL, false));
@@ -55,7 +55,7 @@ public class CustomBindingAdapter {
     @BindingAdapter({"bind:viewType", "bind:dataTop", "bind:clickHandler"})
     public static void configureTopRecyclerView(RecyclerView recyclerView, int viewType, List<MovieEntity> movies, OnItemClickListener listener) {
 
-        TopAdapter adapter = new TopAdapter(viewType, movies, listener);
+        TopMovieAdapter adapter = new TopMovieAdapter(viewType, movies, listener);
 
         if (viewType == Constants.MAIN) {
             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), RecyclerView.HORIZONTAL, false));
@@ -72,7 +72,7 @@ public class CustomBindingAdapter {
     @BindingAdapter({"bind:viewType", "bind:dataUpcoming", "bind:clickHandler"})
     public static void configureUpcomingRecyclerView(RecyclerView recyclerView, int viewType, List<MovieEntity> movies, OnItemClickListener listener) {
 
-        UpcomingAdapter adapter = new UpcomingAdapter(viewType, movies, listener);
+        UpcomingMovieAdapter adapter = new UpcomingMovieAdapter(viewType, movies, listener);
 
         if (viewType == Constants.MAIN) {
             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), RecyclerView.HORIZONTAL, false));
@@ -88,7 +88,7 @@ public class CustomBindingAdapter {
 
     @BindingAdapter({"bind:data", "bind:clickHandler"})
     public static void configureTodayRecyclerView(RecyclerView recyclerView, List<MovieEntity> movies, OnItemClickListener listener) {
-        TodayAdapter adapter = new TodayAdapter(movies, listener);
+        TodayMovieAdapter adapter = new TodayMovieAdapter(movies, listener);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), RecyclerView.HORIZONTAL, false));
         recyclerView.setAdapter(adapter);
     }

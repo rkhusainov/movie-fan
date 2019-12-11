@@ -2,15 +2,11 @@
 
 <layout>
 
-    <data class="MainUpcomingMovieBinding">
+    <data class="DetailCastMovieBinding">
 
         <variable
-            name="movie"
-            type="com.github.rkhusainov.moviefan.presentation.ui.upcoming.MainUpcomingMovieListItemViewModel" />
-
-        <variable
-            name="onItemClickListener"
-            type="com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener" />
+            name="cast"
+            type="com.github.rkhusainov.moviefan.presentation.ui.credit.DetailCastListItemViewModel" />
 
     </data>
 
@@ -30,39 +26,38 @@
 
             <RelativeLayout
                 android:layout_width="130dp"
-                android:layout_height="wrap_content"
-                android:onClick="@{()->onItemClickListener.onClick(movie.id)}">
+                android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/iv_poster"
+                    android:id="@+id/iv_actor_photo"
                     android:layout_width="130dp"
                     android:layout_height="200dp"
-                    app:imageUrl="@{movie.imageUrl}"
-                    tools:src="@drawable/ic_movie_placeholder" />
+                    tools:src="@drawable/ic_actor_placeholder"
+                    app:imageUrl="@{cast.imageUrl}"/>
 
                 <TextView
-                    android:id="@+id/tv_title"
+                    android:id="@+id/tv_actor_name"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:layout_below="@id/iv_poster"
+                    android:layout_below="@id/iv_actor_photo"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
-                    android:text="@{movie.titleTextView}"
+                    android:layout_marginTop="8dp"
                     android:textAppearance="@style/TabTitleTextAppearance"
-                    tools:text="Joker"
-                    tools:textColor="@color/colorWhite" />
+                    tools:text="Joaquin Phoenix"
+                    tools:textColor="@color/colorWhite"
+                    android:text="@{cast.actorNameTextView}"/>
 
                 <TextView
-                    android:id="@+id/tv_release_date"
+                    android:id="@+id/tv_actor_character"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/tv_title"
+                    android:layout_height="58dp"
+                    android:layout_below="@id/tv_actor_name"
                     android:layout_marginStart="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="@{movie.yearTextView}"
+                    android:layout_marginEnd="8dp"
                     android:textColor="@color/colorGrayLight"
-                    tools:text="03 дек" />
+                    tools:text="Joker"
+                    android:text="@{cast.actorCharacterTextView}"/>
 
             </RelativeLayout>
 

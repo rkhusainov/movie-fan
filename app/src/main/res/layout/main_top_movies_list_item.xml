@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout>
 
-    <data class="MainPopularMovieBinding">
+    <data class="MainTopMovieBinding">
 
         <variable
             name="movie"
-            type="com.github.rkhusainov.moviefan.presentation.ui.popular.MainPopularMovieListItemViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.top.MainTopMovieListItemViewModel" />
 
         <variable
             name="onItemClickListener"
@@ -16,8 +14,9 @@
 
     </data>
 
-
-    <FrameLayout
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -44,7 +43,7 @@
                 <TextView
                     android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="54dp"
                     android:layout_below="@id/iv_poster"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
@@ -87,5 +86,4 @@
     </FrameLayout>
 
 </layout>
-
 

@@ -1,4 +1,4 @@
-package com.github.rkhusainov.moviefan.presentation.utils;
+package com.github.rkhusainov.moviefan.presentation.factory;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
@@ -10,16 +10,13 @@ import com.github.rkhusainov.moviefan.domain.interactor.IMovieInteractor;
 import com.github.rkhusainov.moviefan.domain.interactor.MovieInteractor;
 import com.github.rkhusainov.moviefan.domain.repository.IMovieRepository;
 import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
-import com.github.rkhusainov.moviefan.presentation.ui.popular.PopularViewModel;
+import com.github.rkhusainov.moviefan.presentation.ui.today.TodayMovieViewModel;
 
-public class PopularMovieFactory extends ViewModelProvider.NewInstanceFactory {
-
+public class TodayMovieFactory extends ViewModelProvider.NewInstanceFactory {
     private OnItemClickListener mOnItemClickListener;
-    private int mViewType;
 
-    public PopularMovieFactory(OnItemClickListener onItemClickListener, int viewType) {
+    public TodayMovieFactory(OnItemClickListener onItemClickListener) {
         mOnItemClickListener = onItemClickListener;
-        mViewType = viewType;
     }
 
     @SuppressWarnings("unchecked cast")
@@ -28,9 +25,7 @@ public class PopularMovieFactory extends ViewModelProvider.NewInstanceFactory {
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         IMovieRepository movieRepository = new MovieRepository(new MovieMapper());
         IMovieInteractor movieInteractor = new MovieInteractor(movieRepository);
-            return (T) new PopularViewModel(
-                    mOnItemClickListener,
-                    mViewType,
-                    movieInteractor);
+        return (T) new TodayMovieViewModel(mOnItemClickListener,
+                movieInteractor);
     }
 }

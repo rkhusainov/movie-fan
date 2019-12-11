@@ -15,27 +15,27 @@ import androidx.lifecycle.ViewModelProvider;
 import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.databinding.DetailBinding;
 import com.github.rkhusainov.moviefan.presentation.Constants;
+import com.github.rkhusainov.moviefan.presentation.factory.CastFactory;
+import com.github.rkhusainov.moviefan.presentation.factory.MovieDetailFactory;
 import com.github.rkhusainov.moviefan.presentation.ui.credit.CastFragment;
 import com.github.rkhusainov.moviefan.presentation.ui.credit.CastViewModel;
-import com.github.rkhusainov.moviefan.presentation.utils.CastFactory;
-import com.github.rkhusainov.moviefan.presentation.utils.DetailFactory;
 
 import static android.content.ContentValues.TAG;
 
-public class DetailFragment extends Fragment {
+public class MovieDetailFragment extends Fragment {
 
     public static final String MOVIE_KEY = "MOVIE_KEY";
 
     private int mMovieId;
 
-    private DetailViewModel mDetailViewModel;
+    private MovieDetailViewModel mMovieDetailViewModel;
     private CastViewModel mCastViewModel;
 
-    public static DetailFragment newInstance(int move_id) {
+    public static MovieDetailFragment newInstance(int move_id) {
 
         Bundle args = new Bundle();
         args.putInt(MOVIE_KEY, move_id);
-        DetailFragment fragment = new DetailFragment();
+        MovieDetailFragment fragment = new MovieDetailFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -46,8 +46,8 @@ public class DetailFragment extends Fragment {
 
         mMovieId = getArguments().getInt(MOVIE_KEY);
 
-        DetailFactory detailFactory = new DetailFactory(mMovieId);
-        mDetailViewModel = new ViewModelProvider(this, detailFactory).get(DetailViewModel.class);
+        MovieDetailFactory movieDetailFactory = new MovieDetailFactory(mMovieId);
+        mMovieDetailViewModel = new ViewModelProvider(this, movieDetailFactory).get(MovieDetailViewModel.class);
 
         CastFactory castFactory = new CastFactory(Constants.DETAIL, mMovieId);
         mCastViewModel = new ViewModelProvider(this, castFactory).get(CastViewModel.class);
@@ -58,7 +58,7 @@ public class DetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: " + "BINDING");
         DetailBinding binding = DetailBinding.inflate(inflater, container, false);
-        binding.setDetail(mDetailViewModel);
+        binding.setDetail(mMovieDetailViewModel);
         binding.setCast(mCastViewModel);
         binding.setHandler(this);
         binding.setLifecycleOwner(this);

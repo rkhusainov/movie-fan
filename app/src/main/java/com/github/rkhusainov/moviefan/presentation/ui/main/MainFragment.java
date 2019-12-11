@@ -15,25 +15,25 @@ import com.github.rkhusainov.moviefan.R;
 import com.github.rkhusainov.moviefan.databinding.MainMovieBinding;
 import com.github.rkhusainov.moviefan.presentation.Constants;
 import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
-import com.github.rkhusainov.moviefan.presentation.ui.detail.DetailFragment;
-import com.github.rkhusainov.moviefan.presentation.ui.popular.PopularFragment;
-import com.github.rkhusainov.moviefan.presentation.ui.popular.PopularViewModel;
-import com.github.rkhusainov.moviefan.presentation.ui.today.TodayViewModel;
-import com.github.rkhusainov.moviefan.presentation.ui.top.TopFragment;
-import com.github.rkhusainov.moviefan.presentation.ui.top.TopViewModel;
-import com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingFragment;
-import com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingViewModel;
-import com.github.rkhusainov.moviefan.presentation.utils.PopularMovieFactory;
-import com.github.rkhusainov.moviefan.presentation.utils.TodayMovieFactory;
-import com.github.rkhusainov.moviefan.presentation.utils.TopMovieFactory;
-import com.github.rkhusainov.moviefan.presentation.utils.UpcomingMovieFactory;
+import com.github.rkhusainov.moviefan.presentation.factory.PopularMovieFactory;
+import com.github.rkhusainov.moviefan.presentation.factory.TodayMovieFactory;
+import com.github.rkhusainov.moviefan.presentation.factory.TopMovieFactory;
+import com.github.rkhusainov.moviefan.presentation.factory.UpcomingMovieFactory;
+import com.github.rkhusainov.moviefan.presentation.ui.detail.MovieDetailFragment;
+import com.github.rkhusainov.moviefan.presentation.ui.popular.PopularMovieFragment;
+import com.github.rkhusainov.moviefan.presentation.ui.popular.PopularMovieViewModel;
+import com.github.rkhusainov.moviefan.presentation.ui.today.TodayMovieViewModel;
+import com.github.rkhusainov.moviefan.presentation.ui.top.TopMovieFragment;
+import com.github.rkhusainov.moviefan.presentation.ui.top.TopMovieViewModel;
+import com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingMovieFragment;
+import com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingMovieViewModel;
 
 public class MainFragment extends Fragment {
 
-    private PopularViewModel mPopularViewModel;
-    private TodayViewModel mTodayViewModel;
-    private TopViewModel mTopViewModel;
-    private UpcomingViewModel mUpcomingViewModel;
+    private PopularMovieViewModel mPopularMovieViewModel;
+    private TodayMovieViewModel mTodayMovieViewModel;
+    private TopMovieViewModel mTopMovieViewModel;
+    private UpcomingMovieViewModel mUpcomingMovieViewModel;
 
     private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
         @Override
@@ -41,7 +41,7 @@ public class MainFragment extends Fragment {
             if (getFragmentManager() != null) {
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, DetailFragment.newInstance(movie_id))
+                        .replace(R.id.fragment_container, MovieDetailFragment.newInstance(movie_id))
                         .addToBackStack(null)
                         .commit();
             }
@@ -61,10 +61,10 @@ public class MainFragment extends Fragment {
         TopMovieFactory topMovieFactory = new TopMovieFactory(mOnItemClickListener, Constants.MAIN);
         UpcomingMovieFactory upcomingMovieFactory = new UpcomingMovieFactory(mOnItemClickListener, Constants.MAIN);
 
-        mPopularViewModel = new ViewModelProvider(this, popularMovieFactory).get(PopularViewModel.class);
-        mTodayViewModel = new ViewModelProvider(this, todayMoviefactory).get(TodayViewModel.class);
-        mTopViewModel = new ViewModelProvider(this, topMovieFactory).get(TopViewModel.class);
-        mUpcomingViewModel = new ViewModelProvider(this, upcomingMovieFactory).get(UpcomingViewModel.class);
+        mPopularMovieViewModel = new ViewModelProvider(this, popularMovieFactory).get(PopularMovieViewModel.class);
+        mTodayMovieViewModel = new ViewModelProvider(this, todayMoviefactory).get(TodayMovieViewModel.class);
+        mTopMovieViewModel = new ViewModelProvider(this, topMovieFactory).get(TopMovieViewModel.class);
+        mUpcomingMovieViewModel = new ViewModelProvider(this, upcomingMovieFactory).get(UpcomingMovieViewModel.class);
     }
 
     @Nullable
@@ -72,10 +72,10 @@ public class MainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         MainMovieBinding mainMovieBinding = MainMovieBinding.inflate(inflater, container, false);
-        mainMovieBinding.setPopular(mPopularViewModel);
-        mainMovieBinding.setToday(mTodayViewModel);
-        mainMovieBinding.setTop(mTopViewModel);
-        mainMovieBinding.setUpcoming(mUpcomingViewModel);
+        mainMovieBinding.setPopular(mPopularMovieViewModel);
+        mainMovieBinding.setToday(mTodayMovieViewModel);
+        mainMovieBinding.setTop(mTopMovieViewModel);
+        mainMovieBinding.setUpcoming(mUpcomingMovieViewModel);
         mainMovieBinding.setHandler(this);
         mainMovieBinding.setLifecycleOwner(this);
         return mainMovieBinding.getRoot();
@@ -86,21 +86,21 @@ public class MainFragment extends Fragment {
             case R.id.btn_popular:
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, PopularFragment.newInstance())
+                        .replace(R.id.fragment_container, PopularMovieFragment.newInstance())
                         .addToBackStack(null)
                         .commit();
                 break;
             case R.id.btn_top:
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, TopFragment.newInstance())
+                        .replace(R.id.fragment_container, TopMovieFragment.newInstance())
                         .addToBackStack(null)
                         .commit();
                 break;
             case R.id.btn_upcoming:
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, UpcomingFragment.newInstance())
+                        .replace(R.id.fragment_container, UpcomingMovieFragment.newInstance())
                         .addToBackStack(null)
                         .commit();
                 break;

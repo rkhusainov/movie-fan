@@ -12,12 +12,12 @@ import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
 
 import java.util.List;
 
-public class TodayAdapter extends RecyclerView.Adapter<TodayAdapter.MainTodayViewHolder> {
+public class TodayMovieAdapter extends RecyclerView.Adapter<TodayMovieAdapter.MainTodayViewHolder> {
 
     private List<MovieEntity> mMovies;
     private OnItemClickListener mOnItemClickListener;
 
-    public TodayAdapter(List<MovieEntity> movies, OnItemClickListener onItemClickListener) {
+    public TodayMovieAdapter(List<MovieEntity> movies, OnItemClickListener onItemClickListener) {
         mMovies = movies;
         mOnItemClickListener = onItemClickListener;
     }

@@ -2,6 +2,10 @@ package com.github.rkhusainov.moviefan.presentation;
 
 public interface Constants {
 
+    /**
+     * Интерфейс с константами приложения
+     */
+
     // images constants
     String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
     String CARD_IMAGE_SIZE = "w342/";

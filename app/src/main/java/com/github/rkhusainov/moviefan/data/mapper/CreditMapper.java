@@ -13,6 +13,9 @@ import com.github.rkhusainov.moviefan.domain.model.CrewEntity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Реализация маппинга из pojo класса в entity
+ */
 public class CreditMapper implements IMapper<Credit, CreditEntity> {
     @NonNull
     @Override

@@ -1,5 +1,6 @@
 package com.github.rkhusainov.moviefan.presentation.ui.today;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -27,7 +28,11 @@ public class TodayMovieViewModel extends ViewModel {
     private MutableLiveData<Boolean> mIsErrorVisible = new MutableLiveData();
     private MutableLiveData<List<MovieEntity>> mMovies = new MutableLiveData<>();
 
-    public TodayMovieViewModel(OnItemClickListener onItemClickListener, IMovieInteractor interactor) {
+    /**
+     * @param onItemClickListener экземпляр OnItemClickListener'a
+     * @param interactor          экземпляр интерфейса интерактора
+     */
+    public TodayMovieViewModel(@NonNull OnItemClickListener onItemClickListener, @NonNull IMovieInteractor interactor) {
         mCompositeDisposable = new CompositeDisposable();
         mOnItemClickListener = onItemClickListener;
         mMovieInteractor = interactor;
@@ -35,7 +40,9 @@ public class TodayMovieViewModel extends ViewModel {
         mMovies.setValue(new ArrayList<>());
     }
 
-
+    /**
+     * Получение данных и обновление списка
+     */
     public void loadMovies() {
         mCompositeDisposable.add(mMovieInteractor.getTodayMovies()
                 .subscribeOn(Schedulers.io())
@@ -66,18 +73,34 @@ public class TodayMovieViewModel extends ViewModel {
                 }));
     }
 
+    /**
+     * Getter для переменной clickListener'a
+     */
+    @NonNull
     public OnItemClickListener getOnItemClickListener() {
         return mOnItemClickListener;
     }
 
+    /**
+     * Getter для состояния загрузки данных
+     */
+    @NonNull
     public MutableLiveData<Boolean> getIsLoading() {
         return mIsLoading;
     }
 
+    /**
+     * Getter для состояния видимости ошибки
+     */
+    @NonNull
     public MutableLiveData<Boolean> getIsErrorVisible() {
         return mIsErrorVisible;
     }
 
+    /**
+     * Getter для списка фильмов
+     */
+    @NonNull
     public MutableLiveData<List<MovieEntity>> getMovies() {
         return mMovies;
     }

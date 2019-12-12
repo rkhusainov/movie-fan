@@ -11,12 +11,20 @@ import com.github.rkhusainov.moviefan.domain.interactor.MovieInteractor;
 import com.github.rkhusainov.moviefan.domain.repository.IMovieRepository;
 import com.github.rkhusainov.moviefan.presentation.ui.credit.CastViewModel;
 
+/**
+ * Фабрика для CastViewModel
+ */
 public class CastFactory extends ViewModelProvider.NewInstanceFactory {
 
     private int mViewType;
     private int mMovieId;
 
-    public CastFactory(int viewType, int movieId) {
+    /**
+     * @param viewType тип viewHolder'а
+     * @param movieId  ид фильма
+     */
+    public CastFactory(int viewType,
+                       int movieId) {
         mViewType = viewType;
         mMovieId = movieId;
     }

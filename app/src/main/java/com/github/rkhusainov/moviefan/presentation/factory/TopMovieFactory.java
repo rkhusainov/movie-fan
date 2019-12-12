@@ -12,11 +12,18 @@ import com.github.rkhusainov.moviefan.domain.repository.IMovieRepository;
 import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.presentation.ui.top.TopMovieViewModel;
 
+/**
+ * Фабрика для TopMovieViewModel
+ */
 public class TopMovieFactory extends ViewModelProvider.NewInstanceFactory {
 
     private OnItemClickListener mOnItemClickListener;
     private int mViewType;
 
+    /**
+     * @param onItemClickListener экземпляр OnItemClickListener'a
+     * @param viewType            тип viewHolder'а
+     */
     public TopMovieFactory(OnItemClickListener onItemClickListener, int viewType) {
         mOnItemClickListener = onItemClickListener;
         mViewType = viewType;

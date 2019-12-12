@@ -24,11 +24,11 @@ public class UpcomingMovieFragment extends Fragment {
 
     private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
         @Override
-        public void onClick(int movie_id) {
+        public void onClick(int movieId) {
             if (getFragmentManager() != null) {
                 getFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.fragment_container, MovieDetailFragment.newInstance(movie_id))
+                        .replace(R.id.fragment_container, MovieDetailFragment.newInstance(movieId))
                         .addToBackStack(null)
                         .commit();
             }

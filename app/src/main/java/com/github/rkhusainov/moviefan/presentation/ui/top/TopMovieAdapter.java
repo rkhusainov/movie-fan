@@ -23,6 +23,11 @@ public class TopMovieAdapter extends RecyclerView.Adapter<TopMovieAdapter.TopVie
 
     private OnItemClickListener mOnItemClickListener;
 
+    /**
+     * @param itemViewType тип ViewHolder'a
+     * @param movies       список фильмов
+     * @param listener     экземпляр OnItemClickListener'a
+     */
     public TopMovieAdapter(int itemViewType, List<MovieEntity> movies, OnItemClickListener listener) {
         mItemViewType = itemViewType;
         mMovies = movies;
@@ -62,6 +67,9 @@ public class TopMovieAdapter extends RecyclerView.Adapter<TopMovieAdapter.TopVie
         return mMovies.size();
     }
 
+    /**
+     * Абстрактный ViewHolder
+     */
     abstract class TopViewHolderAbs extends RecyclerView.ViewHolder {
 
         public TopViewHolderAbs(@NonNull View itemView) {
@@ -69,6 +77,9 @@ public class TopMovieAdapter extends RecyclerView.Adapter<TopMovieAdapter.TopVie
         }
     }
 
+    /**
+     * ViewHolder для списка в MainFragment
+     */
     class MainTopViewHolder extends TopViewHolderAbs {
 
         private MainTopMovieBinding mBinding;
@@ -86,6 +97,9 @@ public class TopMovieAdapter extends RecyclerView.Adapter<TopMovieAdapter.TopVie
         }
     }
 
+    /**
+     * ViewHolder для списка в TopFragment
+     */
     class TopViewHolder extends TopViewHolderAbs {
 
         private TopMovieBinding mBinding;
@@ -96,7 +110,7 @@ public class TopMovieAdapter extends RecyclerView.Adapter<TopMovieAdapter.TopVie
             mBinding = binding;
         }
 
-        private void bind(MovieEntity movie) {
+        private void bind(@NonNull MovieEntity movie) {
             mBinding.setMovie(new TopMovieListItemViewModel(movie, format(getAdapterPosition() + 1)));
             mBinding.executePendingBindings();
             mBinding.setOnItemClickListener(mOnItemClickListener);

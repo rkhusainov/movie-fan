@@ -6,6 +6,9 @@ import com.github.rkhusainov.moviefan.data.model.detail.Detail;
 import com.github.rkhusainov.moviefan.domain.mapper.IMapper;
 import com.github.rkhusainov.moviefan.domain.model.DetailEntity;
 
+/**
+ * Реализация маппинга из pojo класса в entity
+ */
 public class DetailMapper implements IMapper<Detail, DetailEntity> {
     @NonNull
     @Override

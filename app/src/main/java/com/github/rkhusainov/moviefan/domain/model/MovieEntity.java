@@ -1,38 +1,57 @@
 package com.github.rkhusainov.moviefan.domain.model;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Domain сущность класса "Movie"
+ */
 public class MovieEntity {
+    @NonNull
     private Integer mId;
+    @NonNull
     private String mTitle;
+    @NonNull
     private String mOriginalTitle;
+    @NonNull
     private Double mPopularity;
+    @NonNull
     private String mPosterPath;
+    @NonNull
     private Double mVoteAverage;
+    @NonNull
     private Integer mVoteCount;
+    @NonNull
     private String mOverview;
+    @NonNull
     private String mReleaseDate;
+    @NonNull
     private Boolean mVideo;
+    @NonNull
     private Boolean mAdult;
+    @NonNull
     private String mBackdropPath;
+    @NonNull
     private String mOriginalLanguage;
+    @NonNull
     private List<Integer> mGenreIds;
 
-    public MovieEntity(Integer id,
-                       String title,
-                       String originalTitle,
-                       Double popularity,
-                       String posterPath,
-                       Double voteAverage,
-                       Integer voteCount,
-                       String overview,
-                       String releaseDate,
-                       Boolean video,
-                       Boolean adult,
-                       String backdropPath,
-                       String originalLanguage,
-                       List<Integer> genreIds) {
+    public MovieEntity(@NonNull Integer id,
+                       @NonNull String title,
+                       @NonNull String originalTitle,
+                       @NonNull Double popularity,
+                       @NonNull String posterPath,
+                       @NonNull Double voteAverage,
+                       @NonNull Integer voteCount,
+                       @NonNull String overview,
+                       @NonNull String releaseDate,
+                       @NonNull Boolean video,
+                       @NonNull Boolean adult,
+                       @NonNull String backdropPath,
+                       @NonNull String originalLanguage,
+                       @NonNull List<Integer> genreIds) {
         mId = id;
         mTitle = title;
         mOriginalTitle = originalTitle;

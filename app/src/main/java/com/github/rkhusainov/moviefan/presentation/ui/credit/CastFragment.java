@@ -21,6 +21,9 @@ public class CastFragment extends Fragment {
 
     private CastViewModel mCastViewModel;
 
+    /**
+     * @param movieId ид фильма
+     */
     public static CastFragment newInstance(int movieId) {
 
         Bundle args = new Bundle();
@@ -43,7 +46,9 @@ public class CastFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         CastBinding binding = CastBinding.inflate(inflater, container, false);
+
         binding.setCast(mCastViewModel);
         binding.setLifecycleOwner(this);
         binding.executePendingBindings();

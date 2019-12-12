@@ -28,6 +28,8 @@ import com.github.rkhusainov.moviefan.presentation.ui.top.TopMovieViewModel;
 import com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingMovieFragment;
 import com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingMovieViewModel;
 
+import org.jetbrains.annotations.NotNull;
+
 public class MainFragment extends Fragment {
 
     private PopularMovieViewModel mPopularMovieViewModel;
@@ -72,6 +74,7 @@ public class MainFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         MainMovieBinding mainMovieBinding = MainMovieBinding.inflate(inflater, container, false);
+
         mainMovieBinding.setPopular(mPopularMovieViewModel);
         mainMovieBinding.setToday(mTodayMovieViewModel);
         mainMovieBinding.setTop(mTopMovieViewModel);
@@ -81,7 +84,10 @@ public class MainFragment extends Fragment {
         return mainMovieBinding.getRoot();
     }
 
-    public void openFragment(View view) {
+    /**
+     * @param view нажатый пользователем view
+     */
+    public void openFragment(@NotNull View view) {
         switch (view.getId()) {
             case R.id.btn_popular:
                 getFragmentManager()

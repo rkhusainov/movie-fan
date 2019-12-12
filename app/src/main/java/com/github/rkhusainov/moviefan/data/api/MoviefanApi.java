@@ -9,6 +9,9 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+/**
+ * Rest запросы к web api
+ */
 public interface MoviefanApi {
     @GET("3/movie/popular")
     Single<MovieResponse> getPopularMovies(

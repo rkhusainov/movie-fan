@@ -4,6 +4,8 @@ import android.graphics.PorterDuff;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,10 +26,18 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/**
+ * Вспомогательный класс с биндинг адаптерами
+ */
 public class CustomBindingAdapter {
 
+    /**
+     * @param imageView экземпляр ImageView
+     * @param urlImage  url изображения для скачивания
+     */
     @BindingAdapter("bind:imageUrl")
-    public static void loadImage(ImageView imageView, String urlImage) {
+    public static void loadImage(@NonNull ImageView imageView,
+                                 @NonNull String urlImage) {
 
         Picasso.get().
                 load(urlImage)
@@ -35,8 +45,19 @@ public class CustomBindingAdapter {
                 .into(imageView);
     }
 
+    /**
+     * Binding adapter для PopularMovie
+     *
+     * @param recyclerView экземпляр RecyclerView
+     * @param viewType     тип ViewHolder'a
+     * @param movies       список фильмов
+     * @param listener     экземпляр OnItemClickListener'a
+     */
     @BindingAdapter({"bind:viewType", "bind:dataPopular", "bind:clickHandler"})
-    public static void configurePopularRecyclerView(RecyclerView recyclerView, int viewType, List<MovieEntity> movies, OnItemClickListener listener) {
+    public static void configurePopularRecyclerView(@NonNull RecyclerView recyclerView,
+                                                    int viewType,
+                                                    @NonNull List<MovieEntity> movies,
+                                                    @NonNull OnItemClickListener listener) {
 
         PopularMovieAdapter adapter = new PopularMovieAdapter(viewType, movies, listener);
 
@@ -52,6 +73,14 @@ public class CustomBindingAdapter {
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * Binding adapter для TopMovie
+     *
+     * @param recyclerView экземпляр RecyclerView
+     * @param viewType     тип ViewHolder'a
+     * @param movies       список фильмов
+     * @param listener     экземпляр OnItemClickListener'a
+     */
     @BindingAdapter({"bind:viewType", "bind:dataTop", "bind:clickHandler"})
     public static void configureTopRecyclerView(RecyclerView recyclerView, int viewType, List<MovieEntity> movies, OnItemClickListener listener) {
 
@@ -69,8 +98,19 @@ public class CustomBindingAdapter {
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * Binding adapter для UpcomingMovie
+     *
+     * @param recyclerView экземпляр RecyclerView
+     * @param viewType     тип ViewHolder'a
+     * @param movies       список фильмов
+     * @param listener     экземпляр OnItemClickListener'a
+     */
     @BindingAdapter({"bind:viewType", "bind:dataUpcoming", "bind:clickHandler"})
-    public static void configureUpcomingRecyclerView(RecyclerView recyclerView, int viewType, List<MovieEntity> movies, OnItemClickListener listener) {
+    public static void configureUpcomingRecyclerView(@NonNull RecyclerView recyclerView,
+                                                     int viewType,
+                                                     @NonNull List<MovieEntity> movies,
+                                                     @NonNull OnItemClickListener listener) {
 
         UpcomingMovieAdapter adapter = new UpcomingMovieAdapter(viewType, movies, listener);
 
@@ -86,15 +126,33 @@ public class CustomBindingAdapter {
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * Binding adapter для TodayMovie
+     *
+     * @param recyclerView экземпляр RecyclerView
+     * @param movies       список фильмов
+     * @param listener     экземпляр OnItemClickListener'a
+     */
     @BindingAdapter({"bind:data", "bind:clickHandler"})
-    public static void configureTodayRecyclerView(RecyclerView recyclerView, List<MovieEntity> movies, OnItemClickListener listener) {
+    public static void configureTodayRecyclerView(@NonNull RecyclerView recyclerView,
+                                                  @NonNull List<MovieEntity> movies,
+                                                  @NonNull OnItemClickListener listener) {
         TodayMovieAdapter adapter = new TodayMovieAdapter(movies, listener);
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), RecyclerView.HORIZONTAL, false));
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * Binding adapter для Cast
+     *
+     * @param recyclerView экземпляр RecyclerView
+     * @param viewType     тип ViewHolder'a
+     * @param casts        список актёров
+     */
     @BindingAdapter({"bind:viewType", "bind:dataCast"})
-    public static void configureCastRecyclerView(RecyclerView recyclerView, int viewType, List<CastEntity> casts) {
+    public static void configureCastRecyclerView(@NonNull RecyclerView recyclerView,
+                                                 int viewType,
+                                                 @NonNull List<CastEntity> casts) {
 
         CastAdapter adapter = new CastAdapter(viewType, casts);
 
@@ -110,8 +168,15 @@ public class CustomBindingAdapter {
         recyclerView.setAdapter(adapter);
     }
 
+    /**
+     * Binding adapter для Genres
+     *
+     * @param textView экземпляр textView
+     * @param genres   список жанров
+     */
     @BindingAdapter("bind:genres")
-    public static void formatGenres(TextView textView, List<Genre> genres) {
+    public static void formatGenres(@Nullable TextView textView,
+                                    @Nullable List<Genre> genres) {
         if (genres != null) {
 
             StringBuilder builder = new StringBuilder();

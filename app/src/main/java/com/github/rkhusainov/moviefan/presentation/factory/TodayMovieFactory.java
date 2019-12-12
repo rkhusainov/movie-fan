@@ -12,9 +12,15 @@ import com.github.rkhusainov.moviefan.domain.repository.IMovieRepository;
 import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.presentation.ui.today.TodayMovieViewModel;
 
+/**
+ * Фабрика для TodayMovieViewModel
+ */
 public class TodayMovieFactory extends ViewModelProvider.NewInstanceFactory {
     private OnItemClickListener mOnItemClickListener;
 
+    /**
+     * @param onItemClickListener экземпляр OnItemClickListener'a
+     */
     public TodayMovieFactory(OnItemClickListener onItemClickListener) {
         mOnItemClickListener = onItemClickListener;
     }

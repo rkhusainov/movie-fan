@@ -14,6 +14,8 @@ import com.github.rkhusainov.moviefan.domain.model.MovieEntity;
 import com.github.rkhusainov.moviefan.presentation.Constants;
 import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class PopularMovieAdapter extends RecyclerView.Adapter<PopularMovieAdapter.PopularViewHolderAbs> {
@@ -23,7 +25,12 @@ public class PopularMovieAdapter extends RecyclerView.Adapter<PopularMovieAdapte
 
     private OnItemClickListener mOnItemClickListener;
 
-    public PopularMovieAdapter(int itemViewType, List<MovieEntity> movies, OnItemClickListener onItemClickListener) {
+    /**
+     * @param itemViewType        тип ViewHolder'а
+     * @param movies              список фильмов
+     * @param onItemClickListener экземпляр клик листенера
+     */
+    public PopularMovieAdapter(int itemViewType, @NonNull List<MovieEntity> movies, @NotNull OnItemClickListener onItemClickListener) {
         mItemViewType = itemViewType;
         mMovies = movies;
         mOnItemClickListener = onItemClickListener;
@@ -62,8 +69,14 @@ public class PopularMovieAdapter extends RecyclerView.Adapter<PopularMovieAdapte
         return mMovies.size();
     }
 
+    /**
+     * Абстрактный ViewHolder
+     */
     abstract class PopularViewHolderAbs extends RecyclerView.ViewHolder {
 
+        /**
+         * @param itemView тип ViewHolder'а
+         */
         public PopularViewHolderAbs(@NonNull View itemView) {
             super(itemView);
         }
@@ -73,19 +86,25 @@ public class PopularMovieAdapter extends RecyclerView.Adapter<PopularMovieAdapte
 
         private MainPopularMovieBinding mMainPopularMovieBinding;
 
+        /**
+         * ViewHolder для списка в MainFragment
+         */
         public MainPopularViewHolder(MainPopularMovieBinding binding) {
             super(binding.getRoot());
 
             mMainPopularMovieBinding = binding;
         }
 
-        private void bind(MovieEntity movie) {
+        private void bind(@NonNull MovieEntity movie) {
             mMainPopularMovieBinding.setMovie(new MainPopularMovieListItemViewModel(movie));
             mMainPopularMovieBinding.executePendingBindings();
             mMainPopularMovieBinding.setOnItemClickListener(mOnItemClickListener);
         }
     }
 
+    /**
+     * ViewHolder для списка в PopularFragment
+     */
     class PopularViewHolder extends PopularViewHolderAbs {
 
         private PopularMovieBinding mPopularMovieBinding;
@@ -96,7 +115,7 @@ public class PopularMovieAdapter extends RecyclerView.Adapter<PopularMovieAdapte
             mPopularMovieBinding = binding;
         }
 
-        private void bind(MovieEntity movie) {
+        private void bind(@NonNull MovieEntity movie) {
             mPopularMovieBinding.setMovie(new PopularMovieListItemViewModel(movie, format(getAdapterPosition() + 1)));
             mPopularMovieBinding.executePendingBindings();
             mPopularMovieBinding.setOnItemClickListener(mOnItemClickListener);

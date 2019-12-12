@@ -3,12 +3,12 @@ package com.github.rkhusainov.moviefan.presentation.ui.detail;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -20,8 +20,6 @@ import com.github.rkhusainov.moviefan.presentation.factory.MovieDetailFactory;
 import com.github.rkhusainov.moviefan.presentation.ui.credit.CastFragment;
 import com.github.rkhusainov.moviefan.presentation.ui.credit.CastViewModel;
 
-import static android.content.ContentValues.TAG;
-
 public class MovieDetailFragment extends Fragment {
 
     public static final String MOVIE_KEY = "MOVIE_KEY";
@@ -31,10 +29,13 @@ public class MovieDetailFragment extends Fragment {
     private MovieDetailViewModel mMovieDetailViewModel;
     private CastViewModel mCastViewModel;
 
-    public static MovieDetailFragment newInstance(int move_id) {
+    /**
+     * @param movieId ид фильма
+     */
+    public static MovieDetailFragment newInstance(int movieId) {
 
         Bundle args = new Bundle();
-        args.putInt(MOVIE_KEY, move_id);
+        args.putInt(MOVIE_KEY, movieId);
         MovieDetailFragment fragment = new MovieDetailFragment();
         fragment.setArguments(args);
         return fragment;
@@ -51,13 +52,13 @@ public class MovieDetailFragment extends Fragment {
 
         CastFactory castFactory = new CastFactory(Constants.DETAIL, mMovieId);
         mCastViewModel = new ViewModelProvider(this, castFactory).get(CastViewModel.class);
-        Log.d(TAG, "onAttach: " + "ViewModel Init");
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView: " + "BINDING");
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         DetailBinding binding = DetailBinding.inflate(inflater, container, false);
+
         binding.setDetail(mMovieDetailViewModel);
         binding.setCast(mCastViewModel);
         binding.setHandler(this);

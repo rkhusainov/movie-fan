@@ -17,7 +17,11 @@ public class TodayMovieAdapter extends RecyclerView.Adapter<TodayMovieAdapter.Ma
     private List<MovieEntity> mMovies;
     private OnItemClickListener mOnItemClickListener;
 
-    public TodayMovieAdapter(List<MovieEntity> movies, OnItemClickListener onItemClickListener) {
+    /**
+     * @param movies              список фильмов
+     * @param onItemClickListener экземпляр OnItemClickListener'a
+     */
+    public TodayMovieAdapter(@NonNull List<MovieEntity> movies, @NonNull OnItemClickListener onItemClickListener) {
         mMovies = movies;
         mOnItemClickListener = onItemClickListener;
     }
@@ -43,6 +47,9 @@ public class TodayMovieAdapter extends RecyclerView.Adapter<TodayMovieAdapter.Ma
         return mMovies.size();
     }
 
+    /**
+     * ViewHolder для списка в MainFragment
+     */
     class MainTodayViewHolder extends RecyclerView.ViewHolder {
 
         private MainTodayMovieBinding mMainTodayMovieBinding;
@@ -53,7 +60,7 @@ public class TodayMovieAdapter extends RecyclerView.Adapter<TodayMovieAdapter.Ma
             mMainTodayMovieBinding = binding;
         }
 
-        private void bind(MovieEntity movie) {
+        private void bind(@NonNull MovieEntity movie) {
 
             mMainTodayMovieBinding.setMovie(new MainTodayMovieListItemViewModel(movie));
             mMainTodayMovieBinding.executePendingBindings();

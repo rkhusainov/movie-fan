@@ -13,12 +13,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.github.rkhusainov.moviefan.BuildConfig.API_URL;
 
+/**
+ * Класс для работы с сетью
+ */
 public class ApiUtils {
     private static OkHttpClient sClient;
     private static Retrofit sRetrofit;
     private static Gson sGson;
     private static MoviefanApi sApi;
 
+    /**
+     * @return возвращает экземпляр OkHttpClient
+     */
     private static OkHttpClient getClient() {
         if (sClient == null) {
             OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
@@ -33,6 +39,9 @@ public class ApiUtils {
         return sClient;
     }
 
+    /**
+     * @return возвращает экземпляр Retrofit
+     */
     private static Retrofit getRetrofit() {
         if (sGson == null) {
             sGson = new Gson();
@@ -50,6 +59,9 @@ public class ApiUtils {
         return sRetrofit;
     }
 
+    /**
+     * @return возвращает экземпляр MoviefanApi для сетевых запросов к web api
+     */
     public static MoviefanApi getApi() {
         if (sApi == null) {
             sApi = getRetrofit().create(MoviefanApi.class);

@@ -1,5 +1,8 @@
 package com.github.rkhusainov.moviefan.domain.model;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.github.rkhusainov.moviefan.data.model.detail.Genre;
 import com.github.rkhusainov.moviefan.data.model.detail.ProductionCompany;
 import com.github.rkhusainov.moviefan.data.model.detail.ProductionCountry;
@@ -8,55 +11,83 @@ import com.github.rkhusainov.moviefan.data.model.detail.SpokenLanguage;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Domain сущность класса "Detail"
+ */
 public class DetailEntity {
+    @NonNull
     private Integer mId;
+    @NonNull
     private Boolean mAdult;
+    @NonNull
     private String mBackdropPath;
+    @NonNull
     private Object mBelongsToCollection;
+    @NonNull
     private Integer mBudget;
+    @NonNull
     private List<Genre> mGenres;
+    @NonNull
     private String mHomepage;
+    @NonNull
     private String mImdbId;
+    @NonNull
     private String mOriginalLanguage;
+    @NonNull
     private String mOriginalTitle;
+    @NonNull
     private String mOverview;
+    @NonNull
     private Double mPopularity;
+    @NonNull
     private String mPosterPath;
+    @NonNull
     private List<ProductionCompany> mProductionCompanies = null;
+    @NonNull
     private List<ProductionCountry> mProductionCountries = null;
+    @NonNull
     private String mReleaseDate;
+    @NonNull
     private Integer mRevenue;
+    @NonNull
     private Integer mRuntime;
+    @NonNull
     private List<SpokenLanguage> mSpokenLanguages = null;
+    @NonNull
     private String mStatus;
+    @NonNull
     private String mTagline;
+    @NonNull
     private String mTitle;
+    @NonNull
     private Boolean mVideo;
+    @NonNull
     private Double mVoteAverage;
+    @NonNull
     private Integer mVoteCount;
 
-    public DetailEntity(Integer id,
-                        Boolean adult,
-                        String backdropPath,
-                        Object belongsToCollection,
-                        Integer budget,
-                        List<Genre> genres,
-                        String homepage,
-                        String imdbId,
-                        String originalLanguage,
-                        String originalTitle,
-                        String overview,
-                        Double popularity,
-                        String posterPath,
-                        String releaseDate,
-                        Integer revenue,
-                        Integer runtime,
-                        String status,
-                        String tagline,
-                        String title,
-                        Boolean video,
-                        Double voteAverage,
-                        Integer voteCount) {
+    public DetailEntity(@Nullable Integer id,
+                        @Nullable Boolean adult,
+                        @Nullable String backdropPath,
+                        @Nullable Object belongsToCollection,
+                        @Nullable Integer budget,
+                        @Nullable List<Genre> genres,
+                        @Nullable String homepage,
+                        @Nullable String imdbId,
+                        @Nullable String originalLanguage,
+                        @Nullable String originalTitle,
+                        @Nullable String overview,
+                        @Nullable Double popularity,
+                        @Nullable String posterPath,
+                        @Nullable String releaseDate,
+                        @Nullable Integer revenue,
+                        @Nullable Integer runtime,
+                        @Nullable String status,
+                        @Nullable String tagline,
+                        @Nullable String title,
+                        @Nullable Boolean video,
+                        @Nullable Double voteAverage,
+                        @Nullable Integer voteCount) {
         mId = id;
         mAdult = adult;
         mBackdropPath = backdropPath;

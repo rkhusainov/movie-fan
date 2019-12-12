@@ -2,6 +2,7 @@ package com.github.rkhusainov.moviefan.presentation.common;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -9,6 +10,7 @@ import com.github.rkhusainov.moviefan.R;
 
 public abstract class SingleFragmentActivity extends AppCompatActivity {
 
+    @NonNull
     protected abstract Fragment getFragment();
 
     @Override

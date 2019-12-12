@@ -1,5 +1,6 @@
 package com.github.rkhusainov.moviefan.presentation.ui.credit;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -26,7 +27,12 @@ public class CastViewModel extends ViewModel {
     private MutableLiveData<Boolean> mIsErrorVisible = new MutableLiveData();
     private MutableLiveData<List<CastEntity>> mCasts = new MutableLiveData<>();
 
-    public CastViewModel(int viewType, int movieId, IMovieInteractor interactor) {
+    /**
+     * @param viewType   тип ViewHolder'а
+     * @param movieId    ид фильма
+     * @param interactor экземпляр интерфейса интерактора
+     */
+    public CastViewModel(int viewType, int movieId, @NonNull IMovieInteractor interactor) {
         mCompositeDisposable = new CompositeDisposable();
         mMovieInteractor = interactor;
         loadCast(movieId);
@@ -34,6 +40,9 @@ public class CastViewModel extends ViewModel {
         mViewType.setValue(viewType);
     }
 
+    /**
+     * Получение данных и обновление списка
+     */
     public void loadCast(int movieId) {
         mCompositeDisposable.add(mMovieInteractor.getCasts(movieId)
                 .subscribeOn(Schedulers.io())
@@ -63,18 +72,34 @@ public class CastViewModel extends ViewModel {
                 }));
     }
 
+    /**
+     * Getter для строки тип ViewHolder'а"
+     */
+    @NonNull
     public MutableLiveData<Integer> getViewType() {
         return mViewType;
     }
 
+    /**
+     * Getter для состояния загрузки данных
+     */
+    @NonNull
     public MutableLiveData<Boolean> getIsLoading() {
         return mIsLoading;
     }
 
+    /**
+     * Getter для состояния видимости ошибки
+     */
+    @NonNull
     public MutableLiveData<Boolean> getIsErrorVisible() {
         return mIsErrorVisible;
     }
 
+    /**
+     * Getter для списка актёров
+     */
+    @NonNull
     public MutableLiveData<List<CastEntity>> getCasts() {
         return mCasts;
     }

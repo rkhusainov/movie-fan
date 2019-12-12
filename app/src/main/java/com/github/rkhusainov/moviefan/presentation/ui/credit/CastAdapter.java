@@ -19,6 +19,10 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
     private List<CastEntity> mCasts;
     private int mItemViewType;
 
+    /**
+     * @param itemViewType тип ViewHolder'а
+     * @param casts        список актёров
+     */
     public CastAdapter(int itemViewType, List<CastEntity> casts) {
         mItemViewType = itemViewType;
         mCasts = casts;
@@ -56,40 +60,52 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastViewHolder
         return mCasts.size();
     }
 
+    /**
+     * Абстрактный ViewHolder
+     */
     abstract class CastViewHolderAbs extends RecyclerView.ViewHolder {
 
+        /**
+         * @param itemView тип ViewHolder'а
+         */
         public CastViewHolderAbs(@NonNull View itemView) {
             super(itemView);
         }
     }
 
+    /**
+     * ViewHolder для списка в DetailFragment
+     */
     class DetailCastViewHolder extends CastViewHolderAbs {
 
         private DetailCastMovieBinding mDetailCastMovieBinding;
 
-        public DetailCastViewHolder(DetailCastMovieBinding binding) {
+        public DetailCastViewHolder(@NonNull DetailCastMovieBinding binding) {
             super(binding.getRoot());
 
             mDetailCastMovieBinding = binding;
         }
 
-        void bind(CastEntity cast) {
+        void bind(@NonNull CastEntity cast) {
             mDetailCastMovieBinding.setCast(new DetailCastListItemViewModel(cast));
             mDetailCastMovieBinding.executePendingBindings();
         }
     }
 
+    /**
+     * ViewHolder для списка в CastFragment
+     */
     class CastViewHolder extends CastViewHolderAbs {
 
         private CastMovieBinding mCastMovieBinding;
 
-        public CastViewHolder(CastMovieBinding binding) {
+        public CastViewHolder(@NonNull CastMovieBinding binding) {
             super(binding.getRoot());
 
             mCastMovieBinding = binding;
         }
 
-        void bind(CastEntity cast) {
+        void bind(@NonNull CastEntity cast) {
             mCastMovieBinding.setCast(new CastListItemViewModel(cast));
             mCastMovieBinding.executePendingBindings();
         }

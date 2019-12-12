@@ -11,10 +11,16 @@ import com.github.rkhusainov.moviefan.domain.interactor.MovieInteractor;
 import com.github.rkhusainov.moviefan.domain.repository.IMovieRepository;
 import com.github.rkhusainov.moviefan.presentation.ui.detail.MovieDetailViewModel;
 
+/**
+ * Фабрика для MovieDetailViewModel
+ */
 public class MovieDetailFactory extends ViewModelProvider.NewInstanceFactory {
 
     private int mMovieId;
 
+    /**
+     * @param movieId ид фильма
+     */
     public MovieDetailFactory(int movieId) {
         mMovieId = movieId;
     }

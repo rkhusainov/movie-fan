@@ -1,5 +1,6 @@
 package com.github.rkhusainov.moviefan.presentation.ui.popular;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -28,7 +29,12 @@ public class PopularMovieViewModel extends ViewModel {
     private MutableLiveData<Boolean> mIsErrorVisible = new MutableLiveData();
     private MutableLiveData<List<MovieEntity>> mMovies = new MutableLiveData<>();
 
-    public PopularMovieViewModel(OnItemClickListener onItemClickListener, int viewType, IMovieInteractor interactor) {
+    /**
+     * @param onItemClickListener экземпляр OnItemClickListener'a
+     * @param viewType            тип ViewHolder'a
+     * @param interactor          экземпляр интерфейса интерактора
+     */
+    public PopularMovieViewModel(@NonNull OnItemClickListener onItemClickListener, int viewType, @NonNull IMovieInteractor interactor) {
         mOnItemClickListener = onItemClickListener;
         mCompositeDisposable = new CompositeDisposable();
         mMovieInteractor = interactor;
@@ -37,6 +43,9 @@ public class PopularMovieViewModel extends ViewModel {
         mViewType.postValue(viewType);
     }
 
+    /**
+     * Получение данных и обновление списка
+     */
     public void loadMovies() {
         mCompositeDisposable.add(mMovieInteractor.getPopularMovies()
                 .subscribeOn(Schedulers.io())
@@ -67,22 +76,42 @@ public class PopularMovieViewModel extends ViewModel {
                 }));
     }
 
+    /**
+     * Getter для переменной clickListener'a
+     */
+    @NonNull
     public OnItemClickListener getOnItemClickListener() {
         return mOnItemClickListener;
     }
 
+    /**
+     * Getter для строки с типом ViewHolder'a
+     */
+    @NonNull
     public MutableLiveData<Integer> getViewType() {
         return mViewType;
     }
 
+    /**
+     * Getter для состояния загрузки данных
+     */
+    @NonNull
     public MutableLiveData<Boolean> getIsLoading() {
         return mIsLoading;
     }
 
+    /**
+     * Getter для состояния видимости ошибки
+     */
+    @NonNull
     public MutableLiveData<Boolean> getIsErrorVisible() {
         return mIsErrorVisible;
     }
 
+    /**
+     * Getter для списка фильмов
+     */
+    @NonNull
     public MutableLiveData<List<MovieEntity>> getMovies() {
         return mMovies;
     }

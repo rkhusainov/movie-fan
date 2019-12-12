@@ -12,11 +12,18 @@ import com.github.rkhusainov.moviefan.domain.repository.IMovieRepository;
 import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.presentation.ui.popular.PopularMovieViewModel;
 
+/**
+ * Фабрика для PopularMovieViewModel
+ */
 public class PopularMovieFactory extends ViewModelProvider.NewInstanceFactory {
 
     private OnItemClickListener mOnItemClickListener;
     private int mViewType;
 
+    /**
+     * @param onItemClickListener экземпляр OnItemClickListener'a
+     * @param viewType            тип viewHolder'а
+     */
     public PopularMovieFactory(OnItemClickListener onItemClickListener, int viewType) {
         mOnItemClickListener = onItemClickListener;
         mViewType = viewType;
@@ -28,9 +35,9 @@ public class PopularMovieFactory extends ViewModelProvider.NewInstanceFactory {
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         IMovieRepository movieRepository = new MovieRepository(new MovieMapper());
         IMovieInteractor movieInteractor = new MovieInteractor(movieRepository);
-            return (T) new PopularMovieViewModel(
-                    mOnItemClickListener,
-                    mViewType,
-                    movieInteractor);
+        return (T) new PopularMovieViewModel(
+                mOnItemClickListener,
+                mViewType,
+                movieInteractor);
     }
 }

@@ -1,16 +1,24 @@
 package com.github.rkhusainov.moviefan.domain.model;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Domain сущность класса "Credit"
+ */
 public class CreditEntity {
+    @NonNull
     private Integer mId;
+    @NonNull
     private List<CastEntity> mCast;
+    @NonNull
     private List<CrewEntity> mCrew;
 
-    public CreditEntity(Integer id,
-                        List<CastEntity> cast,
-                        List<CrewEntity> crew) {
+    public CreditEntity(@NonNull Integer id,
+                        @NonNull List<CastEntity> cast,
+                        @NonNull List<CrewEntity> crew) {
         mId = id;
         mCast = cast;
         mCrew = crew;

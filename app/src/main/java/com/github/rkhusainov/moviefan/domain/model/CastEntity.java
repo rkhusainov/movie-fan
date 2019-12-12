@@ -1,25 +1,38 @@
 package com.github.rkhusainov.moviefan.domain.model;
 
+import androidx.annotation.NonNull;
+
 import java.util.Objects;
 
+/**
+ * Domain сущность класса "Cast"
+ */
 public class CastEntity {
+    @NonNull
     private Integer mId;
+    @NonNull
     private Integer mCastId;
+    @NonNull
     private String mCharacter;
+    @NonNull
     private String mCreditId;
+    @NonNull
     private Integer mGender;
+    @NonNull
     private String mName;
+    @NonNull
     private Integer mOrder;
+    @NonNull
     private String mProfilePath;
 
-    public CastEntity(Integer id,
-                      Integer castId,
-                      String character,
-                      String creditId,
-                      Integer gender,
-                      String name,
-                      Integer order,
-                      String profilePath) {
+    public CastEntity(@NonNull Integer id,
+                      @NonNull Integer castId,
+                      @NonNull String character,
+                      @NonNull String creditId,
+                      @NonNull Integer gender,
+                      @NonNull String name,
+                      @NonNull Integer order,
+                      @NonNull String profilePath) {
         mId = id;
         mCastId = castId;
         mCharacter = character;

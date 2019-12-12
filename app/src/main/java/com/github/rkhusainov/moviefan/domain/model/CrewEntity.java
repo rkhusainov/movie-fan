@@ -1,23 +1,35 @@
 package com.github.rkhusainov.moviefan.domain.model;
 
+import androidx.annotation.NonNull;
+
 import java.util.Objects;
 
+/**
+ * Domain сущность класса "Crew"
+ */
 public class CrewEntity {
+    @NonNull
     private Integer mId;
+    @NonNull
     private String mCreditId;
+    @NonNull
     private String mDepartment;
+    @NonNull
     private Integer mGender;
+    @NonNull
     private String mJob;
+    @NonNull
     private String mName;
+    @NonNull
     private String mProfilePath;
 
-    public CrewEntity(Integer id,
-                      String creditId,
-                      String department,
-                      Integer gender,
-                      String job,
-                      String name,
-                      String profilePath) {
+    public CrewEntity(@NonNull Integer id,
+                      @NonNull String creditId,
+                      @NonNull String department,
+                      @NonNull Integer gender,
+                      @NonNull String job,
+                      @NonNull String name,
+                      @NonNull String profilePath) {
         mId = id;
         mCreditId = creditId;
         mDepartment = department;

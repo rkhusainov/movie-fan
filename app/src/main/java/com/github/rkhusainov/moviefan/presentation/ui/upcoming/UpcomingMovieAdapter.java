@@ -22,7 +22,12 @@ public class UpcomingMovieAdapter extends RecyclerView.Adapter<UpcomingMovieAdap
 
     private OnItemClickListener mOnItemClickListener;
 
-    public UpcomingMovieAdapter(int itemViewType, List<MovieEntity> movies, OnItemClickListener listener) {
+    /**
+     * @param itemViewType тип ViewHolder'a
+     * @param movies       список фильмов
+     * @param listener     экземпляр OnItemClickListener'a
+     */
+    public UpcomingMovieAdapter(int itemViewType, @NonNull List<MovieEntity> movies, @NonNull OnItemClickListener listener) {
         mItemViewType = itemViewType;
         mMovies = movies;
         mOnItemClickListener = listener;
@@ -61,7 +66,9 @@ public class UpcomingMovieAdapter extends RecyclerView.Adapter<UpcomingMovieAdap
         return mMovies.size();
     }
 
-
+    /**
+     * Абстрактный ViewHolder
+     */
     abstract class UpcomingViewHolderAbs extends RecyclerView.ViewHolder {
 
         public UpcomingViewHolderAbs(@NonNull View itemView) {
@@ -69,6 +76,9 @@ public class UpcomingMovieAdapter extends RecyclerView.Adapter<UpcomingMovieAdap
         }
     }
 
+    /**
+     * ViewHolder для списка в MainFragment
+     */
     class MainUpcomingViewHolder extends UpcomingViewHolderAbs {
 
         private MainUpcomingMovieBinding mBinding;
@@ -79,13 +89,16 @@ public class UpcomingMovieAdapter extends RecyclerView.Adapter<UpcomingMovieAdap
             mBinding = binding;
         }
 
-        void bind(MovieEntity movie) {
+        void bind(@NonNull MovieEntity movie) {
             mBinding.setMovie(new MainUpcomingMovieListItemViewModel(movie));
             mBinding.executePendingBindings();
             mBinding.setOnItemClickListener(mOnItemClickListener);
         }
     }
 
+    /**
+     * ViewHolder для списка в UpcomingFragment
+     */
     class UpcomingViewHolder extends UpcomingViewHolderAbs {
 
         private UpcomingMovieBinding mBinding;
@@ -96,7 +109,7 @@ public class UpcomingMovieAdapter extends RecyclerView.Adapter<UpcomingMovieAdap
             mBinding = binding;
         }
 
-        void bind(MovieEntity movie) {
+        void bind(@NonNull MovieEntity movie) {
             mBinding.setMovie(new UpcomingMovieListItemViewModel(movie));
             mBinding.executePendingBindings();
             mBinding.setOnItemClickListener(mOnItemClickListener);

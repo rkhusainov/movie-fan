@@ -43,8 +43,10 @@ public class PopularMovieFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        PopularMovieFactory factory = new PopularMovieFactory(mOnItemClickListener, Constants.POPULAR);
+        PopularMovieFactory factory = new PopularMovieFactory(Constants.POPULAR);
         mPopularMovieViewModel = new ViewModelProvider(this, factory).get(PopularMovieViewModel.class);
+
+        mPopularMovieViewModel.getLiveDataOnItemClickListener().setValue(mOnItemClickListener);
     }
 
     @Override

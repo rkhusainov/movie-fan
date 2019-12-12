@@ -36,6 +36,7 @@ public class MainFragment extends Fragment {
     private TodayMovieViewModel mTodayMovieViewModel;
     private TopMovieViewModel mTopMovieViewModel;
     private UpcomingMovieViewModel mUpcomingMovieViewModel;
+    private MainMovieBinding mMainMovieBinding;
 
     private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
         @Override
@@ -58,30 +59,35 @@ public class MainFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        PopularMovieFactory popularMovieFactory = new PopularMovieFactory(mOnItemClickListener, Constants.MAIN);
-        TodayMovieFactory todayMoviefactory = new TodayMovieFactory(mOnItemClickListener);
-        TopMovieFactory topMovieFactory = new TopMovieFactory(mOnItemClickListener, Constants.MAIN);
-        UpcomingMovieFactory upcomingMovieFactory = new UpcomingMovieFactory(mOnItemClickListener, Constants.MAIN);
+        PopularMovieFactory popularMovieFactory = new PopularMovieFactory(Constants.MAIN);
+        TodayMovieFactory todayMoviefactory = new TodayMovieFactory();
+        TopMovieFactory topMovieFactory = new TopMovieFactory(Constants.MAIN);
+        UpcomingMovieFactory upcomingMovieFactory = new UpcomingMovieFactory(Constants.MAIN);
 
         mPopularMovieViewModel = new ViewModelProvider(this, popularMovieFactory).get(PopularMovieViewModel.class);
         mTodayMovieViewModel = new ViewModelProvider(this, todayMoviefactory).get(TodayMovieViewModel.class);
         mTopMovieViewModel = new ViewModelProvider(this, topMovieFactory).get(TopMovieViewModel.class);
         mUpcomingMovieViewModel = new ViewModelProvider(this, upcomingMovieFactory).get(UpcomingMovieViewModel.class);
+
+        mPopularMovieViewModel.getLiveDataOnItemClickListener().setValue(mOnItemClickListener);
+        mTodayMovieViewModel.getLiveDataOnItemClickListener().setValue(mOnItemClickListener);
+        mTopMovieViewModel.getLiveDataOnItemClickListener().setValue(mOnItemClickListener);
+        mUpcomingMovieViewModel.getLiveDataOnItemClickListener().setValue(mOnItemClickListener);
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        MainMovieBinding mainMovieBinding = MainMovieBinding.inflate(inflater, container, false);
+        mMainMovieBinding = MainMovieBinding.inflate(inflater, container, false);
 
-        mainMovieBinding.setPopular(mPopularMovieViewModel);
-        mainMovieBinding.setToday(mTodayMovieViewModel);
-        mainMovieBinding.setTop(mTopMovieViewModel);
-        mainMovieBinding.setUpcoming(mUpcomingMovieViewModel);
-        mainMovieBinding.setHandler(this);
-        mainMovieBinding.setLifecycleOwner(this);
-        return mainMovieBinding.getRoot();
+        mMainMovieBinding.setPopular(mPopularMovieViewModel);
+        mMainMovieBinding.setToday(mTodayMovieViewModel);
+        mMainMovieBinding.setTop(mTopMovieViewModel);
+        mMainMovieBinding.setUpcoming(mUpcomingMovieViewModel);
+        mMainMovieBinding.setHandler(this);
+        mMainMovieBinding.setLifecycleOwner(this);
+        return mMainMovieBinding.getRoot();
     }
 
     /**

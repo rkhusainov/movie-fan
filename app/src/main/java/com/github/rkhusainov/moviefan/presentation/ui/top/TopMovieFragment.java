@@ -43,8 +43,10 @@ public class TopMovieFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        TopMovieFactory factory = new TopMovieFactory(mOnItemClickListener, Constants.TOP);
+        TopMovieFactory factory = new TopMovieFactory(Constants.TOP);
         mTopMovieViewModel = new ViewModelProvider(this, factory).get(TopMovieViewModel.class);
+
+        mTopMovieViewModel.getLiveDataOnItemClickListener().setValue(mOnItemClickListener);
     }
 
     @Override

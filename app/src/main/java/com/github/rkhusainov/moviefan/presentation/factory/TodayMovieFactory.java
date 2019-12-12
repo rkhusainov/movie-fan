@@ -9,21 +9,12 @@ import com.github.rkhusainov.moviefan.data.repository.MovieRepository;
 import com.github.rkhusainov.moviefan.domain.interactor.IMovieInteractor;
 import com.github.rkhusainov.moviefan.domain.interactor.MovieInteractor;
 import com.github.rkhusainov.moviefan.domain.repository.IMovieRepository;
-import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.presentation.ui.today.TodayMovieViewModel;
 
 /**
  * Фабрика для TodayMovieViewModel
  */
 public class TodayMovieFactory extends ViewModelProvider.NewInstanceFactory {
-    private OnItemClickListener mOnItemClickListener;
-
-    /**
-     * @param onItemClickListener экземпляр OnItemClickListener'a
-     */
-    public TodayMovieFactory(OnItemClickListener onItemClickListener) {
-        mOnItemClickListener = onItemClickListener;
-    }
 
     @SuppressWarnings("unchecked cast")
     @NonNull
@@ -31,7 +22,6 @@ public class TodayMovieFactory extends ViewModelProvider.NewInstanceFactory {
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         IMovieRepository movieRepository = new MovieRepository(new MovieMapper());
         IMovieInteractor movieInteractor = new MovieInteractor(movieRepository);
-        return (T) new TodayMovieViewModel(mOnItemClickListener,
-                movieInteractor);
+        return (T) new TodayMovieViewModel(movieInteractor);
     }
 }

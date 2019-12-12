@@ -21,22 +21,20 @@ import io.reactivex.schedulers.Schedulers;
 public class TopMovieViewModel extends ViewModel {
 
     private final CompositeDisposable mCompositeDisposable;
-    private OnItemClickListener mOnItemClickListener;
     private IMovieInteractor mMovieInteractor;
 
+    private MutableLiveData<OnItemClickListener> mLiveDataOnItemClickListener = new MutableLiveData<>();
     private MutableLiveData<Integer> mViewType = new MutableLiveData<>();
     private MutableLiveData<Boolean> mIsLoading = new MutableLiveData<>();
     private MutableLiveData<Boolean> mIsErrorVisible = new MutableLiveData();
     private MutableLiveData<List<MovieEntity>> mMovies = new MutableLiveData<>();
 
     /**
-     * @param onItemClickListener экземпляр OnItemClickListener'a
-     * @param viewType            тип ViewHolder'a
-     * @param interactor          экземпляр интерфейса интерактора
+     * @param viewType   тип ViewHolder'a
+     * @param interactor экземпляр интерфейса интерактора
      */
-    public TopMovieViewModel(@NonNull OnItemClickListener onItemClickListener, int viewType, @NonNull IMovieInteractor interactor) {
+    public TopMovieViewModel(int viewType, @NonNull IMovieInteractor interactor) {
         mCompositeDisposable = new CompositeDisposable();
-        mOnItemClickListener = onItemClickListener;
         mMovieInteractor = interactor;
         loadMovies();
         mMovies.setValue(new ArrayList<>());
@@ -77,11 +75,10 @@ public class TopMovieViewModel extends ViewModel {
     }
 
     /**
-     * Getter для переменной clickListener'a
+     * Getter для переменной LiveDataOnItemClickListener'a
      */
-    @NonNull
-    public OnItemClickListener getOnItemClickListener() {
-        return mOnItemClickListener;
+    public MutableLiveData<OnItemClickListener> getLiveDataOnItemClickListener() {
+        return mLiveDataOnItemClickListener;
     }
 
     /**

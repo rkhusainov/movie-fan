@@ -21,21 +21,19 @@ import io.reactivex.schedulers.Schedulers;
 public class PopularMovieViewModel extends ViewModel {
 
     private final CompositeDisposable mCompositeDisposable;
-    private OnItemClickListener mOnItemClickListener;
     private IMovieInteractor mMovieInteractor;
 
+    private MutableLiveData<OnItemClickListener> mLiveDataOnItemClickListener = new MutableLiveData<>();
     private MutableLiveData<Integer> mViewType = new MutableLiveData<>();
     private MutableLiveData<Boolean> mIsLoading = new MutableLiveData();
     private MutableLiveData<Boolean> mIsErrorVisible = new MutableLiveData();
     private MutableLiveData<List<MovieEntity>> mMovies = new MutableLiveData<>();
 
     /**
-     * @param onItemClickListener экземпляр OnItemClickListener'a
-     * @param viewType            тип ViewHolder'a
-     * @param interactor          экземпляр интерфейса интерактора
+     * @param viewType   тип ViewHolder'a
+     * @param interactor экземпляр интерфейса интерактора
      */
-    public PopularMovieViewModel(@NonNull OnItemClickListener onItemClickListener, int viewType, @NonNull IMovieInteractor interactor) {
-        mOnItemClickListener = onItemClickListener;
+    public PopularMovieViewModel(int viewType, @NonNull IMovieInteractor interactor) {
         mCompositeDisposable = new CompositeDisposable();
         mMovieInteractor = interactor;
         loadMovies();
@@ -77,11 +75,10 @@ public class PopularMovieViewModel extends ViewModel {
     }
 
     /**
-     * Getter для переменной clickListener'a
+     * Getter для переменной LiveDataOnItemClickListener'a
      */
-    @NonNull
-    public OnItemClickListener getOnItemClickListener() {
-        return mOnItemClickListener;
+    public MutableLiveData<OnItemClickListener> getLiveDataOnItemClickListener() {
+        return mLiveDataOnItemClickListener;
     }
 
     /**

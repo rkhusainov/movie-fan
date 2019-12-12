@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="@{upcoming.isErrorVisible ? V.GONE : V.VISIBLE}"
-            bind:clickHandler="@{upcoming.onItemClickListener}"
+            bind:clickHandler="@{upcoming.liveDataOnItemClickListener}"
             bind:dataTop="@{upcoming.movies}"
             bind:viewType="@{upcoming.viewType}" />
 

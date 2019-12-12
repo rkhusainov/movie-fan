@@ -1,6 +1,7 @@
 package com.github.rkhusainov.moviefan.presentation.utils;
 
 import android.graphics.PorterDuff;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +26,8 @@ import com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingMovieAdap
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Вспомогательный класс с биндинг адаптерами
@@ -60,6 +63,8 @@ public class CustomBindingAdapter {
                                                     @NonNull OnItemClickListener listener) {
 
         PopularMovieAdapter adapter = new PopularMovieAdapter(viewType, movies, listener);
+
+        Log.d(TAG, "configurePopularRecyclerView: " + listener.toString());
 
         if (viewType == Constants.MAIN) {
             recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext(), RecyclerView.HORIZONTAL, false));

@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="@{popular.isErrorVisible ? V.GONE : V.VISIBLE}"
-            bind:clickHandler="@{popular.onItemClickListener}"
+            bind:clickHandler="@{popular.liveDataOnItemClickListener}"
             bind:dataPopular="@{popular.movies}"
             bind:viewType="@{popular.viewType}" />
 

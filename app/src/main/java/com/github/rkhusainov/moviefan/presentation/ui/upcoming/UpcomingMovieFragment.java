@@ -43,8 +43,10 @@ public class UpcomingMovieFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        UpcomingMovieFactory factory = new UpcomingMovieFactory(mOnItemClickListener, Constants.UPCOMING);
+        UpcomingMovieFactory factory = new UpcomingMovieFactory(Constants.UPCOMING);
         mUpcomingMovieViewModel = new ViewModelProvider(this, factory).get(UpcomingMovieViewModel.class);
+
+        mUpcomingMovieViewModel.getLiveDataOnItemClickListener().setValue(mOnItemClickListener);
     }
 
     @Nullable

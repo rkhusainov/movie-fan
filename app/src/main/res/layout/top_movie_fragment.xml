@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="@{top.isErrorVisible ? V.GONE : V.VISIBLE}"
-            bind:clickHandler="@{top.onItemClickListener}"
+            bind:clickHandler="@{top.liveDataOnItemClickListener}"
             bind:dataTop="@{top.movies}"
             bind:viewType="@{top.viewType}" />
 

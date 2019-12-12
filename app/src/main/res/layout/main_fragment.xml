@@ -100,7 +100,7 @@
                         android:clipToPadding="false"
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
-                        bind:clickHandler="@{popular.onItemClickListener}"
+                        bind:clickHandler="@{popular.liveDataOnItemClickListener}"
                         bind:dataPopular="@{popular.movies}"
                         bind:viewType="@{popular.viewType}" />
 
@@ -138,7 +138,7 @@
                         android:clipToPadding="false"
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
-                        bind:clickHandler="@{today.onItemClickListener}"
+                        bind:clickHandler="@{today.liveDataOnItemClickListener}"
                         bind:data="@{today.movies}" />
 
                 </LinearLayout>
@@ -183,7 +183,7 @@
                         android:clipToPadding="false"
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
-                        bind:clickHandler="@{upcoming.onItemClickListener}"
+                        bind:clickHandler="@{upcoming.liveDataOnItemClickListener}"
                         bind:dataUpcoming="@{upcoming.movies}"
                         bind:viewType="@{upcoming.viewType}" />
 
@@ -229,7 +229,7 @@
                         android:clipToPadding="false"
                         android:paddingStart="8dp"
                         android:paddingEnd="8dp"
-                        bind:clickHandler="@{top.onItemClickListener}"
+                        bind:clickHandler="@{top.liveDataOnItemClickListener}"
                         bind:dataTop="@{top.movies}"
                         bind:viewType="@{top.viewType}" />
 

@@ -44,7 +44,7 @@ public class CustomBindingAdapter {
 
         Picasso.get().
                 load(urlImage)
-                .placeholder(R.drawable.ic_movie_placeholder)
+                .error(R.drawable.ic_actor_placeholder)
                 .into(imageView);
     }
 

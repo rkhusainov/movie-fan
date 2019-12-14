@@ -188,7 +188,7 @@ public class CustomBindingAdapter {
             String separator = "";
             for (Genre genre : genres) {
                 builder.append(separator + genre.getName());
-                separator = ",";
+                separator = textView.getResources().getString(R.string.genres_separator);
             }
             textView.setText(builder);
         }

@@ -19,7 +19,7 @@ public class UpcomingMovieFactory extends ViewModelProvider.NewInstanceFactory {
     private int mViewType;
 
     /**
-     * @param viewType            тип viewHolder'а
+     * @param viewType тип viewHolder'а
      */
     public UpcomingMovieFactory(int viewType) {
         mViewType = viewType;

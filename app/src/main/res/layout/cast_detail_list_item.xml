@@ -32,8 +32,9 @@
                     android:id="@+id/iv_actor_photo"
                     android:layout_width="130dp"
                     android:layout_height="200dp"
-                    tools:src="@drawable/ic_actor_placeholder"
-                    app:imageUrl="@{cast.imageUrl}"/>
+                    android:scaleType="centerCrop"
+                    app:imageUrl="@{cast.imageUrl}"
+                    tools:src="@drawable/ic_actor_placeholder" />
 
                 <TextView
                     android:id="@+id/tv_actor_name"
@@ -41,12 +42,12 @@
                     android:layout_height="50dp"
                     android:layout_below="@id/iv_actor_photo"
                     android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@{cast.actorNameTextView}"
                     android:textAppearance="@style/TabTitleTextAppearance"
                     tools:text="Joaquin Phoenix"
-                    tools:textColor="@color/colorWhite"
-                    android:text="@{cast.actorNameTextView}"/>
+                    tools:textColor="@color/colorWhite" />
 
                 <TextView
                     android:id="@+id/tv_actor_character"
@@ -55,9 +56,9 @@
                     android:layout_below="@id/tv_actor_name"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
+                    android:text="@{cast.actorCharacterTextView}"
                     android:textColor="@color/colorGrayLight"
-                    tools:text="Joker"
-                    android:text="@{cast.actorCharacterTextView}"/>
+                    tools:text="Joker" />
 
             </RelativeLayout>
 

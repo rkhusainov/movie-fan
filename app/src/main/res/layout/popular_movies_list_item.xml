@@ -27,6 +27,7 @@
             android:id="@+id/iv_poster"
             android:layout_width="80dp"
             android:layout_height="120dp"
+            android:scaleType="centerCrop"
             bind:imageUrl="@{movie.imageUrl}"
             tools:src="@drawable/ic_actor_placeholder" />
 

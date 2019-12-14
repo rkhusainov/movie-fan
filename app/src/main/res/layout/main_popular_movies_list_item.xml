@@ -38,8 +38,9 @@
                     android:id="@+id/iv_poster"
                     android:layout_width="130dp"
                     android:layout_height="200dp"
+                    android:scaleType="centerCrop"
                     app:imageUrl="@{movie.imageUrl}"
-                    tools:src="@drawable/ic_movie_placeholder" />
+                    tools:src="@drawable/ic_actor_placeholder" />
 
                 <TextView
                     android:id="@+id/tv_title"

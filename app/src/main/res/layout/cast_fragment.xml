@@ -10,7 +10,7 @@
 
         <variable
             name="cast"
-            type="com.github.rkhusainov.moviefan.presentation.ui.credit.CastViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.credit.viewmodel.CastViewModel" />
 
     </data>
 

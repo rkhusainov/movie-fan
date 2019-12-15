@@ -8,7 +8,7 @@
 
         <variable
             name="movie"
-            type="com.github.rkhusainov.moviefan.presentation.ui.popular.MainPopularMovieListItemViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.popular.viewmodel.MainPopularMovieListItemViewModel" />
 
         <variable
             name="onItemClickListener"

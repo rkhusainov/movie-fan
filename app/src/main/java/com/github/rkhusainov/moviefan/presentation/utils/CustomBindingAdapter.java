@@ -18,11 +18,11 @@ import com.github.rkhusainov.moviefan.domain.model.CastEntity;
 import com.github.rkhusainov.moviefan.domain.model.MovieEntity;
 import com.github.rkhusainov.moviefan.presentation.Constants;
 import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
-import com.github.rkhusainov.moviefan.presentation.ui.credit.CastAdapter;
-import com.github.rkhusainov.moviefan.presentation.ui.popular.PopularMovieAdapter;
-import com.github.rkhusainov.moviefan.presentation.ui.today.TodayMovieAdapter;
-import com.github.rkhusainov.moviefan.presentation.ui.top.TopMovieAdapter;
-import com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingMovieAdapter;
+import com.github.rkhusainov.moviefan.presentation.ui.credit.view.CastAdapter;
+import com.github.rkhusainov.moviefan.presentation.ui.popular.view.PopularMovieAdapter;
+import com.github.rkhusainov.moviefan.presentation.ui.today.view.TodayMovieAdapter;
+import com.github.rkhusainov.moviefan.presentation.ui.top.view.TopMovieAdapter;
+import com.github.rkhusainov.moviefan.presentation.ui.upcoming.view.UpcomingMovieAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

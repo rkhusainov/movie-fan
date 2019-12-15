@@ -9,7 +9,7 @@ import com.github.rkhusainov.moviefan.data.repository.MovieRepository;
 import com.github.rkhusainov.moviefan.domain.interactor.IMovieInteractor;
 import com.github.rkhusainov.moviefan.domain.interactor.MovieInteractor;
 import com.github.rkhusainov.moviefan.domain.repository.IMovieRepository;
-import com.github.rkhusainov.moviefan.presentation.ui.today.TodayMovieViewModel;
+import com.github.rkhusainov.moviefan.presentation.ui.today.viewmodel.TodayMovieViewModel;
 
 /**
  * Фабрика для {@link TodayMovieViewModel}

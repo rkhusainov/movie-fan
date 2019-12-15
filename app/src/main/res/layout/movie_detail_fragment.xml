@@ -14,15 +14,15 @@
 
         <variable
             name="detail"
-            type="com.github.rkhusainov.moviefan.presentation.ui.detail.MovieDetailViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.detail.viewmodel.MovieDetailViewModel" />
 
         <variable
             name="cast"
-            type="com.github.rkhusainov.moviefan.presentation.ui.credit.CastViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.credit.viewmodel.CastViewModel" />
 
         <variable
             name="handler"
-            type="com.github.rkhusainov.moviefan.presentation.ui.detail.MovieDetailFragment" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.detail.view.MovieDetailFragment" />
 
         <variable
             name="constant"
@@ -38,7 +38,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark"
         android:orientation="vertical"
-        tools:context=".presentation.ui.detail.MovieDetailFragment">
+        tools:context=".presentation.ui.detail.view.MovieDetailFragment">
 
         <ProgressBar
             android:id="@+id/progress_bar"

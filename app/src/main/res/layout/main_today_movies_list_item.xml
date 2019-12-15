@@ -6,7 +6,7 @@
 
         <variable
             name="movie"
-            type="com.github.rkhusainov.moviefan.presentation.ui.today.MainTodayMovieListItemViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.today.viewmodel.MainTodayMovieListItemViewModel" />
 
         <variable
             name="onItemClickListener"

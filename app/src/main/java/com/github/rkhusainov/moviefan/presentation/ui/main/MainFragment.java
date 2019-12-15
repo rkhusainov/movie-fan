@@ -19,14 +19,14 @@ import com.github.rkhusainov.moviefan.presentation.factory.PopularMovieFactory;
 import com.github.rkhusainov.moviefan.presentation.factory.TodayMovieFactory;
 import com.github.rkhusainov.moviefan.presentation.factory.TopMovieFactory;
 import com.github.rkhusainov.moviefan.presentation.factory.UpcomingMovieFactory;
-import com.github.rkhusainov.moviefan.presentation.ui.detail.MovieDetailFragment;
-import com.github.rkhusainov.moviefan.presentation.ui.popular.PopularMovieFragment;
-import com.github.rkhusainov.moviefan.presentation.ui.popular.PopularMovieViewModel;
-import com.github.rkhusainov.moviefan.presentation.ui.today.TodayMovieViewModel;
-import com.github.rkhusainov.moviefan.presentation.ui.top.TopMovieFragment;
-import com.github.rkhusainov.moviefan.presentation.ui.top.TopMovieViewModel;
-import com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingMovieFragment;
-import com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingMovieViewModel;
+import com.github.rkhusainov.moviefan.presentation.ui.detail.view.MovieDetailFragment;
+import com.github.rkhusainov.moviefan.presentation.ui.popular.view.PopularMovieFragment;
+import com.github.rkhusainov.moviefan.presentation.ui.popular.viewmodel.PopularMovieViewModel;
+import com.github.rkhusainov.moviefan.presentation.ui.today.viewmodel.TodayMovieViewModel;
+import com.github.rkhusainov.moviefan.presentation.ui.top.view.TopMovieFragment;
+import com.github.rkhusainov.moviefan.presentation.ui.top.viewmodel.TopMovieViewModel;
+import com.github.rkhusainov.moviefan.presentation.ui.upcoming.view.UpcomingMovieFragment;
+import com.github.rkhusainov.moviefan.presentation.ui.upcoming.viewmodel.UpcomingMovieViewModel;
 
 import org.jetbrains.annotations.NotNull;
 

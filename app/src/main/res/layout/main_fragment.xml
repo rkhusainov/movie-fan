@@ -11,19 +11,19 @@
 
         <variable
             name="popular"
-            type="com.github.rkhusainov.moviefan.presentation.ui.popular.PopularMovieViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.popular.viewmodel.PopularMovieViewModel" />
 
         <variable
             name="today"
-            type="com.github.rkhusainov.moviefan.presentation.ui.today.TodayMovieViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.today.viewmodel.TodayMovieViewModel" />
 
         <variable
             name="top"
-            type="com.github.rkhusainov.moviefan.presentation.ui.top.TopMovieViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.top.viewmodel.TopMovieViewModel" />
 
         <variable
             name="upcoming"
-            type="com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingMovieViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.upcoming.viewmodel.UpcomingMovieViewModel" />
 
         <variable
             name="onItemClickListener"

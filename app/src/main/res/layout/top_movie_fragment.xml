@@ -11,7 +11,7 @@
 
         <variable
             name="top"
-            type="com.github.rkhusainov.moviefan.presentation.ui.top.TopMovieViewModel" />
+            type="com.github.rkhusainov.moviefan.presentation.ui.top.viewmodel.TopMovieViewModel" />
 
     </data>
 

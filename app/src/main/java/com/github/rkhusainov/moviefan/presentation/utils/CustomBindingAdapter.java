@@ -37,6 +37,8 @@ import static android.content.ContentValues.TAG;
 public class CustomBindingAdapter {
 
     /**
+     * Binding adapter для ImageView
+     *
      * @param imageView экземпляр ImageView
      * @param urlImage  url изображения для скачивания
      */
@@ -51,7 +53,7 @@ public class CustomBindingAdapter {
     }
 
     /**
-     * Binding adapter для PopularMovie
+     * Binding adapter для списка популярных фильмов
      *
      * @param recyclerView экземпляр RecyclerView
      * @param viewType     тип ViewHolder'a
@@ -81,7 +83,7 @@ public class CustomBindingAdapter {
     }
 
     /**
-     * Binding adapter для TopMovie
+     * Binding adapter для списка топ фильмов
      *
      * @param recyclerView экземпляр RecyclerView
      * @param viewType     тип ViewHolder'a
@@ -106,7 +108,7 @@ public class CustomBindingAdapter {
     }
 
     /**
-     * Binding adapter для UpcomingMovie
+     * Binding adapter для списка фильмов, которые скоро покажут в кинотеатрах
      *
      * @param recyclerView экземпляр RecyclerView
      * @param viewType     тип ViewHolder'a
@@ -134,7 +136,7 @@ public class CustomBindingAdapter {
     }
 
     /**
-     * Binding adapter для TodayMovie
+     * Binding adapter для списка фильмов, которые сегодня в кинотеатрах
      *
      * @param recyclerView экземпляр RecyclerView
      * @param movies       список фильмов
@@ -150,7 +152,7 @@ public class CustomBindingAdapter {
     }
 
     /**
-     * Binding adapter для Cast
+     * Binding adapter для списка актёров
      *
      * @param recyclerView экземпляр RecyclerView
      * @param viewType     тип ViewHolder'a
@@ -176,7 +178,7 @@ public class CustomBindingAdapter {
     }
 
     /**
-     * Binding adapter для Genres
+     * Binding adapter для списка жанров
      *
      * @param textView экземпляр textView
      * @param genres   список жанров

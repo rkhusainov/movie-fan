@@ -18,20 +18,22 @@ import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.presentation.factory.TopMovieFactory;
 import com.github.rkhusainov.moviefan.presentation.ui.detail.MovieDetailFragment;
 
+/**
+ * Фрагмент для экрана с топ фильмами
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class TopMovieFragment extends Fragment {
 
     private TopMovieViewModel mTopMovieViewModel;
 
-    private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
-        @Override
-        public void onClick(int movie_id) {
-            if (getFragmentManager() != null) {
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, MovieDetailFragment.newInstance(movie_id))
-                        .addToBackStack(null)
-                        .commit();
-            }
+    private OnItemClickListener mOnItemClickListener = movie_id -> {
+        if (getFragmentManager() != null) {
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, MovieDetailFragment.newInstance(movie_id))
+                    .addToBackStack(null)
+                    .commit();
         }
     };
 

@@ -15,6 +15,11 @@ import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
 
 import java.util.List;
 
+/**
+ * Адаптер для списка фильмов, которые скоро покажут в кинотеатрах
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class UpcomingMovieAdapter extends RecyclerView.Adapter<UpcomingMovieAdapter.UpcomingViewHolderAbs> {
 
     private List<MovieEntity> mMovies;
@@ -23,6 +28,8 @@ public class UpcomingMovieAdapter extends RecyclerView.Adapter<UpcomingMovieAdap
     private OnItemClickListener mOnItemClickListener;
 
     /**
+     * Конструктор для адаптера
+     *
      * @param itemViewType тип ViewHolder'a
      * @param movies       список фильмов
      * @param listener     экземпляр OnItemClickListener'a

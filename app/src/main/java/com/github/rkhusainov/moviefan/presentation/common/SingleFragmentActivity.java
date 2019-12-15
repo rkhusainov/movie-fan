@@ -8,6 +8,11 @@ import androidx.fragment.app.Fragment;
 
 import com.github.rkhusainov.moviefan.R;
 
+/**
+ * Абстрактный класс для host-activity
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public abstract class SingleFragmentActivity extends AppCompatActivity {
 
     @NonNull

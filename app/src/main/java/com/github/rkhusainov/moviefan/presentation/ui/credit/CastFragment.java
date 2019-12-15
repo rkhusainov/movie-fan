@@ -15,6 +15,11 @@ import com.github.rkhusainov.moviefan.databinding.CastBinding;
 import com.github.rkhusainov.moviefan.presentation.Constants;
 import com.github.rkhusainov.moviefan.presentation.factory.CastFactory;
 
+/**
+ * Фрагмент для экрана со списком акётров
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class CastFragment extends Fragment {
 
     public static final String MOVIE_KEY = "MOVIE_KEY";

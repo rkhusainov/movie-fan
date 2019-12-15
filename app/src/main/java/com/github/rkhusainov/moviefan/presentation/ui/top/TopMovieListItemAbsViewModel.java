@@ -4,6 +4,11 @@ import androidx.annotation.NonNull;
 
 import com.github.rkhusainov.moviefan.domain.model.MovieEntity;
 
+/**
+ * Абстрактная ViewModel для элемента списка топ фильмов
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class TopMovieListItemAbsViewModel {
 
     private int mId;
@@ -11,6 +16,8 @@ public class TopMovieListItemAbsViewModel {
     private String mVoteTextView;
 
     /**
+     * Конструктор для ViewModel
+     *
      * @param movie данные текущего фильма
      */
     public TopMovieListItemAbsViewModel(@NonNull MovieEntity movie) {

@@ -12,7 +12,9 @@ import com.github.rkhusainov.moviefan.domain.repository.IMovieRepository;
 import com.github.rkhusainov.moviefan.presentation.ui.popular.PopularMovieViewModel;
 
 /**
- * Фабрика для PopularMovieViewModel
+ * Фабрика для {@link PopularMovieViewModel}
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public class PopularMovieFactory extends ViewModelProvider.NewInstanceFactory {
 

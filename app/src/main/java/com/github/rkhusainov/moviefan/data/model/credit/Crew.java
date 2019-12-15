@@ -4,6 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
+/**
+ * Pojo класс, содержащий информацию о других участниках съемок, кроме актеров
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class Crew {
     @SerializedName("credit_id")
     private String mCreditId;

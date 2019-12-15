@@ -12,7 +12,9 @@ import com.github.rkhusainov.moviefan.domain.repository.IMovieRepository;
 import com.github.rkhusainov.moviefan.presentation.ui.top.TopMovieViewModel;
 
 /**
- * Фабрика для TopMovieViewModel
+ * Фабрика для {@link TopMovieViewModel}
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public class TopMovieFactory extends ViewModelProvider.NewInstanceFactory {
 

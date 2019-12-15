@@ -11,7 +11,9 @@ import java.util.List;
 import io.reactivex.Single;
 
 /**
- * Интерактора, отвечающий за получением данных из репозитория
+ * Интерактор, отвечающий за получением данных из репозитория
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public interface IMovieInteractor {
 

@@ -5,7 +5,9 @@ import androidx.annotation.NonNull;
 import java.util.Objects;
 
 /**
- * Domain сущность класса "Cast"
+ * Domain сущность, содержащая информацию об актёрах
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public class CastEntity {
     @NonNull

@@ -30,6 +30,11 @@ import com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingMovieView
 
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Фрагмент для главного экрана с категориями
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class MainFragment extends Fragment {
 
     private PopularMovieViewModel mPopularMovieViewModel;
@@ -38,16 +43,13 @@ public class MainFragment extends Fragment {
     private UpcomingMovieViewModel mUpcomingMovieViewModel;
     private MainMovieBinding mMainMovieBinding;
 
-    private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
-        @Override
-        public void onClick(int movie_id) {
-            if (getFragmentManager() != null) {
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, MovieDetailFragment.newInstance(movie_id))
-                        .addToBackStack(null)
-                        .commit();
-            }
+    private OnItemClickListener mOnItemClickListener = movie_id -> {
+        if (getFragmentManager() != null) {
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, MovieDetailFragment.newInstance(movie_id))
+                    .addToBackStack(null)
+                    .commit();
         }
     };
 

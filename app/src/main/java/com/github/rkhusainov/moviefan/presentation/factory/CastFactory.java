@@ -12,7 +12,9 @@ import com.github.rkhusainov.moviefan.domain.repository.IMovieRepository;
 import com.github.rkhusainov.moviefan.presentation.ui.credit.CastViewModel;
 
 /**
- * Фабрика для CastViewModel
+ * Фабрика для {@link CastViewModel}
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public class CastFactory extends ViewModelProvider.NewInstanceFactory {
 

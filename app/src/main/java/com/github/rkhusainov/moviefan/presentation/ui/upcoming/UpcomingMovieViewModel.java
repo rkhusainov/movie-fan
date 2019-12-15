@@ -13,11 +13,13 @@ import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * ViewModel для списка фильмов, которые скоро покажут в кинотеатрах
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class UpcomingMovieViewModel extends ViewModel {
 
     private final CompositeDisposable mCompositeDisposable;
@@ -30,8 +32,10 @@ public class UpcomingMovieViewModel extends ViewModel {
     private MutableLiveData<List<MovieEntity>> mMovies = new MutableLiveData<>();
 
     /**
-     * @param viewType            тип ViewHolder'a
-     * @param interactor          экземпляр интерфейса интерактора
+     * Конструктор для ViewModel
+     *
+     * @param viewType   тип ViewHolder'a
+     * @param interactor экземпляр интерфейса интерактора
      */
     public UpcomingMovieViewModel(int viewType, @NonNull IMovieInteractor interactor) {
         mCompositeDisposable = new CompositeDisposable();
@@ -48,30 +52,12 @@ public class UpcomingMovieViewModel extends ViewModel {
         mCompositeDisposable.add(mMovieInteractor.getUpcomingMovies()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        mIsLoading.postValue(true);
-                    }
-                })
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mIsLoading.postValue(false);
-                    }
-                })
-                .subscribe(new Consumer<List<MovieEntity>>() {
-                    @Override
-                    public void accept(List<MovieEntity> movieEntities) throws Exception {
-                        mIsErrorVisible.postValue(false);
-                        mMovies.postValue(movieEntities);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        mIsErrorVisible.postValue(true);
-                    }
-                }));
+                .doOnSubscribe(disposable -> mIsLoading.postValue(true))
+                .doFinally(() -> mIsLoading.postValue(false))
+                .subscribe(movieEntities -> {
+                    mIsErrorVisible.postValue(false);
+                    mMovies.postValue(movieEntities);
+                }, throwable -> mIsErrorVisible.postValue(true)));
     }
 
     /**

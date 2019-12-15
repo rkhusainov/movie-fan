@@ -16,6 +16,11 @@ import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
 
 import java.util.List;
 
+/**
+ * Адаптер для списка топ фильмов
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class TopMovieAdapter extends RecyclerView.Adapter<TopMovieAdapter.TopViewHolderAbs> {
 
     private List<MovieEntity> mMovies;
@@ -24,6 +29,8 @@ public class TopMovieAdapter extends RecyclerView.Adapter<TopMovieAdapter.TopVie
     private OnItemClickListener mOnItemClickListener;
 
     /**
+     * Конструктор для ViewModel
+     *
      * @param itemViewType тип ViewHolder'a
      * @param movies       список фильмов
      * @param listener     экземпляр OnItemClickListener'a

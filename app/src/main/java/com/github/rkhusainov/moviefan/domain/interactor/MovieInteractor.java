@@ -13,6 +13,8 @@ import io.reactivex.Single;
 
 /**
  * Реализация интерактора, отвечающего за получением данных из репозитория
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public class MovieInteractor implements IMovieInteractor {
 

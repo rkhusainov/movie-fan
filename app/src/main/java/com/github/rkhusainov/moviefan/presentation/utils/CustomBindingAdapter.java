@@ -31,6 +31,8 @@ import static android.content.ContentValues.TAG;
 
 /**
  * Вспомогательный класс с биндинг адаптерами
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public class CustomBindingAdapter {
 

@@ -15,6 +15,8 @@ import java.util.List;
 
 /**
  * Реализация маппинга из pojo класса в entity
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public class CreditMapper implements IMapper<Credit, CreditEntity> {
     @NonNull

@@ -12,7 +12,9 @@ import com.github.rkhusainov.moviefan.domain.repository.IMovieRepository;
 import com.github.rkhusainov.moviefan.presentation.ui.detail.MovieDetailViewModel;
 
 /**
- * Фабрика для MovieDetailViewModel
+ * Фабрика для {@link MovieDetailViewModel}
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public class MovieDetailFactory extends ViewModelProvider.NewInstanceFactory {
 

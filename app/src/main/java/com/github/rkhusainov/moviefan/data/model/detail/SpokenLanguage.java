@@ -4,6 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
+/**
+ * Pojo класс, содержащий информацию о языках, на которых говорят в фильме
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class SpokenLanguage {
     @SerializedName("iso_639_1")
     private String mIso6391;

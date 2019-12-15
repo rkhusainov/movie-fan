@@ -18,6 +18,11 @@ import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
 import com.github.rkhusainov.moviefan.presentation.factory.PopularMovieFactory;
 import com.github.rkhusainov.moviefan.presentation.ui.detail.MovieDetailFragment;
 
+/**
+ * Фрагмент для экрана с популярными фильмами
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class PopularMovieFragment extends Fragment {
 
     private PopularMovieViewModel mPopularMovieViewModel;
@@ -26,16 +31,13 @@ public class PopularMovieFragment extends Fragment {
         return new PopularMovieFragment();
     }
 
-    private OnItemClickListener mOnItemClickListener = new OnItemClickListener() {
-        @Override
-        public void onClick(int movie_id) {
-            if (getFragmentManager() != null) {
-                getFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragment_container, MovieDetailFragment.newInstance(movie_id))
-                        .addToBackStack(null)
-                        .commit();
-            }
+    private OnItemClickListener mOnItemClickListener = movie_id -> {
+        if (getFragmentManager() != null) {
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, MovieDetailFragment.newInstance(movie_id))
+                    .addToBackStack(null)
+                    .commit();
         }
     };
 

@@ -5,6 +5,11 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Pojo класс, содержащий информацию о фильмах
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class Movie {
     @SerializedName("id")
     private Integer mId;
@@ -25,7 +30,7 @@ public class Movie {
     @SerializedName("original_title")
     private String mOriginalTitle;
     @SerializedName("genre_ids")
-    private List<Integer> mGenreIds = null;
+    private List<Integer> mGenreIds;
     @SerializedName("title")
     private String mTitle;
     @SerializedName("vote_average")

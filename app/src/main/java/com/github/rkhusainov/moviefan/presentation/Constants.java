@@ -1,10 +1,11 @@
 package com.github.rkhusainov.moviefan.presentation;
 
+/**
+ * Класс, в котором хранятся константы приложения
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public interface Constants {
-
-    /**
-     * Интерфейс с константами приложения
-     */
 
     // images constants
     String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/";
@@ -23,5 +24,4 @@ public interface Constants {
     // language and location constants
     String LANGUAGE = "ru-RU";
     String REGION = "RU";
-
 }

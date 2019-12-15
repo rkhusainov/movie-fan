@@ -12,11 +12,13 @@ import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * ViewModel для списка актёров
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class CastViewModel extends ViewModel {
 
     private final CompositeDisposable mCompositeDisposable;
@@ -28,6 +30,8 @@ public class CastViewModel extends ViewModel {
     private MutableLiveData<List<CastEntity>> mCasts = new MutableLiveData<>();
 
     /**
+     * Конструктор для ViewModel
+     *
      * @param viewType   тип ViewHolder'а
      * @param movieId    ид фильма
      * @param interactor экземпляр интерфейса интерактора
@@ -47,29 +51,11 @@ public class CastViewModel extends ViewModel {
         mCompositeDisposable.add(mMovieInteractor.getCasts(movieId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        mIsLoading.postValue(true);
-                    }
-                })
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mIsLoading.postValue(false);
-                    }
-                })
-                .subscribe(new Consumer<List<CastEntity>>() {
-                    @Override
-                    public void accept(List<CastEntity> castEntities) throws Exception {
-                        mCasts.postValue(castEntities);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        mIsErrorVisible.postValue(true);
-                    }
-                }));
+                .doOnSubscribe(disposable -> mIsLoading.postValue(true))
+                .doFinally(() -> mIsLoading.postValue(false))
+                .subscribe(
+                        castEntities -> mCasts.postValue(castEntities),
+                        throwable -> mIsErrorVisible.postValue(true)));
     }
 
     /**

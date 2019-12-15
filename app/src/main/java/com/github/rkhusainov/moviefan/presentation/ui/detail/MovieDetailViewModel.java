@@ -10,11 +10,13 @@ import org.jetbrains.annotations.NotNull;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * ViewModel для детальной информации о фильме
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class MovieDetailViewModel extends ViewModel {
 
     private CompositeDisposable mCompositeDisposable;
@@ -25,6 +27,8 @@ public class MovieDetailViewModel extends ViewModel {
     private MutableLiveData<DetailEntity> mDetailLiveData = new MutableLiveData<>();
 
     /**
+     * Конструктор для ViewModel
+     *
      * @param movieId    ид фильма
      * @param interactor экземпляр интерфейса интерактора
      */
@@ -42,29 +46,11 @@ public class MovieDetailViewModel extends ViewModel {
         mCompositeDisposable.add(mMovieInteractor.getDetail(movieId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        mIsLoading.postValue(true);
-                    }
-                })
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mIsLoading.postValue(false);
-                    }
-                })
-                .subscribe(new Consumer<DetailEntity>() {
-                    @Override
-                    public void accept(DetailEntity detailEntity) throws Exception {
-                        mDetailLiveData.setValue(detailEntity);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        mIsErrorVisible.postValue(true);
-                    }
-                }));
+                .doOnSubscribe(disposable -> mIsLoading.postValue(true))
+                .doFinally(() -> mIsLoading.postValue(false))
+                .subscribe(
+                        detailEntity -> mDetailLiveData.setValue(detailEntity),
+                        throwable -> mIsErrorVisible.postValue(true)));
     }
 
     /**

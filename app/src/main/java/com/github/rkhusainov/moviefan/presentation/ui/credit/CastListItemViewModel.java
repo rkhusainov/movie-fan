@@ -5,11 +5,18 @@ import androidx.annotation.NonNull;
 import com.github.rkhusainov.moviefan.domain.model.CastEntity;
 import com.github.rkhusainov.moviefan.presentation.Constants;
 
+/**
+ * ViewModel для элемента списка актёров
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class CastListItemViewModel extends CastListItemAbsViewModel {
 
     private String mImageUrl;
 
     /**
+     * Консрукторя для ViewModel
+     *
      * @param cast данные текущего актёра
      */
     public CastListItemViewModel(@NonNull CastEntity cast) {

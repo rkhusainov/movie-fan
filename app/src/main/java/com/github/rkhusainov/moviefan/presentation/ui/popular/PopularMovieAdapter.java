@@ -18,6 +18,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+/**
+ * Адаптер для списка популярных фильмов
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class PopularMovieAdapter extends RecyclerView.Adapter<PopularMovieAdapter.PopularViewHolderAbs> {
 
     private List<MovieEntity> mMovies;
@@ -26,6 +31,8 @@ public class PopularMovieAdapter extends RecyclerView.Adapter<PopularMovieAdapte
     private OnItemClickListener mOnItemClickListener;
 
     /**
+     * Конструктор для адаптера
+     *
      * @param itemViewType        тип ViewHolder'а
      * @param movies              список фильмов
      * @param onItemClickListener экземпляр клик листенера

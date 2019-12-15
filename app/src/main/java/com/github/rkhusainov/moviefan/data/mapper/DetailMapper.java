@@ -8,6 +8,8 @@ import com.github.rkhusainov.moviefan.domain.model.DetailEntity;
 
 /**
  * Реализация маппинга из pojo класса в entity
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public class DetailMapper implements IMapper<Detail, DetailEntity> {
     @NonNull

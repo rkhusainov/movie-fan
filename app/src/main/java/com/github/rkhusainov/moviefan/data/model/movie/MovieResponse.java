@@ -5,6 +5,11 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Pojo класс, содержащий список фильмов и номер страницы
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class MovieResponse {
     @SerializedName("page")
     private Integer mPage;
@@ -13,7 +18,7 @@ public class MovieResponse {
     @SerializedName("total_pages")
     private Integer totalPages;
     @SerializedName("results")
-    private List<Movie> mMovies = null;
+    private List<Movie> mMovies;
 
     public MovieResponse(Integer page, Integer totalResults, Integer totalPages, List<Movie> movies) {
         mPage = page;

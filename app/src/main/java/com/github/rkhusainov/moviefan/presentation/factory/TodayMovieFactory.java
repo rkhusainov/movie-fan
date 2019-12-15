@@ -12,7 +12,9 @@ import com.github.rkhusainov.moviefan.domain.repository.IMovieRepository;
 import com.github.rkhusainov.moviefan.presentation.ui.today.TodayMovieViewModel;
 
 /**
- * Фабрика для TodayMovieViewModel
+ * Фабрика для {@link TodayMovieViewModel}
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public class TodayMovieFactory extends ViewModelProvider.NewInstanceFactory {
 

@@ -4,6 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
+/**
+ * Pojo класс, содержащий информацию о жанрах фильма
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class Genre {
     @SerializedName("id")
     private Integer mId;

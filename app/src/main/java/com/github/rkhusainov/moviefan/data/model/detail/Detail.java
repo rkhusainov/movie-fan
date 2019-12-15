@@ -5,6 +5,11 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Pojo класс, содержащий детальную информацию о фильме
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class Detail {
     @SerializedName("adult")
     private Boolean mAdult;

@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Domain сущность класса "Movie"
+ * Domain сущность, содержащая информацию о фильмах
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public class MovieEntity {
     @NonNull

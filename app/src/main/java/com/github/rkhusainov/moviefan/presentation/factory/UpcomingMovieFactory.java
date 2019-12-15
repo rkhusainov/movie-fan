@@ -12,7 +12,9 @@ import com.github.rkhusainov.moviefan.domain.repository.IMovieRepository;
 import com.github.rkhusainov.moviefan.presentation.ui.upcoming.UpcomingMovieViewModel;
 
 /**
- * Фабрика для UpcomingMovieViewModel
+ * Фабрика для {@link UpcomingMovieViewModel}
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public class UpcomingMovieFactory extends ViewModelProvider.NewInstanceFactory {
 

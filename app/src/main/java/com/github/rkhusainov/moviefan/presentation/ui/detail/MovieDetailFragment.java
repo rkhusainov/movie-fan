@@ -20,6 +20,11 @@ import com.github.rkhusainov.moviefan.presentation.factory.MovieDetailFactory;
 import com.github.rkhusainov.moviefan.presentation.ui.credit.CastFragment;
 import com.github.rkhusainov.moviefan.presentation.ui.credit.CastViewModel;
 
+/**
+ * Фрагмент для экрана с детальной информацией о фильме
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class MovieDetailFragment extends Fragment {
 
     public static final String MOVIE_KEY = "MOVIE_KEY";

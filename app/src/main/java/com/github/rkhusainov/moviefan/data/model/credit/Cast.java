@@ -4,6 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
+/**
+ * Pojo класс, содержащий информацию об актёрах
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class Cast {
     @SerializedName("cast_id")
     private Integer mCastId;

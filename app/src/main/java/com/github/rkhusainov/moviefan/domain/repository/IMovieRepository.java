@@ -12,6 +12,8 @@ import io.reactivex.Single;
 
 /**
  * Репозиторий с методами для получения данных
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public interface IMovieRepository {
 

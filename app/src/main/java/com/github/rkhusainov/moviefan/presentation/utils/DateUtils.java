@@ -8,6 +8,8 @@ import java.util.Locale;
 
 /**
  * Утилитный класс для форматирования даты и времени
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public class DateUtils {
 

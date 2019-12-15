@@ -4,6 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
+/**
+ * Pojo класс, содержащий информацию о стране, где снят фильм
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class ProductionCountry {
     @SerializedName("iso_3166_1")
     private String mIso31661;

@@ -12,12 +12,20 @@ import com.github.rkhusainov.moviefan.presentation.common.OnItemClickListener;
 
 import java.util.List;
 
+/**
+ * Адаптер для списка фильмов, которые сегодня в кинотеатрах
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
+
 public class TodayMovieAdapter extends RecyclerView.Adapter<TodayMovieAdapter.MainTodayViewHolder> {
 
     private List<MovieEntity> mMovies;
     private OnItemClickListener mOnItemClickListener;
 
     /**
+     * Конструктор для адаптера
+     *
      * @param movies              список фильмов
      * @param onItemClickListener экземпляр OnItemClickListener'a
      */

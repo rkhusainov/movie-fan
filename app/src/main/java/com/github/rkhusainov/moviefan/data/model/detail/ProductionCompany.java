@@ -4,6 +4,11 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
+/**
+ * Pojo класс, содержащий информацию о компании, которая сняла фильм
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class ProductionCompany {
     @SerializedName("id")
     private Integer mId;

@@ -5,7 +5,9 @@ import androidx.annotation.NonNull;
 import java.util.Objects;
 
 /**
- * Domain сущность класса "Crew"
+ * Domain сущность, содержащая информацию о других участниках съемок, кроме актеров
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public class CrewEntity {
     @NonNull

@@ -15,6 +15,8 @@ import static com.github.rkhusainov.moviefan.BuildConfig.API_URL;
 
 /**
  * Класс для работы с сетью
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public class ApiUtils {
     private static OkHttpClient sClient;

@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Domain сущность класса "Credit"
+ * Domain сущность, содержащая информацию о всех участниках съёмок фильма
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public class CreditEntity {
     @NonNull

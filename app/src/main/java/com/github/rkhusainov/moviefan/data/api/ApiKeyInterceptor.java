@@ -11,6 +11,11 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * Класс, который добавляет api ключ к запросам к web api
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class ApiKeyInterceptor implements Interceptor {
 
     public static final String API_KEY_NAME = "api_key";

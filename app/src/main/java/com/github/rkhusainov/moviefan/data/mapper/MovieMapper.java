@@ -9,9 +9,10 @@ import com.github.rkhusainov.moviefan.domain.model.MovieEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * Реализация маппинга из pojo класса в entity
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public class MovieMapper implements IMapper<List<Movie>, List<MovieEntity>> {
 

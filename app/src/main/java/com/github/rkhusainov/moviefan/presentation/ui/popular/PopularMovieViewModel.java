@@ -13,11 +13,13 @@ import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * ViewModel для списка популярных фильмов
+ *
+ * @author Хусаинов Ринат on 2019-12-15
+ */
 public class PopularMovieViewModel extends ViewModel {
 
     private final CompositeDisposable mCompositeDisposable;
@@ -30,6 +32,8 @@ public class PopularMovieViewModel extends ViewModel {
     private MutableLiveData<List<MovieEntity>> mMovies = new MutableLiveData<>();
 
     /**
+     * Конструктор для ViewModel
+     *
      * @param viewType   тип ViewHolder'a
      * @param interactor экземпляр интерфейса интерактора
      */
@@ -48,30 +52,12 @@ public class PopularMovieViewModel extends ViewModel {
         mCompositeDisposable.add(mMovieInteractor.getPopularMovies()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        mIsLoading.postValue(true);
-                    }
-                })
-                .doFinally(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        mIsLoading.postValue(false);
-                    }
-                })
-                .subscribe(new Consumer<List<MovieEntity>>() {
-                    @Override
-                    public void accept(List<MovieEntity> movieEntities) throws Exception {
-                        mIsErrorVisible.postValue(false);
-                        mMovies.postValue(movieEntities);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        mIsErrorVisible.postValue(true);
-                    }
-                }));
+                .doOnSubscribe(disposable -> mIsLoading.postValue(true))
+                .doFinally(() -> mIsLoading.postValue(false))
+                .subscribe(movieEntities -> {
+                    mIsErrorVisible.postValue(false);
+                    mMovies.postValue(movieEntities);
+                }, throwable -> mIsErrorVisible.postValue(true)));
     }
 
     /**

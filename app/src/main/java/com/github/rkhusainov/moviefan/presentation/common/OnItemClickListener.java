@@ -1,7 +1,9 @@
 package com.github.rkhusainov.moviefan.presentation.common;
 
 /**
- * листенер нажатий на элемент списка
+ * Слушатель нажатий на элемент списка
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public interface OnItemClickListener {
 

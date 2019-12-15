@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Domain сущность класса "Detail"
+ * Domain сущность, содержащая детальную информацию о фильме
+ *
+ * @author Хусаинов Ринат on 2019-12-15
  */
 public class DetailEntity {
     @NonNull

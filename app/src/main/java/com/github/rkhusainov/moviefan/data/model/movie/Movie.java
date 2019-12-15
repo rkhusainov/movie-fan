@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class Movie {
+    @SerializedName("id")
+    private Integer mId;
     @SerializedName("popularity")
     private Double mPopularity;
     @SerializedName("vote_count")
@@ -14,8 +16,6 @@ public class Movie {
     private Boolean mVideo;
     @SerializedName("poster_path")
     private String mPosterPath;
-    @SerializedName("id")
-    private Integer mId;
     @SerializedName("adult")
     private Boolean mAdult;
     @SerializedName("backdrop_path")
@@ -34,6 +34,36 @@ public class Movie {
     private String mOverview;
     @SerializedName("release_date")
     private String mReleaseDate;
+
+    public Movie(Integer id,
+                 Double popularity,
+                 Integer voteCount,
+                 Boolean video,
+                 String posterPath,
+                 Boolean adult,
+                 String backdropPath,
+                 String originalLanguage,
+                 String originalTitle,
+                 List<Integer> genreIds,
+                 String title,
+                 Double voteAverage,
+                 String overview,
+                 String releaseDate) {
+        mId = id;
+        mPopularity = popularity;
+        mVoteCount = voteCount;
+        mVideo = video;
+        mPosterPath = posterPath;
+        mAdult = adult;
+        mBackdropPath = backdropPath;
+        mOriginalLanguage = originalLanguage;
+        mOriginalTitle = originalTitle;
+        mGenreIds = genreIds;
+        mTitle = title;
+        mVoteAverage = voteAverage;
+        mOverview = overview;
+        mReleaseDate = releaseDate;
+    }
 
     public Double getPopularity() {
         return mPopularity;

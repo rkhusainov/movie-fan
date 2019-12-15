@@ -15,6 +15,13 @@ public class MovieResponse {
     @SerializedName("results")
     private List<Movie> mMovies = null;
 
+    public MovieResponse(Integer page, Integer totalResults, Integer totalPages, List<Movie> movies) {
+        mPage = page;
+        mTotalResults = totalResults;
+        this.totalPages = totalPages;
+        mMovies = movies;
+    }
+
     public Integer getPage() {
         return mPage;
     }

@@ -10,6 +10,11 @@ public class Genre {
     @SerializedName("name")
     private String mName;
 
+    public Genre(Integer id, String name) {
+        mId = id;
+        mName = name;
+    }
+
     public Integer getId() {
         return mId;
     }
